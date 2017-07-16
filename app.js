@@ -240,7 +240,6 @@ function getScoresForEntirePopulation(population, targetPhonoVectors) {
 
 function getScore(kanas, targetPhonoVectors) {
     let challengerIpa = kanasToIpa(kanas);
-    console.log("challengerIpa: "+challengerIpa);
     let challengerPhonemes = parsePhonemes(challengerIpa);
     let challengerFeatures = phonemesToFeatures(challengerPhonemes); 
     return getLevenshtein(challengerFeatures, targetPhonoVectors,featureSchema);

@@ -9,6 +9,10 @@ function normalizeIPA(string){
 }
 
 function parsePhonemes(ipaString){
+   if(!ipaString || ipaString.length === 0){
+       return [];
+   }
+
    let normalized = normalizeIPA(ipaString);
 
    let phonemes = [];

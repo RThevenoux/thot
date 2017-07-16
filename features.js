@@ -1,5 +1,5 @@
 featureSchema = {
-  "name":"POC",
+  name:"POC",
   features:[
     {
       "name":"height",
@@ -30,7 +30,7 @@ featureSchema = {
       "weight":0.5
     }
   ]
-}
+};
 
 vowels={
     'i':{

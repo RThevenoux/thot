@@ -70,3 +70,12 @@ function getRandomKana(){
     let index = Math.floor(Math.random()*katakanas.length);
     return katakanas[index].kana;
 }
+
+function generateRandomKanas(ipaPhonemes) {
+  let length = ipaPhonemes.length*(1+(Math.random()-.5));
+  let kanas = [];
+  for(let i=0;i<length;i++){
+    kanas.push(getRandomKana());
+  }
+  return kanas;
+}

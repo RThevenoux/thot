@@ -1,3 +1,37 @@
+featureSchema = {
+  "name":"POC",
+  features:[
+    {
+      "name":"height",
+      "type":"number",
+      "min":0,
+      "max":6,
+      "weight":1
+    },
+    {
+      "name":"backness",
+      "type":"number",
+      "min":0,
+      "max":2,
+      "weight":0.5
+    },
+    {
+      "name":"roundedness",
+      "type":"number",
+      "min":0,
+      "max":2,
+      "weight":1
+    },
+    {
+      "name":"nasal",
+      "type":"number",
+      "min":0,
+      "max":1,
+      "weight":0.5
+    }
+  ]
+}
+
 vowels={
     'i':{
             "height":6,
@@ -31,7 +65,7 @@ vowels={
     },
     'ə':{
             "height":3,
-            "backness":2,
+            "backness":1,
             "roundedness":0
     },
     'ɛ':{
@@ -58,16 +92,20 @@ vowels={
             "height":0,
             "backness":2,
             "roundedness":0
+    },
+    'ɯ':{
+            "height":6,
+            "backness":2,
+            "roundedness":1
     }
 };
 
-function frenchIpaToPhonoVectors(string){
-  return string.match(/([^\u0303](?!\u0303)|[^\u0303][\u0303])/g).map(phoneme=>phonemeToVector(phoneme));
+function phonemesToFeatures(phonemes){
+        return phonemes.map(x=>phonemeToFeatures(x));
 }
 
-function phonemeToVector(phoneme){
-    let base = phoneme[0];
-    let vector = vowels[base];
-    vector.nasal = /\u0303/.test(phoneme);
-    return vector;
+function phonemeToFeatures(phoneme){
+        let feature = vowels[phoneme.base];
+        feature.nasal = (phoneme.nasal?1:0);
+        return feature;
 }

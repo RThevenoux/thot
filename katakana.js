@@ -2,64 +2,39 @@ let katakanas = [
     {
         "kana":'ア',
         "romaji":"a",
-        "phonology":{
-            "height":0,
-            "backness":1,
-            "roundedness":0,
-            "nasal":0
-        }
+        "ipa":"a"
     },
     {
         "kana":'イ',
         "romaji":"i",
-        "phonology":{
-            "height":6,
-            "backness":0,
-            "roundedness":0,
-            "nasal":0
-        }
+        "ipa":"i"
     },
     {
         "kana":'ウ',
         "romaji":"u",
-        "phonology":{
-            "height":6,
-            "backness":2,
-            "roundedness":1,
-            "nasal":0
-        }
+        "ipa":"ɯ"
     },
     {
         "kana":'エ',
         "romaji":"e",
-        "phonology":{
-            "height":3,
-            "backness":0,
-            "roundedness":0,
-            "nasal":0
-        }
+        "ipa":"e"
     },
     {
         "kana":'オ',
         "romaji":"o",
-        "phonology":{
-            "height":3,
-            "backness":2,
-            "roundedness":2,
-            "nasal":0
-        }
+        "ipa":"o"
     }
 ];
 
-function kanasToPhonoVectors(kanas){
-    return kanas.map(x=>getPhonemeForKana(x));
+function kanasToIpa(kanas){
+    return kanas.map(x=>kanaToIpa(x)).join('');
 }
 
-function getPhonemeForKana(kana){
+function kanaToIpa(kana){
     for(i=0;i<katakanas.length;i++){
         data = katakanas[i];
         if(data.kana==kana){
-            return data.phonology;
+            return data.ipa;
         }
     }
     return null;

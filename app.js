@@ -65,12 +65,8 @@ function addIPA(value){
 
 function beginEvolution(target) {
 
-  let targetPhonoVectors = frenchIpaToPhonoVectors(target);
-
-  for(i=0;i<targetPhonoVectors.length;i++){
-    let v = targetPhonoVectors[i];
-    console.log("h:"+v.height+" b:"+v.backness+" r="+v.roundedness+" n="+v.nasal);
-  }
+  let ipaPhonemes = parsePhonemes(target);
+  let targetPhonoVectors = phonemesToFeatures(ipaPhonemes);
 
   topPerformerNode1.style.color = 'darkorange';
   
@@ -232,7 +228,6 @@ function mateGenomesGetNewGenome(...args) {
   return mutateGenome(newGenome);
 }
 
-
 function getScoresForEntirePopulation(population, targetPhonoVectors) {
   let newScores = [];
   let j = 0;
@@ -244,8 +239,11 @@ function getScoresForEntirePopulation(population, targetPhonoVectors) {
 }
 
 function getScore(kanas, targetPhonoVectors) {
-    let challenger = kanasToPhonoVectors(kanas);
-    return getLevenshtein(challenger, targetPhonoVectors);
+    let challengerIpa = kanasToIpa(kanas);
+    console.log("challengerIpa: "+challengerIpa);
+    let challengerPhonemes = parsePhonemes(challengerIpa);
+    let challengerFeatures = phonemesToFeatures(challengerPhonemes); 
+    return getLevenshtein(challengerFeatures, targetPhonoVectors,featureSchema);
 }
 
 function generateRandomPopulationOfSize() {

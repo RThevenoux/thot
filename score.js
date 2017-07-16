@@ -1,5 +1,5 @@
 // Compute the edit distance between the two given strings or array
-function getLevenshtein(a, b) {
+function getLevenshtein(a, b, featureSchema) {
   let insertionCost = 10;
   let deletionCost = 10;
 
@@ -26,7 +26,7 @@ function getLevenshtein(a, b) {
       let phonoVectorA = a[j-1];
       let phonoVectorB = b[i-1];
 
-      let substitution = matrix[i-1][j-1] + phonoVectorDistance(phonoVectorA,phonoVectorB);
+      let substitution = matrix[i-1][j-1] + phonoVectorDistance(phonoVectorA,phonoVectorB,featureSchema);
       let insertion = matrix[i][j-1] + insertionCost;
       let deletion =  matrix[i-1][j] + deletionCost;
       matrix[i][j] = Math.min(substitution, Math.min(insertion,deletion));
@@ -36,10 +36,25 @@ function getLevenshtein(a, b) {
   return matrix[b.length][a.length];
 };
 
-function phonoVectorDistance(a,b){
-    let height = Math.abs(a.height - b.height)/7;
-    let backness = Math.abs(a.backness - b.backness)/3;
-    let roundedness =  Math.abs(a.roundedness - b.roundedness)/3;
-    let nasal =  Math.abs(a.nasal - b.nasal)/3;
-    return height + backness*0.5 + roundedness + nasal*0.5;
+function phonoVectorDistance(a,b,featureSchema){
+    let scoreSum = 0;
+    let weightSum = 0;
+
+    featureSchema.features.forEach(feature=>{
+        scoreSum+=score(a,b,feature)*feature.weight;
+        weightSum+=feature.weight;
+    });
+
+    return scoreSum/weightSum;
+}
+
+function score(a,b,feature){
+  switch(feature.type){
+    case "number" : return numberScore(a,b,feature);
+    default : return 0;
+  }
+}
+
+function numberScore(a,b,feature){
+  return (Math.abs(a[feature.name] - b[feature.name]))/(feature.max-feature.min);
 }

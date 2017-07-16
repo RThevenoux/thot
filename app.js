@@ -16,18 +16,17 @@ var sexNumberNode = document.getElementById('sex-number');
 var popSizeNode = document.getElementById('pop-size');
 var selectionBiasNode = document.getElementById('selection-bias');
 var elitesNode = document.getElementById('elites');
-var ipaNode = document.getElementById('ipa');
 
 var listener = {
-  newGeneration(sortedPop, sortedScores,generation){
-    console.log('generations #'+generation+" best:"+sortedPop[0]);
-    displayData(sortedPop, sortedScores);
+  newGeneration(population, generation){
+    console.log('generations #'+generation+" best:"+population[0].kanas);
+    displayData(population);
   },
 
-  finish(sortedPop, sortedScores,generation){
-    displayData(sortedPop, sortedScores);
+  finish(population, generation){
+    displayData(population);
     topPerformers[0].label.style.color = 'darkgreen';
-    console.log("WINNER : "+sortedPop[0]+" score:"+sortedScores[0]);
+    console.log("WINNER : "+population[0].kanas+" score:"+population[0].score);
   }
 };
 
@@ -45,24 +44,22 @@ evolveStartNode.onclick = () => {
   beginEvolution(ipaTarget, listener);
 };
 
-// Set up default display
-mutationRateNode.value = mutationRate;
-sexNumberNode.value = sexNumber;
-popSizeNode.value = popSize;
-selectionBiasNode.value = sBias;
-elitesNode.value = elites;
+window.onload = () => {
+  // Set up default display
+  mutationRateNode.value = mutationRate;
+  sexNumberNode.value = sexNumber;
+  popSizeNode.value = popSize;
+  selectionBiasNode.value = sBias;
+  elitesNode.value = elites;
+}
 
 function addIPA(value){
   inputNode.value += value;
 }
 
-function displayData(sortedPop, sortedScores) {
-  for(let i=0;i<shownPopulationSize;i++){
-    topPerformers[i].label.textContent = getStringFromGenome(sortedPop[i]);
-    topPerformers[i].score.textContent = sortedScores[i];
+function displayData(population) {
+  for(let i=0; i<topPerformers.length; i++){
+    topPerformers[i].label.textContent = population[i].display;
+    topPerformers[i].score.textContent = population[i].score;
   }
-}
-
-function getStringFromGenome(genome) {
-  return String.prototype.concat(...genome);
 }

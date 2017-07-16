@@ -8,54 +8,33 @@ function beginEvolution(ipaTarget){
   let ipaPhonemes = parsePhonemes(ipaTarget);
   let targetPhonoVectors = phonemesToFeatures(ipaPhonemes);
   
-  let initialPop = generateRandomPopulation(popSize, ipaPhonemes);
-  let initialScores = getScoresForEntirePopulation(initialPop, targetPhonoVectors);
+  let initialPopulation = generateRandomPopulation(popSize, targetPhonoVectors, ipaPhonemes);
 
-  evolution(targetPhonoVectors, initialPop, initialScores, 0, listener);
+  evolution(targetPhonoVectors, initialPopulation, 0, listener);
 }
 
-function evolution(targetPhonoVectors, pop, scores, generation, listener) {
-  let [sortedPop, sortedScores] = getSortedPopAndScores(scores, pop);
-  pop = generateNewPopulation(sortedPop, sortedScores);
-  scores = getScoresForEntirePopulation(pop, targetPhonoVectors);
+function evolution(targetFeatures, population, generation, listener) {
+  population.sort((a, b) => a.score - b.score);
 
-  if(isConvergence(sortedPop, sortedScores, generation)){
-    listener.finish(sortedPop, sortedScores, generation);
+  if(isConvergence(population, generation)){
+    listener.finish(population, generation);
   } else {
-    setTimeout(()=>evolution(targetPhonoVectors, pop, scores, generation+1, listener), 0);
-    listener.newGeneration(sortedPop, sortedScores, generation);
+    newPopulation = generateNewPopulation(population, targetFeatures);  
+     setTimeout(()=>evolution(targetFeatures, newPopulation, generation+1, listener), 0);
+     listener.newGeneration(population, generation);
   } 
 }
 
-function getSortedPopAndScores(scoresArray, popArray) {
-  //1) combine the arrays:
-  var list = [];
-  for (var j in scoresArray)
-      list.push({'genome': popArray[j], 'score': scoresArray[j]});
-  
-  //2) sort:
-  list.sort(function(a, b) {
-      return ((a.score < b.score) ? -1 : ((a.score == b.score) ? 0 : 1));
-  });
-  
-  //3) separate them back out:
-  for (var k = 0; k < list.length; k++) {
-      popArray[k] = list[k].genome;
-      scoresArray[k] = list[k].score;
-  }
-    
-  return [popArray, scoresArray];
-}
-
-function selectNindividuals(popArray, scoresArray) {
-  let weightsArray = getWeights(scoresArray);
-  let selectedIndividuals = [];
+function selectParents(population) {
+  let weightsArray = getWeights(population);
+  let selectedParents = [];
   let s = 0;
   while (s < sexNumber) {
-    selectedIndividuals.push(popArray[weightedRandSelection(weightsArray)]);
+    let selectedIndex = weightedRandSelection(weightsArray);
+    selectedParents.push(population[selectedIndex].kanas);
     s++;
   }
-  return selectedIndividuals;
+  return selectedParents;
 }
 
 function weightedRandSelection(weights) {
@@ -67,98 +46,69 @@ function weightedRandSelection(weights) {
   }
 }
 
-function getWeights(scores) {
-  return scores.map(s => 1/(s^sBias));
+function getWeights(population) {
+  return population.map(indivual => 1/(indivual.score^sBias));
 }
 
-function mateGenomesGetNewGenome(...args) {
-  let n = args.length;
-  let chunk = Math.floor(args[0].length / n);
-  let m = 0;
+function mateGenomes(parents) {
+
+  let n = parents.length;
+  let chunk = Math.floor(parents[0].length / n);
+
   let newGenome = [];
-  while (m < n){
-    if(m === n-1){
-      newGenome = newGenome.concat(args[m].slice(m*chunk, args[0].length));
-    }
-    else {
-      newGenome = newGenome.concat(args[m].slice(m*chunk, (m+1)*chunk));
-    }
-    m++;
+
+  for(let i=0 ; i<n ; i++){
+    let startIndex = i*chunk;
+    let endIndex = (i === n-1? parents[0].length : (i+1)*chunk);
+    newGenome = newGenome.concat(parents[i].slice(startIndex, endIndex));
   }
-  return mutateGenome(newGenome);
+
+  return newGenome;
 }
 
-function getScoresForEntirePopulation(population, targetPhonoVectors) {
-  let newScores = [];
-  let j = 0;
-  while (j < population.length) {
-    newScores.push(getScore(population[j], targetPhonoVectors));
-    j++;
-  }
-  return newScores;
-}
-
-function getScore(kanas, targetPhonoVectors) {
-    let challengerIpa = kanasToIpa(kanas);
-    let challengerPhonemes = parsePhonemes(challengerIpa);
-    let challengerFeatures = phonemesToFeatures(challengerPhonemes); 
-    return getLevenshtein(challengerFeatures, targetPhonoVectors,featureSchema);
-}
-
-function generateNewPopulation(sortedPop, sortedScores) {
+function generateNewPopulation(population, targetFeatures) {
   let newGeneration = [];
-  let p = 0;
-  while(p < popSize) {
-    if(p < elites) {
-      newGeneration.push(sortedPop[p]);
+
+  for(let i=0;i< popSize;i++){
+    if(i < elites) {
+      newGeneration.push(population[i]);
+    } else {
+      
+      let selectedParents = selectParents(population);
+      let unmutatedChild = mateGenomes(selectedParents);
+      let child = mutateGenome(unmutatedChild);
+
+      newGeneration.push(createIndivudual(child, targetFeatures));
     }
-    else {
-      newGeneration.push(
-        mateGenomesGetNewGenome(
-          ...selectNindividuals(sortedPop, sortedScores)
-        )
-      );
-    }
-    p++;
   }
+
   return newGeneration;
 }
 
-function generateRandomPopulation(popSize, ipaPhonemes) {
+function createIndivudual(kanas, targetFeatures){
+    let challengerIpa = kanasToIpa(kanas);
+    let challengerPhonemes = parsePhonemes(challengerIpa);
+    let challengerFeatures = phonemesToFeatures(challengerPhonemes); 
+    let score =  getLevenshtein(challengerFeatures, targetFeatures, featureSchema);
+
+    return {
+        kanas:kanas,
+        display:String.prototype.concat(...kanas),
+        score:score
+    }
+}
+
+function generateRandomPopulation(popSize, targetFeatures, ipaPhonemes) {
   let population = [];
 
-  for(i=0;i<popSize;i++) {
-    population.push(generateRandomKanas(ipaPhonemes));
+  for(let i=0;i<popSize;i++) {
+    let kanas = generateRandomKanas(ipaPhonemes);
+    population.push(createIndivudual(kanas, targetFeatures));
   }
 
   return population;
 }
 
-function isConvergence(sortedPop, sortedScores,generation){
-  return sortedScores[0] == 0 || generation > 1000 ;//|| isExtremum(sortedPop);
-}
-
-function isExtremum(sortedPop){
-  let rate = 0.9;
-  for(j=0;j<sortedPop.length*rate;j++){
-    if(! isGenomeEquals(sortedPop[0],sortedPop[j])){
-      return false;
-    }
-  }
-
-  return true;
-}
-
-function isGenomeEquals(genomeA, genomeB){
-  if(genomeA.length != genomeB.length){
-    return false;
-  }
-
-  for(i=0; i<genomeA.length ; i++){
-    if(genomeA[i] != genomeB[i]){
-      return false;
-    }
-  }
-
-  return true;
+function isConvergence(population, generation){
+  return population[0].score == 0 || generation > 1000 ;
 }

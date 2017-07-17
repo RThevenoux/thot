@@ -12,20 +12,17 @@ function GeneticRun(ipaTarget, alphabet, featureSchema){
   
   // # declare methodes
   this.evolution = _evolution;
-  this._createIndivudual = _createIndivudual; 
-  this._getScore = _getScore;
+  this._createIndivudual = _createIndivudual;
   this._isConvergence = _isConvergence;
   this._generateRandomPopulation = _generateRandomPopulation;
   this._newGeneration = _newGeneration;
-  this._getFeatures = (phonemes) =>  phonemes.map(x=> this.featureSchema.parse(x));
-
+  
   // # init values
-  this.featureSchema = featureSchema;
   this.alphabet = alphabet;
-  // target
-  this.targetIpa = ipaTarget;
+  this.ipaTarget = ipaTarget;// not used ?
   this.targetPhonemes = parsePhonemes(ipaTarget);
-  this.targetFeatures = this._getFeatures(this.targetPhonemes);
+  this.scorer = new Scorer(this.targetPhonemes, featureSchema);
+  
   // population
   this.generation = 0;
   this.population = this._generateRandomPopulation();
@@ -57,7 +54,8 @@ function _generateRandomPopulation() {
 
 function _createIndivudual(genome){
     let phenotype = this.alphabet.generatePhenotype(genome);
-    let score = this._getScore(phenotype.ipa);
+    let phonemes = parsePhonemes(phenotype.ipa);
+    let score = this.scorer.computeScore(phonemes);
 
     return {
         genome: genome,
@@ -65,13 +63,6 @@ function _createIndivudual(genome){
         ipa: phenotype.ipa,
         score: score
     }
-}
-
-function _getScore(ipa){
-    let phonemes = parsePhonemes(ipa);
-    let features = this._getFeatures(phonemes);
-    let score =  getLevenshtein(features, this.targetFeatures, this.featureSchema);
-    return score;
 }
 
 function _isConvergence(){

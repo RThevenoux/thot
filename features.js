@@ -1,6 +1,6 @@
-featureSchema = {
-  name:"POC",
-  features:[
+function POCFeatureSchema(){
+  this.name = "POC";
+  this.features=[
     {
       "name":"height",
       "type":"number",
@@ -29,10 +29,16 @@ featureSchema = {
       "max":1,
       "weight":0.5
     }
-  ]
+  ];
+  
+  this.parse = function (phoneme){
+   let feature = pocMap[phoneme.base];
+   feature.nasal = (phoneme.nasal?1:0);
+   return feature;
+  }
 };
 
-vowels={
+let pocMap={
     'i':{
             "height":6,
             "backness":0,
@@ -99,13 +105,3 @@ vowels={
             "roundedness":1
     }
 };
-
-function phonemesToFeatures(phonemes){
-        return phonemes.map(x=>phonemeToFeatures(x));
-}
-
-function phonemeToFeatures(phoneme){
-        let feature = vowels[phoneme.base];
-        feature.nasal = (phoneme.nasal?1:0);
-        return feature;
-}

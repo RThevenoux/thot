@@ -12,7 +12,7 @@ for(let i=0;i<shownPopulationSize;i++){
 var inputNode = document.getElementById('textBox');
 var evolveStartNode = document.getElementById('start-evolve');
 var mutationRateNode = document.getElementById('mutation-rate');
-var sexNumberNode = document.getElementById('sex-number');
+var parentPerChildNode = document.getElementById('parent-per-child');
 var popSizeNode = document.getElementById('pop-size');
 var selectionBiasNode = document.getElementById('selection-bias');
 var elitesNode = document.getElementById('elites');
@@ -30,27 +30,34 @@ var listener = {
   }
 };
 
+let alphabet;
+let featureSchema;
+
 // Click Event
-mutationRateNode.onchange = () => {mutationRate = mutationRateNode.value};
-selectionBiasNode.onchange = () => {sBias = selectionBiasNode.value};
-sexNumberNode.onchange = () => {sexNumber = sexNumberNode.value};
-popSizeNode.onchange = () => {popSize = popSizeNode.value};
-elitesNode.onchange = () => {elites = elitesNode.value};
+mutationRateNode.onchange = () => {geneticParameters.mutationRate = mutationRateNode.value};
+selectionBiasNode.onchange = () => {geneticParameters.sBias = selectionBiasNode.value};
+parentPerChildNode.onchange = () => {geneticParameters.parentPerChild = parentPerChildNode.value};
+popSizeNode.onchange = () => {geneticParameters.popSize = popSizeNode.value};
+elitesNode.onchange = () => {geneticParameters.elites = elitesNode.value};
 evolveStartNode.onclick = () => {
   let ipaTarget = inputNode.value;
   console.log("Begin evolution. Target: "+ ipaTarget);
   topPerformers[0].label.style.color = 'darkorange';
 
-  beginEvolution(ipaTarget, listener);
+  if(!alphabet) alphabet= new KatakanaAlphabet();
+  if(!featureSchema) featureSchema = new POCFeatureSchema();
+  
+  let geneticRun = new GeneticRun(ipaTarget, alphabet, featureSchema);
+  geneticRun.evolution(listener);
 };
 
 window.onload = () => {
   // Set up default display
-  mutationRateNode.value = mutationRate;
-  sexNumberNode.value = sexNumber;
-  popSizeNode.value = popSize;
-  selectionBiasNode.value = sBias;
-  elitesNode.value = elites;
+  mutationRateNode.value = geneticParameters.mutationRate;
+  parentPerChildNode.value = geneticParameters.parentPerChild;
+  popSizeNode.value = geneticParameters.popSize;
+  selectionBiasNode.value = geneticParameters.sBias;
+  elitesNode.value = geneticParameters.elites;
 }
 
 function addIPA(value){

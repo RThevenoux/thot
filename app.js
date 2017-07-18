@@ -30,8 +30,8 @@ var listener = {
   }
 };
 
-let alphabet;
-let featureSchema;
+var alphabet;
+var featureFactory;
 
 // Click Event
 mutationRateNode.onchange = () => {geneticParameters.mutationRate = mutationRateNode.value};
@@ -43,12 +43,11 @@ evolveStartNode.onclick = () => {
   let ipaTarget = inputNode.value;
   console.log("Begin evolution. Target: "+ ipaTarget);
   topPerformers[0].label.style.color = 'darkorange';
-
-  if(!alphabet) alphabet= new KatakanaAlphabet();
-  if(!featureSchema) featureSchema = new POCFeatureSchema();
   
-  let geneticRun = new GeneticRun(ipaTarget, alphabet, featureSchema);
-  geneticRun.evolution(listener);
+  featureFactory.getInstance((err, featureSchema) =>{
+    let geneticRun = new GeneticRun(ipaTarget, alphabet, featureSchema);
+    geneticRun.evolution(listener);
+  });
 };
 
 window.onload = () => {
@@ -58,6 +57,10 @@ window.onload = () => {
   popSizeNode.value = geneticParameters.popSize;
   selectionBiasNode.value = geneticParameters.sBias;
   elitesNode.value = geneticParameters.elites;
+  
+  // Init singleton
+  featureFactory = new PocFeatureFactory();
+  alphabet= new KatakanaAlphabet();
 }
 
 function addIPA(value){

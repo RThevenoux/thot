@@ -11,49 +11,49 @@
 <body>
     <div>
         <p>Voyelle</p>
-        <button  onclick="addIPA('i')">i</button>
-        <button  onclick="addIPA('y')">y</button>
-        <button  onclick="addIPA('u')">u</button>
-        <button  onclick="addIPA('e')">e</button>
-        <button  onclick="addIPA('ø')">ø</button>
-        <button  onclick="addIPA('o')">o</button>
-        <button  onclick="addIPA('ə')">ə</button> 	 
-        <button  onclick="addIPA('ɛ')">ɛ</button>
-        <button  onclick="addIPA('ɛ̃')">ɛ̃</button>
-        <button  onclick="addIPA('œ')">œ</button>
-        <button  onclick="addIPA('œ̃')">œ̃</button>
-        <button  onclick="addIPA('ɔ')">ɔ</button>
-        <button  onclick="addIPA('ɔ̃')">ɔ̃</button>
-        <button  onclick="addIPA('a')">a</button>
-        <button  onclick="addIPA('ɑ')">ɑ</button>
-        <button  onclick="addIPA('ɑ̃')">ɑ̃</button>
+        <button onclick="addIPA('i')">i</button>
+        <button onclick="addIPA('y')">y</button>
+        <button onclick="addIPA('u')">u</button>
+        <button onclick="addIPA('e')">e</button>
+        <button onclick="addIPA('ø')">ø</button>
+        <button onclick="addIPA('o')">o</button>
+        <button onclick="addIPA('ə')">ə</button>
+        <button onclick="addIPA('ɛ')">ɛ</button>
+        <button onclick="addIPA('ɛ̃')">ɛ̃</button>
+        <button onclick="addIPA('œ')">œ</button>
+        <button onclick="addIPA('œ̃')">œ̃</button>
+        <button onclick="addIPA('ɔ')">ɔ</button>
+        <button onclick="addIPA('ɔ̃')">ɔ̃</button>
+        <button onclick="addIPA('a')">a</button>
+        <button onclick="addIPA('ɑ')">ɑ</button>
+        <button onclick="addIPA('ɑ̃')">ɑ̃</button>
     </div>
-     <div>
+    <div>
         <p>Semi</p>
-        <button  onclick="addIPA('ɥ')">ɥ</button>
-        <button  onclick="addIPA('w')">w</button>
-        <button  onclick="addIPA('j')">j</button>
+        <button onclick="addIPA('ɥ')">ɥ</button>
+        <button onclick="addIPA('w')">w</button>
+        <button onclick="addIPA('j')">j</button>
     </div>
     <div>
         <p>Consone</p>
-        <button  onclick="addIPA('p')">p</button>
-        <button  onclick="addIPA('b')">b</button>
-        <button  onclick="addIPA('t')">t</button>
-        <button  onclick="addIPA('d')">d</button>
-        <button  onclick="addIPA('k')">k</button>
-        <button  onclick="addIPA('g')">g</button>
-        <button  onclick="addIPA('m')">m</button>
-        <button  onclick="addIPA('n')">n</button>
-        <button  onclick="addIPA('ɲ')">ɲ</button>
-        <button  onclick="addIPA('ŋ')">ŋ</button>
-        <button  onclick="addIPA('f')">f</button>
-        <button  onclick="addIPA('v')">v</button>
-        <button  onclick="addIPA('s')">s</button>
-        <button  onclick="addIPA('z')">z</button>
-        <button  onclick="addIPA('ʃ')">ʃ</button>
-        <button  onclick="addIPA('ʒ')">ʒ</button>
-        <button  onclick="addIPA('ʁ')">ʁ</button>
-        <button  onclick="addIPA('l')">l</button>
+        <button onclick="addIPA('p')">p</button>
+        <button onclick="addIPA('b')">b</button>
+        <button onclick="addIPA('t')">t</button>
+        <button onclick="addIPA('d')">d</button>
+        <button onclick="addIPA('k')">k</button>
+        <button onclick="addIPA('g')">g</button>
+        <button onclick="addIPA('m')">m</button>
+        <button onclick="addIPA('n')">n</button>
+        <button onclick="addIPA('ɲ')">ɲ</button>
+        <button onclick="addIPA('ŋ')">ŋ</button>
+        <button onclick="addIPA('f')">f</button>
+        <button onclick="addIPA('v')">v</button>
+        <button onclick="addIPA('s')">s</button>
+        <button onclick="addIPA('z')">z</button>
+        <button onclick="addIPA('ʃ')">ʃ</button>
+        <button onclick="addIPA('ʒ')">ʒ</button>
+        <button onclick="addIPA('ʁ')">ʁ</button>
+        <button onclick="addIPA('l')">l</button>
     </div>
 
 
@@ -140,12 +140,20 @@
 
     </div>
     <script type="text/javascript" src="./app.js"></script>
-    <script type="text/javascript" src="./genetic.js"></script>
-    <script type="text/javascript" src="./distance.js"></script>
-    <script type="text/javascript" src="./scorer.js"></script>
-    <script type="text/javascript" src="./feature/poc-feature-schema.js"></script>
-    <script type="text/javascript" src="./feature/pct-feature-schema.js"></script>
-    <script type="text/javascript" src="./ipa.js"></script>
+    <script type="text/javascript" src="./json-loader.js"></script>
+    <script type="text/javascript" src="./genetic/genetic-run.js"></script>
+    <script type="text/javascript" src="./genetic/ipa.js"></script>
+    <script type="text/javascript" src="./genetic/levenshtein.js"></script>
+    <script type="text/javascript" src="./genetic/scorer.js"></script>
+    <script type="text/javascript" src="./genetic/generator.js"></script>
+    <script type="text/javascript" src="./feature/abstract-feature-comparator.js"></script>
+    <script type="text/javascript" src="./feature/abstract-feature-set.js"></script>
+    <script type="text/javascript" src="./feature/poc/poc-feature-comparator.js"></script>
+    <script type="text/javascript" src="./feature/poc/poc-feature-factory.js"></script>
+    <script type="text/javascript" src="./feature/poc/poc-feature-set.js"></script>
+    <script type="text/javascript" src="./feature/pct/pct-feature-comparator.js"></script>
+    <script type="text/javascript" src="./feature/pct/pct-feature-factory.js"></script>
+    <script type="text/javascript" src="./feature/pct/pct-feature-set.js"></script>
     <script type="text/javascript" src="./alphabet/katakana-alphabet.js"></script>
     <script type="text/javascript" src="./alphabet/katakana-factory.js"></script>
 </body>

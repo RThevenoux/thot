@@ -2,6 +2,7 @@ class KatakanaAlphabet {
 
   constructor(data) {
     this.katakanas = data;
+    this.name = "Katakana"
   }
 
   mutateGenome(genome, mutationRate) {

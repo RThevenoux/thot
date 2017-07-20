@@ -43,15 +43,32 @@ popSizeNode.onchange = () => { geneticParameters.popSize = popSizeNode.value };
 elitesNode.onchange = () => { geneticParameters.elites = elitesNode.value };
 evolveStartNode.onclick = () => {
   let ipaTarget = inputNode.value;
-  console.log("Begin evolution. Target: " + ipaTarget);
+  console.log("Click on 'Evolve Me'. Target: " + ipaTarget);
   topPerformers[0].label.style.color = 'darkorange';
 
   // Get FeatureSchema & Alphabet then run genetic
-  featureFactory.getInstance((err, featureSchema) => {
-    alphabetFactory.getInstance((err, alphabet) => {
-      let geneticRun = new GeneticRun(ipaTarget, alphabet, featureSchema);
-      geneticRun.evolution(listener);
-    })
+  featureFactory.getFeatureSet((err, featureSet) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log("| Feature Set : "+featureSet.name);
+    featureFactory.getFeatureComparator((err, featureComparator) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log("|  Comparator : "+featureComparator.name);
+      alphabetFactory.getInstance((err, alphabet) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        console.log("|     Alpabet : "+alphabet.name);
+        let geneticRun = new GeneticRun(ipaTarget, alphabet, featureSet, featureComparator);
+        geneticRun.evolution(listener);
+      });
+    });
   });
 };
 

@@ -12,19 +12,33 @@ class GeneticRun {
 
   constructor(ipaTarget, alphabet, featureSet, featureComparator) {
     this.alphabet = alphabet;
+    this.ipaTarget = ipaTarget;
     this.scorer = new Scorer(ipaTarget, featureSet, featureComparator);
     this.generator = new Generator(this.alphabet);
 
     this._initializePopulation(ipaTarget);
   }
 
-  evolution(listener) {
-    if (this._isConvergence()) {
-      listener.finish(this.population, this.generation);
+  start(listener){
+    this.listener = listener;
+    this.stopped = false;
+    this.listener.started(this.ipaTarget);
+    this._evolution();
+  }
+
+  stop(){
+    this.stopped=true;
+  }
+
+  _evolution() {
+    if(this.stopped){
+      this.listener.stopped();
+    }else if (this._isConvergence()) {
+      this.listener.finished(this.population, this.generation);
     } else {
       this._newGeneration();
-      listener.newGeneration(this.population, this.generation);
-      setTimeout(() => this.evolution(listener), 0);
+      this.listener.newGeneration(this.population, this.generation);
+      setTimeout(() => this._evolution(), 0);
     }
   }
 

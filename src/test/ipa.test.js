@@ -3,7 +3,8 @@ window.onload = () => {
     let testCases = {
         "a": "a",
         "abcdef": "abcdef",
-        "g": '\u0261'
+        "g": '\u0261',
+        "kʲakʷa": "kjakwa"
     }
 
     let errorCount = 0;
@@ -20,7 +21,11 @@ window.onload = () => {
     }
 
     console.log("");
-    console.log("FINISH error: " + errorCount + "/" + totalCount);
-    ipaResult.textContent = "Error: " + errorCount + "/" + totalCount;
+    console.log("FINISH 'IPA.normalize()' error: " + errorCount + "/" + totalCount);
+    if (errorCount == 0) {
+        ipaResult.textContent = "IPA.normalize() OK";
+    } else {
+        ipaResult.textContent = "IPA.normalize() Error: " + errorCount + "/" + totalCount;
+    }
 };
 

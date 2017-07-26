@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Name Evolver</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Caveat+Brush|Droid+Sans" rel="stylesheet">
+</head>
+
+<body>
+    <div>
+        <p>Voyelle</p>
+        <button onclick="addIPA('i')">i</button>
+        <button onclick="addIPA('y')">y</button>
+        <button onclick="addIPA('u')">u</button>
+        <button onclick="addIPA('e')">e</button>
+        <button onclick="addIPA('ø')">ø</button>
+        <button onclick="addIPA('o')">o</button>
+        <button onclick="addIPA('ə')">ə</button>
+        <button onclick="addIPA('ɛ')">ɛ</button>
+        <button onclick="addIPA('ɛ̃')">ɛ̃</button>
+        <button onclick="addIPA('œ')">œ</button>
+        <button onclick="addIPA('œ̃')">œ̃</button>
+        <button onclick="addIPA('ɔ')">ɔ</button>
+        <button onclick="addIPA('ɔ̃')">ɔ̃</button>
+        <button onclick="addIPA('a')">a</button>
+        <button onclick="addIPA('ɑ')">ɑ</button>
+        <button onclick="addIPA('ɑ̃')">ɑ̃</button>
+    </div>
+    <div>
+        <p>Semi</p>
+        <button onclick="addIPA('ɥ')">ɥ</button>
+        <button onclick="addIPA('w')">w</button>
+        <button onclick="addIPA('j')">j</button>
+    </div>
+    <div>
+        <p>Consone</p>
+        <button onclick="addIPA('p')">p</button>
+        <button onclick="addIPA('b')">b</button>
+        <button onclick="addIPA('t')">t</button>
+        <button onclick="addIPA('d')">d</button>
+        <button onclick="addIPA('k')">k</button>
+        <button onclick="addIPA('g')">g</button>
+        <button onclick="addIPA('m')">m</button>
+        <button onclick="addIPA('n')">n</button>
+        <button onclick="addIPA('ɲ')">ɲ</button>
+        <button onclick="addIPA('ŋ')">ŋ</button>
+        <button onclick="addIPA('f')">f</button>
+        <button onclick="addIPA('v')">v</button>
+        <button onclick="addIPA('s')">s</button>
+        <button onclick="addIPA('z')">z</button>
+        <button onclick="addIPA('ʃ')">ʃ</button>
+        <button onclick="addIPA('ʒ')">ʒ</button>
+        <button onclick="addIPA('ʁ')">ʁ</button>
+        <button onclick="addIPA('l')">l</button>
+    </div>
+
+
+    <div class="container">
+
+        <div class="top-bar">
+            <div class="input__container">
+                <h2>Your name</h2>
+                <div class="name-input">
+                    <input type="text" id="textBox" />
+                    <button id="start-evolve">Evolve Me</button>
+                </div>
+            </div>
+            <div class="parameter">
+                mutation rate
+                <input type="number" id="mutation-rate" />
+            </div>
+            <div class="parameter">
+                parents per child
+                <input type="number" id="parent-per-child" />
+            </div>
+            <div class="parameter">
+                population size
+                <input type="number" id="pop-size" />
+            </div>
+            <div class="parameter">
+                selection bias
+                <input type="number" id="selection-bias" />
+            </div>
+            <div class="parameter">
+                elites
+                <input type="number" id="elites" />
+            </div>
+        </div>
+
+        <div class="top-performers">
+
+            <div class="performer-row">
+                <div class="top-performer title">Top Individuals</div>
+                <span class="score title">Scores</span>
+            </div>
+
+            <div class="performer-row">
+                <div id="top-performer0" class="top-performer"></div>
+                <span id="score0" class="score"></span>
+            </div>
+            <div class="performer-row">
+                <div id="top-performer1" class="top-performer"></div>
+                <span id="score1" class="score"></span>
+            </div>
+            <div class="performer-row">
+                <div id="top-performer2" class="top-performer"></div>
+                <span id="score2" class="score"></span>
+            </div>
+            <div class="performer-row">
+                <div id="top-performer3" class="top-performer"></div>
+                <span id="score3" class="score"></span>
+            </div>
+            <div class="performer-row">
+                <div id="top-performer4" class="top-performer"></div>
+                <span id="score4" class="score"></span>
+            </div>
+            <div class="performer-row">
+                <div id="top-performer5" class="top-performer"></div>
+                <span id="score5" class="score"></span>
+            </div>
+            <div class="performer-row">
+                <div id="top-performer6" class="top-performer"></div>
+                <span id="score6" class="score"></span>
+            </div>
+            <div class="performer-row">
+                <div id="top-performer7" class="top-performer"></div>
+                <span id="score7" class="score"></span>
+            </div>
+            <div class="performer-row">
+                <div id="top-performer8" class="top-performer"></div>
+                <span id="score8" class="score"></span>
+            </div>
+            <div class="performer-row">
+                <div id="top-performer9" class="top-performer"></div>
+                <span id="score9" class="score"></span>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="./index.js"></script>
+    <script type="text/javascript" src="./app-controller.js"></script>
+    <script type="text/javascript" src="./app-model.js"></script>
+    <script type="text/javascript" src="./parameter-controller.js"></script>
+    <script type="text/javascript" src="./parameter-model.js"></script>
+    <script type="text/javascript" src="./json-loader.js"></script>
+    <script type="text/javascript" src="./alphabet/ipa.js"></script>
+    <script type="text/javascript" src="./alphabet/katakana-alphabet.js"></script>
+    <script type="text/javascript" src="./alphabet/katakana-factory.js"></script>
+    <script type="text/javascript" src="./genetic/genetic-run.js"></script>
+    <script type="text/javascript" src="./genetic/levenshtein.js"></script>
+    <script type="text/javascript" src="./genetic/scorer.js"></script>
+    <script type="text/javascript" src="./genetic/generator.js"></script>
+    <script type="text/javascript" src="./feature/abstract-feature-comparator.js"></script>
+    <script type="text/javascript" src="./feature/abstract-feature-set.js"></script>
+    <script type="text/javascript" src="./feature/poc/poc-feature-comparator.js"></script>
+    <script type="text/javascript" src="./feature/poc/poc-feature-factory.js"></script>
+    <script type="text/javascript" src="./feature/poc/poc-feature-set.js"></script>
+    <script type="text/javascript" src="./feature/pct/pct-feature-comparator.js"></script>
+    <script type="text/javascript" src="./feature/pct/pct-feature-factory.js"></script>
+    <script type="text/javascript" src="./feature/pct/pct-feature-set.js"></script>
+
+</body>
+
+</html>

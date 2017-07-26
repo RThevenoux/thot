@@ -4,21 +4,21 @@ class IPA {
   static normalize(string) {
     // simplification
     string = string.replace(/ʷ/g, 'w'); // Labiovelarisation simplified
-    string = string.replace(/ʲ/g, 'j'); // Labiovelarisation simplified
+    string = string.replace(/ʲ/g, 'j'); // Palatalisation simplified
 
     // IPA normalization
     let normalization = {
-      'g': 'ɡ', // U+0067 > U+0261
-      "ʦ": "t͡s",
-      "ʣ": "d͡z",
-      "ʧ": "t͡ʃ",
-      "ʤ": "d͡ʒ",
-      "ʨ": "t͡ɕ",
-      "ʥ": "d͡ʑ",
-      "ɚ": "ə˞",
-      "ɝ": "ɜ˞",
-      "͜": "͡",
-      ":": "ː", // U+003A > U+02D0 (Chrone)
+      '\u0067': '\u0261', // LATIN SMALL LETTER G > LATIN SMALL LETTER SCRIPT G
+      "\u02A6": "t͡s", // ʦ
+      "ʣ": "d͡z", // ʣ
+      "ʧ": "t͡ʃ", // ʧ
+      "ʤ": "d͡ʒ", // ʤ
+      "ʨ": "t͡ɕ", // ʨ
+      "ʥ": "d͡ʑ", // ʥ
+      "ɚ": "ə˞", // ɚ
+      "ɝ": "ɜ˞", // ɝ
+      "\u035C": "\u0361", // COMBINING DOUBLE BREVE BELOW > COMBINING DOUBLE INVERTED BREVE
+      ":": "\u02D0", // COLON > MODIFIER LETTER TRIANGULAR COLON
       "˗": "̠", // retracted
     };
 
@@ -39,24 +39,40 @@ class IPA {
     let normalized = this.normalize(ipaString);
 
     let phonemes = [];
-    let lastPhoneme = {};
+
+    let lastPhoneme = null;
+    let combining = false;
 
     for (let i = 0; i < normalized.length; i++) {
       let char = normalized[i];
-      if (char === "\u0303") {
-        if (lastPhoneme == null) {
+      if (char === "\u0303") { // ~ : nasal
+        if (!lastPhoneme) {
           throw new Exception("Unexpected '~' without base");
         }
-        lastPhoneme.nasal = true;
-      } else {
-        if (i != 0) {
-          phonemes.push(lastPhoneme);
+        if (combining) {
+          throw new Exception("Unexpected '~' after combining");
         }
-        lastPhoneme = {
-          'base': char
-        };
+        lastPhoneme.nasal = true;
+      } else if (char === "\u0361") { // COMBINING DOUBLE BREVE
+        if (!lastPhoneme) {
+          throw new Exception("Unexpected 'COMBINING DOUBLE BREVE' without base");
+        }
+        combining = true;
+      } else {
+        if (combining) {
+          lastPhoneme.base += char;
+          combining = false;
+        } else {
+          if (lastPhoneme) {
+            phonemes.push(lastPhoneme);
+          }
+          lastPhoneme = {
+            'base': char
+          }
+        }
       }
     }
+
 
     phonemes.push(lastPhoneme);
     return phonemes;

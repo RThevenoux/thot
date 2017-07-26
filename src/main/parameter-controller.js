@@ -1,8 +1,7 @@
 class ParameterController {
     constructor() {
         this.model = new ParameterModel();
-        console.log("ParameterController.constructor()");
-
+        
         var that = this;
         let mutationRateNode = document.getElementById('mutation-rate');
         mutationRateNode.onchange = () => { that.model.mutationRate = mutationRateNode.value };

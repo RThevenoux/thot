@@ -2,6 +2,32 @@ class IPA {
   constructor() { };
 
   static normalize(string) {
+    // simplification
+    string = string.replace(/ʷ/g, 'w'); // Labiovelarisation simplified
+    string = string.replace(/ʲ/g, 'j'); // Labiovelarisation simplified
+
+    // IPA normalization
+    let normalization = {
+      'g': 'ɡ', // U+0067 > U+0261
+      "ʦ": "t͡s",
+      "ʣ": "d͡z",
+      "ʧ": "t͡ʃ",
+      "ʤ": "d͡ʒ",
+      "ʨ": "t͡ɕ",
+      "ʥ": "d͡ʑ",
+      "ɚ": "ə˞",
+      "ɝ": "ɜ˞",
+      "͜": "͡",
+      ":": "ː", // U+003A > U+02D0 (Chrone)
+      "˗": "̠", // retracted
+    };
+
+    for (let key in normalization) {
+      let regex = new RegExp(key, 'gi');
+      string = string.replace(regex, normalization[key]);
+    }
+
+
     return string.normalize("NFD");
   }
 

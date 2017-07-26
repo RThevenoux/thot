@@ -1,28 +1,19 @@
-var geneticParameters = {
-  mutationRate: 0.10,
-  parentPerChild: 4,
-  sBias: 0.8,
-  popSize: 30,
-  elites: 3, //should be less then popSize. Else unmanaged error.
-  maxGeneration: 1000
-};
-
-// GENETIC RUN - BEGIN {
 class GeneticRun {
 
-  constructor(ipaTarget, alphabet, featureSet, featureComparator) {
+  constructor(ipaTarget, alphabet, featureSet, featureComparator, parameters) {
+    this.parameters = parameters;
     this.alphabet = alphabet;
     this.ipaTarget = ipaTarget;
     this.scorer = new Scorer(ipaTarget, featureSet, featureComparator);
-    this.generator = new Generator(this.alphabet);
-
-    this._initializePopulation(ipaTarget);
+    this.generator = new Generator(this.alphabet, this.parameters);
   }
 
   start(listener){
     this.listener = listener;
     this.stopped = false;
     this.listener.started(this.ipaTarget);
+
+    this._initializePopulation(this.ipaTarget);
     this._evolution();
   }
 
@@ -46,7 +37,7 @@ class GeneticRun {
     let targetPhonemes = IPA.parsePhonemes(ipaTarget);
 
     let newPpopulation = [];
-    for (let i = 0; i < geneticParameters.popSize; i++) {
+    for (let i = 0; i < this.parameters.popSize; i++) {
       let genome = this.alphabet.generateRandomGenome(targetPhonemes);
       let individual = this._createIndivudual(genome);
       newPpopulation.push(individual);
@@ -68,18 +59,18 @@ class GeneticRun {
   }
 
   _isConvergence() {
-    return this.population[0].score == 0 || this.generation > geneticParameters.maxGeneration;
+    return this.population[0].score == 0 || this.generation > this.parameters.maxGeneration;
   }
 
   _newGeneration() {
-    let eliteNumber = geneticParameters.elites;
-    let popSize = geneticParameters.popSize;
+    let eliteNumber = this.parameters.elites;
+    let popSize = this.parameters.popSize;
 
     // Keep the elite individual
     let newGeneration = this.population.slice(0, eliteNumber);
 
     // Generate other individual
-    for (let i = geneticParameters.elites; i < popSize; i++) {
+    for (let i = eliteNumber; i < popSize; i++) {
       let genome = this.generator.generateGenome(this.population);
       let indivual = this._createIndivudual(genome);
       newGeneration.push(indivual);

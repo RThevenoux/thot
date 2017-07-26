@@ -6,7 +6,7 @@ class AppModel {
     this.geneticRun = null;
   }
 
-  start(ipaTarget, listener) {
+  start(ipaTarget, parameters, listener) {
     console.log("Load strategies... (target:"+ipaTarget+')');
 
     this.loadStrategies((err, items) => {
@@ -17,7 +17,7 @@ class AppModel {
       if(this.geneticRun){
         this.geneticRun.stop();
       }
-      this.geneticRun = new GeneticRun(ipaTarget, items.alphabet, items.featureSet, items.featureComparator);
+      this.geneticRun = new GeneticRun(ipaTarget, items.alphabet, items.featureSet, items.featureComparator, parameters);
       this.geneticRun.start(listener);
     });
   }

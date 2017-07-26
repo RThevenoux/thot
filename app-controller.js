@@ -1,7 +1,8 @@
 class AppController {
-  constructor() {
+  constructor(parameters) {
     let shownPopulationSize = 10;
 
+    this.parameters = parameters;
     this.model = new AppModel();
 
     this.topPerformers = [];
@@ -18,7 +19,7 @@ class AppController {
   }
 
   start(ipaTarget) {
-    this.model.start(ipaTarget,this);
+    this.model.start(ipaTarget, this.parameters, this);
   }
 
   stop(){

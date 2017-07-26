@@ -1,20 +1,20 @@
 class Generator {
-    constructor(mutator) {
+    constructor(mutator, parameters) {
         this.mutator = mutator;
+        this.parameters = parameters;
     };
 
     generateGenome(population) {
-        let parents = this._select(population);
+        let parents = this._selectParents(population);
         let child = this._mateGenomes(parents);
-        let mutated = this.mutator.mutateGenome(child, geneticParameters.mutationRate);
+        let mutated = this.mutator.mutateGenome(child, this.parameters.mutationRate);
         return mutated;
     }
 
-    _select(population) {
-        let number = geneticParameters.parentPerChild;
-        let bias = geneticParameters.sBias;
+    _selectParents(population) {
+        let number = this.parameters.parentPerChild;
 
-        let weightsArray = this._getWeights(population, bias);
+        let weightsArray = this._getWeights(population);
         let selectedGenomes = [];
 
         for (let i = 0; i < number; i++) {
@@ -35,7 +35,8 @@ class Generator {
         }
     }
 
-    _getWeights(population, bias) {
+    _getWeights(population) {
+        let bias = this.parameters.sBias;
         return population.map(indivual => 1 / (indivual.score ^ bias));
     }
 

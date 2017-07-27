@@ -1,12 +1,24 @@
 class IPA {
   constructor() { };
 
-  static normalize(string) {
-    // simplification
-    string = string.replace(/ʷ/g, 'w'); // Labiovelarisation simplified
-    string = string.replace(/ʲ/g, 'j'); // Palatalisation simplified
+  static parsePhonemes(ipaString) {
+    if (!ipaString || ipaString.length === 0) {
+      return [];
+    }
 
-    // IPA normalization
+    let normalized = this._normalize(ipaString);
+
+    let simplification = {
+      'ʷ': 'w',// Labiovelarisation
+      'ʲ': 'j'// Palatalisation
+    }
+
+    let simplified = this._replaceAll(normalized, simplification);
+
+    return this._parse(simplified);
+  }
+
+  static _normalize(input) {
     let normalization = {
       '\u0067': '\u0261', // LATIN SMALL LETTER G > LATIN SMALL LETTER SCRIPT G
       "\u02A6": "t͡s", // ʦ
@@ -22,22 +34,12 @@ class IPA {
       "˗": "̠", // retracted
     };
 
-    for (let key in normalization) {
-      let regex = new RegExp(key, 'gi');
-      string = string.replace(regex, normalization[key]);
-    }
+    let tmp = this._replaceAll(input, normalization);
 
-
-    return string.normalize("NFD");
+    return tmp.normalize("NFD");
   }
 
-  static parsePhonemes(ipaString) {
-    if (!ipaString || ipaString.length === 0) {
-      return [];
-    }
-
-    let normalized = this.normalize(ipaString);
-
+  static _parse(normalized) {
     let phonemes = [];
 
     let lastPhoneme = null;
@@ -72,9 +74,16 @@ class IPA {
         }
       }
     }
-
-
     phonemes.push(lastPhoneme);
     return phonemes;
+  }
+
+  static _replaceAll(input, actions) {
+    let tmp = input;
+    for (let key in actions) {
+      let regex = new RegExp(key, 'gi');
+      tmp = tmp.replace(regex, actions[key]);
+    }
+    return tmp;
   }
 } 

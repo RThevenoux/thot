@@ -21,7 +21,6 @@ testNormalize = () => {
         "\u00E3": "a\u0303",// LATIN SMALL LETTER A WITH TILDE > a + tilde
         "abcdef": "abcdef",
         "g": '\u0261',
-        "kʲakʷa": "kjakwa",
         "ʦ": "t\u0361s",
         "tˢ": "t\u0361s"
     }
@@ -31,7 +30,7 @@ testNormalize = () => {
     let totalCount = 0;
     for (let key in testCases) {
         let expected = testCases[key];
-        let result = IPA.normalize(key);
+        let result = IPA._normalize(key);
         if (result !== expected) {
             errorCount++;
             console.log("Error on '" + key + "'");
@@ -54,7 +53,9 @@ testParse = () => {
         ["a\u0303", [['a', true]], " a + tilde"],
         ["ab", [['a', false], ['b', false]], " a + tilde"],
         ["a\u00E3a\u0303a", [['a', false], ['a', true], ['a', true], ['a', false]], " a + tilde"],
-        ["ʦ", [['ts', false]]]
+        ["ʦ", [['ts', false]]],
+        ["kʲ",[['k',false],['j',false]]],
+        ["kʷ",[['k',false],['w',false]]]
     ];
 
     let errorCount = 0;

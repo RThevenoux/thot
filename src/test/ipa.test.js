@@ -22,7 +22,8 @@ testNormalize = () => {
         "abcdef": "abcdef",
         "g": '\u0261',
         "ʦ": "t\u0361s",
-        "tˢ": "t\u0361s"
+        "tˢ": "t\u0361s",
+        "çc\u0327ç": "ççç",// LATIN SMALL LETTER C WITH CEDILLA
     }
 
     console.log("'IPA.normalize()' START")
@@ -34,7 +35,11 @@ testNormalize = () => {
         if (result !== expected) {
             errorCount++;
             console.log("Error on '" + key + "'");
-            console.log("   expected '" + expected + "', obtain '" + result + '"');
+            let unicode = "";
+            for (let i = 0; i < result.length; i++) {
+                unicode += "\\u" + result.charCodeAt(i).toString(16);
+            }
+            console.log("   expected '" + expected + "', obtain '" + result + '" > ' + unicode);
         }
         totalCount++;
     }
@@ -54,8 +59,8 @@ testParse = () => {
         ["ab", [['a', false], ['b', false]], " a + tilde"],
         ["a\u00E3a\u0303a", [['a', false], ['a', true], ['a', true], ['a', false]], " a + tilde"],
         ["ʦ", [['ts', false]]],
-        ["kʲ",[['k',false],['j',false]]],
-        ["kʷ",[['k',false],['w',false]]]
+        ["kʲ", [['k', false], ['j', false]]],
+        ["kʷ", [['k', false], ['w', false]]]
     ];
 
     let errorCount = 0;
@@ -89,7 +94,7 @@ testParse = () => {
                     console.log("   expected nasal: " + expected[1] + ", obtain: " + phoneme.nasal);
                 }
             }
-            if(error){
+            if (error) {
                 errorCount++;
             }
         }

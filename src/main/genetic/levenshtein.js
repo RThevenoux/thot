@@ -1,8 +1,8 @@
 class Levenshtein {
   constructor(featureComparator) {
     this.featureComparator = featureComparator;
-    this.insertionCost = 5;
-    this.deletionCost = 5;
+    this.insertionCost = 2;
+    this.deletionCost = 2;
   }
 
   // Compute the edit distance between the two given strings or array

@@ -1,4 +1,8 @@
+const NASAL_MARK = '\u0303';
+const LONG_MARK = '\u02D0'; // MODIFIER LETTER TRIANGULAR COLON
+
 class IPA {
+
   constructor() { };
 
   static parsePhonemes(ipaString) {
@@ -30,13 +34,13 @@ class IPA {
       "ɚ": "ə\u02DE", // ɚ
       "ɝ": "ɜ\u02DE", // ɝ
       "\u035C": "\u0361", // COMBINING DOUBLE BREVE BELOW > COMBINING DOUBLE INVERTED BREVE
-      ":": "\u02D0", // COLON > MODIFIER LETTER TRIANGULAR COLON
+      ":": LONG_MARK, // COLON > MODIFIER LETTER TRIANGULAR COLON
       "˗": "̠", // retracted
     };
 
     let tmp = this._replaceAll(input, normalization);
     tmp = tmp.normalize("NFD");
-    tmp = tmp.replace(/\u0063\u0327/g,"\u00E7"); // LATIN SMALL LETTER C WITH CEDILLA
+    tmp = tmp.replace(/\u0063\u0327/g, "\u00E7"); // LATIN SMALL LETTER C WITH CEDILLA
 
     return tmp;
   }
@@ -49,9 +53,8 @@ class IPA {
 
     for (let i = 0; i < normalized.length; i++) {
       let char = normalized[i];
-      
-      // ~ : nasal
-      if (char === "\u0303") { 
+
+      if (char === NASAL_MARK) {
         if (!lastPhoneme) {
           throw new Exception("Unexpected '~' without base");
         }
@@ -66,6 +69,9 @@ class IPA {
           throw new Exception("Unexpected 'COMBINING DOUBLE BREVE' without base");
         }
         combining = true;
+      }
+      else if (char === LONG_MARK) {
+        // ignore
       }
       // Default
       else {

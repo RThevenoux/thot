@@ -1,4 +1,9 @@
 class Generator {
+
+    /**
+     * @param {*} mutator 
+     * @param {ParameterModel} parameters 
+     */
     constructor(mutator, parameters) {
         this.mutator = mutator;
         this.parameters = parameters;

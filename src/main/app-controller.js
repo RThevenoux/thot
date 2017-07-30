@@ -1,4 +1,8 @@
 class AppController {
+  /**
+   * 
+   * @param {ParameterModel} parameters 
+   */
   constructor(parameters) {
     let shownPopulationSize = 10;
 

@@ -1,5 +1,13 @@
 class GeneticRun {
 
+  /**
+   * 
+   * @param {String} ipaTarget 
+   * @param {*} alphabet 
+   * @param {AbstractFeatureSet} featureSet 
+   * @param {AbstractFeatureComparator} featureComparator 
+   * @param {ParameterModel} parameters 
+   */
   constructor(ipaTarget, alphabet, featureSet, featureComparator, parameters) {
     this.parameters = parameters;
     this.alphabet = alphabet;

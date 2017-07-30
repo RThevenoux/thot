@@ -11,27 +11,13 @@ class KatakanaAlphabet {
       }
   */
 
-  /*
-    vowelCombination : {vowel:[consonant]}
-
-    katakanas: {
-      consonant:{
-        gemination: "" || false,
-        nCategory: "m","n","ng","vowel"
-        vowels:{
-          vowel:{  
-            display: '',
-            ipa: ""
-          }
-        }
-      }
-    }
-  */
-  constructor(katakanas, vowelCombination) {
-    console.log(JSON.stringify(vowelCombination));
-    this.katakanas = katakanas;
-    this.vowelCombination = vowelCombination;
-    this.name = "Katakana"
+  /**
+   * 
+   * @param {KatakanaHelper} helper 
+   */
+  constructor(helper) {
+    this.helper = helper;
+    this.name = "Katakana";
   }
 
   mutateGenome(genome, mutationRate) {
@@ -73,20 +59,9 @@ class KatakanaAlphabet {
     };
 
     if (mutationType < 0.35) {
-      // Change vowel
-      let consonantDesc = this.katakanas[gene.consonant];
-      let otherVowels = Object.keys(consonantDesc.vowels);
-      otherVowels.splice(otherVowels.indexOf(gene.vowel), 1);
-      if (otherVowels.length > 0) {
-        mutated.vowel = this._randomInArray(otherVowels);
-      }
+      mutated.vowel = this.helper.changeVowelKey(gene);
     } else if (mutationType >= 0.35 && mutationType < 0.7) {
-      // Change consonant
-      let otherConsonants = new Set(this.vowelCombination[gene.vowel]);
-      otherConsonants.delete(gene.consonant);
-      if (otherConsonants.size > 0) {
-        mutated.consonant = this._randomInArray([...otherConsonants]);
-      }
+      mutated.consonant = this.helper.changeConsonantKey(gene);
     } else if (mutationType >= 0.7 && mutationType < 0.8) {
       mutated.sokuon = !mutated.sokuon;
     } else if (mutationType >= 0.8 && mutationType < 0.9) {
@@ -119,14 +94,14 @@ class KatakanaAlphabet {
 
     for (let i = 0; i < genome.length; i++) {
       let gene = genome[i];
-      let consonant = this.katakanas[gene.consonant];
-      let kana = consonant.vowels[gene.vowel];
+      let consonantGemination = this.helper.getGemination(gene.consonant);
 
-      if (gene.sokuon && consonant.gemination && i != 0) {
+      if (gene.sokuon && consonantGemination && i != 0) {
         display += '\u30c3'; // ッ
-        ipa += consonant.gemination;
+        ipa += consonantGemination;
       }
 
+      let kana = this.helper.getKana(gene);
       display += kana.display;
       ipa += kana.ipa;
 
@@ -153,8 +128,8 @@ class KatakanaAlphabet {
   };
 
   _nToIPA(gene, nextGene) {
-    let nextConsonant = this.katakanas[nextGene.consonant];
-    switch (nextConsonant.nCategory) {
+    let nextNCategory = this.helper.getNCategory(nextGene.consonant);
+    switch (nextNCategory) {
       case "m":
         return 'm'; // m
       case "n":
@@ -162,10 +137,9 @@ class KatakanaAlphabet {
       case "ng":
         return '\u014B'; // ŋ
       case "vowel":
-        let simpleVowel = this.katakanas[""].vowels[gene.vowel];
-        return simpleVowel + NASAL_MARK;
+        return this.helper.getNasalizedVowel(gene.vowel);
       default:
-        console.error("invalid 'nCategory':" + nextConsonant.nCategory);
+        console.error("invalid 'nCategory':" + nextNCategory);
         return "";
     }
   }
@@ -175,20 +149,14 @@ class KatakanaAlphabet {
     let sokuon = Math.random() < 0.1;
     let choonpu = Math.random() < 0.1;
 
-    let consonant = this._randomInArray(Object.keys(this.katakanas));
-    let vowel = this._randomInArray(Object.keys(this.katakanas[consonant].vowels));
+    let keys = this.helper.getRandomKeys();
 
     return {
-      consonant: consonant,
-      vowel: vowel,
+      consonant: keys.consonant,
+      vowel: keys.vowel,
       choonpu: choonpu,
       sokuon: sokuon,
       n: n
     };
-  }
-
-  _randomInArray(array) {
-    let index = Math.floor(Math.random() * array.length);
-    return array[index];
   }
 }

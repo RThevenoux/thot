@@ -6,6 +6,12 @@ class AppModel {
     this.geneticRun = null;
   }
 
+  /**
+   * 
+   * @param {String} ipaTarget 
+   * @param {ParameterModel} parameters 
+   * @param {*} listener 
+   */
   start(ipaTarget, parameters, listener) {
     console.log("Load strategies... (target:"+ipaTarget+')');
 

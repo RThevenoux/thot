@@ -20,21 +20,19 @@ class KatakanaFactory {
           let katakanas = {};
 
           for (let consonant in data) {
-            let vowels = data[consonant];
-            for (let vowel in vowels) {
-              let kana = vowels[vowel];
-              if (kana) {
-                let ipa = consonant + vowel;
+            let consonantInput = data[consonant];
+            let consonantDesc = {
+              gemination: consonantInput.gemination,
+              nCategory: consonantInput.nCategory,
+              vowels: {}
+            };
+            katakanas[consonant] = consonantDesc;
 
-                let consonantDesc = katakanas[consonant];
-                if (!consonantDesc) {
-                  consonantDesc = {
-                    gemination: consonant,
-                    nCategory: "m",
-                    vowels: {}
-                  };
-                  katakanas[consonant] = consonantDesc;
-                }
+            for (let vowel in consonantInput.vowels) {
+              let kana = consonantInput.vowels[vowel];
+
+              if (kana) {
+                let ipa = consonantInput.ipa + vowel;
                 consonantDesc.vowels[vowel] = {
                   display: kana,
                   ipa: ipa
@@ -44,8 +42,8 @@ class KatakanaFactory {
               }
             }
           }
-
-          that.singleton = new KatakanaAlphabet(katakanas, vowelCombination);
+          let helper = new KatakanaHelper(katakanas, vowelCombination);
+          that.singleton = new KatakanaAlphabet(helper);
           callback(null, that.singleton);
         });
     }

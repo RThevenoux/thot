@@ -20,6 +20,10 @@ class KatakanaAlphabet {
     this.name = "Katakana";
   }
 
+  /**
+   * @param {Genome} genome 
+   * @param {Number} mutationRate 
+   */
   mutateGenome(genome, mutationRate) {
     let result = [];
 
@@ -73,21 +77,26 @@ class KatakanaAlphabet {
     return mutated;
   }
 
-  generateRandomGenome(ipaPhonemes) {
-    let length = ipaPhonemes.length * (1 + (Math.random() - .5));
+  /**
+   * @param {IpaPhoneme[]} ipaPhonemes
+   * @returns {Genome} 
+   */
+  generateRandomGenome(ipaTarget) {
+    let phonemeNumber = IPA.parsePhonemes(ipaTarget).length;
+    let length = phonemeNumber * (1 + (Math.random() - .5));
+    
     let genome = [];
     for (let i = 0; i < length; i++) {
       genome.push(this._getRandomGene());
     }
 
-    let tmp = this.generatePhenotype(genome);
-    let tmp2 = "";
-    genome.forEach(x => tmp2 += (x.sokuon ? 'Q' : '') + x.consonant + x.vowel + (x.choonpu ? 'R' : '') + (x.n ? 'N' : ''));
-    console.log("Random: l=" + genome.length + " p:" + tmp2 + " i:" + tmp.ipa + " d:" + tmp.display);
-
     return genome;
   };
 
+  /**
+   * @param {Genome} genome
+   * @returns {Phenotype} 
+   */
   generatePhenotype(genome) {
     let display = "";
     let ipa = "";

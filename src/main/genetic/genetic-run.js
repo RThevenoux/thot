@@ -41,12 +41,13 @@ class GeneticRun {
     }
   }
 
+  /**
+   * @param {String} ipaTarget 
+   */
   _initializePopulation(ipaTarget) {
-    let targetPhonemes = IPA.parsePhonemes(ipaTarget);
-
     let newPpopulation = [];
     for (let i = 0; i < this.parameters.popSize; i++) {
-      let genome = this.alphabet.generateRandomGenome(targetPhonemes);
+      let genome = this.alphabet.generateRandomGenome(ipaTarget);
       let individual = this._createIndivudual(genome);
       newPpopulation.push(individual);
     }
@@ -55,6 +56,11 @@ class GeneticRun {
     this.generation = 0;
   }
 
+  /**
+   * 
+   * @param {Genome} genome
+   * @returns {Individual} 
+   */
   _createIndivudual(genome) {
     let phenotype = this.alphabet.generatePhenotype(genome);
     let score = this.scorer.computeScore(phenotype.ipa);

@@ -5,6 +5,10 @@ class IPA {
 
   constructor() { };
 
+  /**
+   * @param {String} ipaString
+   * @returns {IpaPhoneme[]} 
+   */
   static parsePhonemes(ipaString) {
     if (!ipaString || ipaString.length === 0) {
       return [];
@@ -73,18 +77,16 @@ class IPA {
       else if (char === LONG_MARK) {
         // ignore
       }
-      // Default
+      // Default - base character
       else {
         if (combining) {
-          lastPhoneme.base += char;
+          lastPhoneme.combineBase(char);
           combining = false;
         } else {
           if (lastPhoneme) {
             phonemes.push(lastPhoneme);
           }
-          lastPhoneme = {
-            'base': char
-          }
+          lastPhoneme = new IpaPhoneme(char);
         }
       }
     }

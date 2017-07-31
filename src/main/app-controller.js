@@ -22,6 +22,10 @@ class AppController {
     evolveStartNode.onclick = () => this.start(inputNode.value);
   }
 
+  /**
+   * 
+   * @param {String} ipaTarget 
+   */
   start(ipaTarget) {
     this.model.start(ipaTarget, this.parameters, this);
   }

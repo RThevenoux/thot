@@ -9,52 +9,58 @@ class Generator {
         this.parameters = parameters;
     };
 
+    /**
+     * @param {Individual[]} population
+     * @returns {Genome}
+     */
     generateGenome(population) {
-        let parents = this._selectParents(population);
+        let parents = this._selectParentGenomes(population);
         let child = this._mateGenomes(parents);
         let mutated = this.mutator.mutateGenome(child, this.parameters.mutationRate);
         return mutated;
     }
 
-    _selectParents(population) {
+    /**
+     * @param {Individual[]} population
+     * @returns {Genome[]}
+     */
+    _selectParentGenomes(population) {
         let number = this.parameters.parentPerChild;
 
-        let weightsArray = this._getWeights(population);
+        let weights = this._getWeights(population);
         let selectedGenomes = [];
 
         for (let i = 0; i < number; i++) {
-            let selectedIndex = this._weightedRandSelection(weightsArray);
-            let genome = population[selectedIndex].genome;
-            selectedGenomes.push(genome);
+            let selected = Random.inWeightedArray(population, weights);
+            selectedGenomes.push(selected.genome);
         }
 
         return selectedGenomes;
     }
 
-    _weightedRandSelection(weights) {
-        let sumOfWeights = weights.reduce((a, b) => a + b);
-        let i, sum = 0, r = Math.random() * sumOfWeights;
-        for (i in weights) {
-            sum += weights[i];
-            if (r <= sum) return i;
-        }
-    }
-
+    /**
+     * @param {Individual[]} population
+     * @returns {Number[]}
+     */
     _getWeights(population) {
         let bias = this.parameters.sBias;
         return population.map(indivual => 1 / (indivual.score ^ bias));
     }
 
-    _mateGenomes(parents) {
-        let n = parents.length;
-        let chunkSize = Math.floor(parents[0].length / n);
+    /**
+     * @param {Genome[]} population
+     * @returns {Genome}
+     */
+    _mateGenomes(genomes) {
+        let n = genomes.length;
+        let chunkSize = Math.floor(genomes[0].length / n);
 
         let newGenome = [];
 
         for (let i = 0; i < n; i++) {
             let startIndex = i * chunkSize;
-            let endIndex = (i === n - 1 ? parents[0].length : (i + 1) * chunkSize);
-            let chunk = parents[i].slice(startIndex, endIndex);
+            let endIndex = (i === n - 1 ? genomes[0].length : (i + 1) * chunkSize);
+            let chunk = genomes[i].slice(startIndex, endIndex);
             newGenome = newGenome.concat(chunk);
         }
 

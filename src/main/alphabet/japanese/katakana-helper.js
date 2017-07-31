@@ -22,17 +22,23 @@ class KatakanaHelper {
         this.vowelCombination = vowelCombination;
     }
 
-    /** return the IPA representation of the sound produce by /Q/ before the consonant */
+    /** Returns the IPA representation of the sound produce by /Q/ before the consonant
+     * @param {String} consonantKey
+     * @returns {String}  */
     getGemination(consonantKey) {
         return this.data[consonantKey].gemination;
     }
 
-    /** return the category of how if /N/ react is present before the consonant*/
+    /** Returns the category of how if /N/ react is present before the consonant 
+    * @param {String} consonantKey
+    * @returns {String}*/
     getNCategory(consonantKey) {
         return this.data[consonantKey].nCategory;
     }
 
-    /** return the IPA representation of the nazalised vowel */
+    /** Returns the IPA representation of the nazalised vowel
+     * @param {String} vowelKey
+     * @returns {String} */
     getNasalizedVowel(vowelKey) {
         let singleVowelKana = this.getKana({ 'consonant': "", "vowel": vowelKey });
         return singleVowelKana.ipa + NASAL_MARK;
@@ -47,7 +53,7 @@ class KatakanaHelper {
         let otherVowels = Object.keys(consonantDesc.vowels);
         otherVowels.splice(otherVowels.indexOf(key.vowel), 1);
         if (otherVowels.length > 0) {
-            return Util.randomInArray(otherVowels);
+            return Random.inArray(otherVowels);
         } else {
             return key.vowel;
         }
@@ -61,7 +67,7 @@ class KatakanaHelper {
         let otherConsonants = new Set(this.vowelCombination[key.vowel]);
         otherConsonants.delete(key.consonant);
         if (otherConsonants.size > 0) {
-            return Util.randomInArray([...otherConsonants]);
+            return Random.inArray([...otherConsonants]);
         } else {
             return key.consonant;
         }
@@ -78,8 +84,8 @@ class KatakanaHelper {
      * @returns {KanaKey}
      */
     getRandomKeys() {
-        let consonant = Util.randomInArray(Object.keys(this.data));
-        let vowel = Util.randomInArray(Object.keys(this.data[consonant].vowels));
+        let consonant = Random.inArray(Object.keys(this.data));
+        let vowel = Random.inArray(Object.keys(this.data[consonant].vowels));
         return {
             consonant: consonant,
             vowel: vowel

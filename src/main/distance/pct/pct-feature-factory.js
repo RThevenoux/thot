@@ -9,7 +9,7 @@ class PctFeatureFactory {
       callback(null, this.featureSet);
     } else {
       var that = this;
-      JSONLoader.load("feature/pct/pct-feature-set.json",
+      JSONLoader.load("distance/pct/pct-feature-set.json",
         (err, data) => {
           if (err) {
             callback(err);
@@ -26,7 +26,7 @@ class PctFeatureFactory {
       callback(null, this.featureComparator);
     } else {
       var that = this;
-      JSONLoader.load("feature/pct/pct-feature-comparator.json",
+      JSONLoader.load("distance/pct/pct-feature-comparator.json",
         (err, data) => {
           if (err) {
             callback(err);

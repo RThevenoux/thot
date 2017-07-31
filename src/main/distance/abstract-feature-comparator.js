@@ -1,6 +1,12 @@
 class AbstractFeatureComparator {
     constructor() {}
 
+    /**
+     * 
+     * @param {Features} a 
+     * @param {Features} b
+     * @returns {Number} 
+     */
     distance(a, b) {
         let scoreSum = 0;
         let weightSum = 0;

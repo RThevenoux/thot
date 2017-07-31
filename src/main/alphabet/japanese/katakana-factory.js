@@ -38,7 +38,7 @@ class KatakanaFactory {
                   ipa: ipa
                 };
 
-                this.add(vowelCombination, vowel, consonant);
+                this._add(vowelCombination, vowel, consonant);
               }
             }
           }
@@ -49,7 +49,7 @@ class KatakanaFactory {
     }
   }
 
-  add(map, key, value) {
+  _add(map, key, value) {
     let changes = map[key];
     if (!changes) {
       changes = [];

@@ -5,6 +5,10 @@ class PctFeatureSet extends AbstractFeatureSet{
     this.mapping = data;
   }
 
+  /**
+   * 
+   * @param {IpaPhoneme} phoneme 
+   */
   parse(phoneme) {
     let feature = this.mapping[phoneme.base];
     return feature;

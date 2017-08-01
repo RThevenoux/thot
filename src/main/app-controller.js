@@ -43,17 +43,17 @@ class AppController {
     console.log("Evolution stopped");
   }
 
-  newGeneration(population, generation) {
-    let best = population[0];
-    console.log('generations #' + generation + " best:" + best.score + " | " + best.display);
+  newGeneration(population) {
+    let best = population.getBest();
+    console.log('generations #' + population.generation + " best:" + best.score + " | " + best.display);
     this.displayData(population);
   }
 
-  finished(population, generation) {
+  finished(population) {
     this.displayData(population);
     this.updateFirstPerformerColor('darkgreen');
 
-    let winner = population[0];
+    let winner = population.getBest();
     console.log("WINNER : " + winner.display + " score:" + winner.score);
   }
 
@@ -63,7 +63,7 @@ class AppController {
 
   displayData(population) {
     for (let i = 0; i < this.topPerformers.length; i++) {
-      let individual = population[i];
+      let individual = population.individuals[i];
       let view = this.topPerformers[i];
 
       view.label.textContent = individual.display + " - /" + individual.ipa + "/";

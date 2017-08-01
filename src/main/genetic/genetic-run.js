@@ -14,6 +14,7 @@ class GeneticRun {
     this.ipaTarget = ipaTarget;
     this.scorer = new Scorer(ipaTarget, featureSet, featureComparator);
     this.generator = new Generator(this.alphabet, this.parameters);
+    this.population = new Population(parameters.sBiais);
   }
 
   start(listener){
@@ -45,15 +46,13 @@ class GeneticRun {
    * @param {String} ipaTarget 
    */
   _initializePopulation(ipaTarget) {
-    let newPpopulation = [];
+    let newGeneration = [];
     for (let i = 0; i < this.parameters.popSize; i++) {
       let genome = this.alphabet.generateRandomGenome(ipaTarget);
       let individual = this._createIndivudual(genome);
-      newPpopulation.push(individual);
+      newGeneration.push(individual);
     }
-
-    this.population = newPpopulation.sort((a, b) => a.score - b.score);
-    this.generation = 0;
+    this.population.newGeneration(newGeneration);
   }
 
   /**
@@ -73,7 +72,7 @@ class GeneticRun {
   }
 
   _isConvergence() {
-    return this.population[0].score == 0 || this.generation > this.parameters.maxGeneration;
+    return this.population.getBest().score == 0 || this.population.generation > this.parameters.maxGeneration;
   }
 
   _newGeneration() {
@@ -81,7 +80,7 @@ class GeneticRun {
     let popSize = this.parameters.popSize;
 
     // Keep the elite individual
-    let newGeneration = this.population.slice(0, eliteNumber);
+    let newGeneration = this.population.getElite(eliteNumber);
 
     // Generate other individual
     for (let i = eliteNumber; i < popSize; i++) {
@@ -90,7 +89,6 @@ class GeneticRun {
       newGeneration.push(indivual);
     }
 
-    this.population = newGeneration.sort((a, b) => a.score - b.score);
-    this.generation++;
+    this.population.newGeneration(newGeneration);
   }
 }

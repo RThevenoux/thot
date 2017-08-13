@@ -1,3 +1,8 @@
+
+// -- NOTA :
+// After [s, z, n, j], 'u' > [ʉ͍]
+// --
+
 class KatakanaFactory {
 
   constructor() {
@@ -10,7 +15,7 @@ class KatakanaFactory {
     } else {
       var that = this;
       JSONLoader.load("alphabet/japanese/katakana-data.json",
-        (err, data) => {
+        (err, input) => {
           if (err) {
             callback(err);
             return;
@@ -18,29 +23,33 @@ class KatakanaFactory {
 
           let vowelCombination = {};
           let katakanas = {};
+          let vowels = input.vowels;
 
-          for (let consonant in data) {
-            let consonantInput = data[consonant];
+          for (let consonantKey in input.consonants) {
+            let consonantInput = input.consonants[consonantKey];
             let consonantDesc = {
               gemination: consonantInput.gemination,
               nCategory: consonantInput.nCategory,
               vowels: {}
             };
-            katakanas[consonant] = consonantDesc;
 
-            for (let vowel in consonantInput.vowels) {
-              let kana = consonantInput.vowels[vowel];
+            for (let vowelKey in consonantInput.vowels) {
+              let kana = consonantInput.vowels[vowelKey];
 
-              if (kana) {
-                let ipa = consonantInput.ipa + vowel;
-                consonantDesc.vowels[vowel] = {
-                  display: kana,
-                  ipa: ipa
-                };
+              if (kana.ipa) {
+                let ipa = kana.ipa;
+                let display = kana.display;
 
-                this._add(vowelCombination, vowel, consonant);
+                this._add(vowelCombination, consonantDesc, vowelKey, consonantKey, ipa, display);
+              } else if (kana) {
+                let ipa = consonantInput.ipa + vowels[vowelKey];
+                let display = kana;
+
+                this._add(vowelCombination, consonantDesc, vowelKey, consonantKey, ipa, display);
               }
             }
+
+            katakanas[consonantKey] = consonantDesc;
           }
           let helper = new KatakanaHelper(katakanas, vowelCombination);
           that.singleton = new KatakanaAlphabet(helper);
@@ -49,12 +58,18 @@ class KatakanaFactory {
     }
   }
 
-  _add(map, key, value) {
-    let changes = map[key];
+  _add(vowelCombination, consonantDesc, vowelKey, consonantKey, ipa, display) {
+    let changes = vowelCombination[vowelKey];
     if (!changes) {
       changes = [];
-      map[key] = changes;
+      vowelCombination[vowelKey] = changes;
     }
-    changes.push(value);
+    changes.push(consonantKey);
+    
+    consonantDesc.vowels[vowelKey] = {
+      display: display,
+      ipa: ipa
+    };
   }
+
 }

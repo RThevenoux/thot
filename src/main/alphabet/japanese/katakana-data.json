@@ -1,434 +1,434 @@
 {
-  "": {
-    "gemination": false,
-    "nCategory": "n",
-    "ipa":"",
-    "vowels": {
-      "a": "ア",
-      "i": "イ",
-      "u": "ウ",
-      "e": "エ",
-      "o": "オ"
-    }
+  "vowels": {
+    "a": "ä",
+    "i": "i",
+    "u": "u͍˖",
+    "e": "e̞",
+    "o": "o̞"
   },
-  "k": {
-    "gemination": "k",
-    "nCategory": "ng",
-    "ipa":"k",
-    "vowels": {
-      "a": "カ",
-      "i": "キ",
-      "u": "ク",
-      "e": "ケ",
-      "o": "コ"
-    }
-  },
-  "ky": {
-    "gemination": "k",
-    "nCategory": "ng",
-    "ipa":"kʲ",
-    "vowels": {
-      "a": "キャ",
-      "i": "",
-      "u": "キュ",
-      "e": "",
-      "o": "キョ"
-    }
-  },
-  "kw": {
-    "gemination": "k",
-    "nCategory": "ng",
-    "ipa":"kʷ",
-    "vowels": {
-      "a": "クヮ",
-      "i": "クィ",
-      "u": "",
-      "e": "クェ",
-      "o": "クォ"
-    }
-  },
-  "s": {
-    "gemination": "s",
-    "nCategory": "vowel",
-    "ipa":"s",
-    "vowels": {
-      "a": "サ",
-      "i": "",
-      "u": "ス",
-      "e": "セ",
-      "o": "ソ"
-    }
-  },
-  "sh": {
-    "gemination": "ɕ",
-    "nCategory": "vowel",
-    "ipa":"ɕ",
-    "vowels": {
-      "a": "シャ",
-      "i": "シ",
-      "u": "シュ",
-      "e": "シェ",
-      "o": "ショ"
-    }
-  },
-  "t": {
-    "gemination": "t",
-    "nCategory": "n",
-    "ipa":"t",
-    "vowels": {
-      "a": "タ",
-      "i": "ティ",
-      "u": "トゥ",
-      "e": "テ",
-      "o": "ト"
-    }
-  },
-  "ch": {
-    "gemination": "t",
-    "nCategory": "n",
-    "ipa":"t͡ɕ",
-    "vowels": {
-      "a": "チャ",
-      "i": "チ",
-      "u": "チュ",
-      "e": "チェ",
-      "o": "チョ"
-    }
-  },
-  "ts": {
-    "gemination": "t",
-    "nCategory": "n",
-    "ipa":"t͡s",
-    "vowels": {
-      "a": "ツァ",
-      "i": "ツィ",
-      "u": "ツ",
-      "e": "ツェ",
-      "o": "ツォ"
-    }
-  },
-  "ty": {
-    "gemination": "t",
-    "nCategory": "n",
-    "ipa":"tʲ",
-    "vowels": {
-      "a": "",
-      "i": "",
-      "u": "テュ",
-      "e": "",
-      "o": ""
-    }
-  },
-  "n": {
-    "gemination": "false",
-    "nCategory": "n",
-    "ipa":"n",
-    "vowels": {
-      "a": "ナ",
-      "i": "",
-      "u": "ヌ",
-      "e": "ネ",
-      "o": "ノ"
-    }
-  },
-  "ny1": {
-    "gemination": "false",
-    "nCategory": "n",
-    "ipa":"nʲ",
-    "vowels": {
-      "a": "",
-      "i": "ニ",
-      "u": "",
-      "e": "",
-      "o": ""
-    }
-  },
-  "ny2": {
-    "gemination": "false",
-    "nCategory": "n",
-    "ipa":"ɲ",
-    "vowels": {
-      "a": "ニャ",
-      "i": "",
-      "u": "ニュ",
-      "e": "",
-      "o": "ニョ"
-    }
-  },
-  "h": {
-    "gemination": "h",
-    "nCategory": "vowel",
-    "ipa":"h",
-    "vowels": {
-      "a": "ハ",
-      "i": "",
-      "u": "",
-      "e": "ヘ",
-      "o": "ホ"
-    }
-  },
-  "hy": {
-    "gemination": "ç",
-    "nCategory": "vowel",
-    "ipa":"ç",
-    "vowels": {
-      "a": "ヒャ",
-      "i": "ヒ",
-      "u": "ヒュ",
-      "e": "",
-      "o": "ヒョ"
-    }
-  },
-  "f": {
-    "gemination": "ɸ",
-    "nCategory": "vowel",
-    "ipa":"ɸ",
-    "vowels": {
-      "a": "ファ",
-      "i": "フィ",
-      "u": "フ",
-      "e": "フェ",
-      "o": "フォ"
-    }
-  },
-  "fy": {
-    "gemination": "ɸ",
-    "nCategory": "vowel",
-    "ipa":"ɸʲ",
-    "vowels": {
-      "a": "",
-      "i": "",
-      "u": "フュ",
-      "e": "",
-      "o": ""
-    }
-  },
-  "m": {
-    "gemination": "m",
-    "nCategory": "m",
-    "ipa":"m",
-    "vowels": {
-      "a": "マ",
-      "i": "ミ",
-      "u": "ム",
-      "e": "メ",
-      "o": "モ"
-    }
-  },
-  "my": {
-    "gemination": "m",
-    "nCategory": "m",
-    "ipa":"mʲ",
-    "vowels": {
-      "a": "ミャ",
-      "i": "",
-      "u": "ミュ",
-      "e": "",
-      "o": "ミョ"
-    }
-  },
-  "y": {
-    "gemination": false,
-    "nCategory": "vowel",
-    "ipa":"j",
-    "vowels": {
-      "a": "ヤ",
-      "i": "",
-      "u": "ユ",
-      "e": "イェ",
-      "o": "ヨ"
-    }
-  },
-  "r": {
-    "gemination": "ɽ",
-    "nCategory": "vowel",
-    "ipa":"ɽ",
-    "vowels": {
-      "a": "ラ",
-      "i": "リ",
-      "u": "ル",
-      "e": "レ",
-      "o": "ロ"
-    }
-  },
-  "ry": {
-    "gemination": "ɽ",
-    "nCategory": "vowel",
-    "ipa":"ɽʲ",
-    "vowels": {
-      "a": "リャ",
-      "i": "",
-      "u": "リュ",
-      "e": "",
-      "o": "リョ"
-    }
-  },
-  "w": {
-    "gemination": false,
-    "nCategory": "vowel",
-    "ipa":"w",
-    "vowels": {
-      "a": "ワ",
-      "i": "ウィ",
-      "u": "",
-      "e": "ウェ",
-      "o": "ウォ"
-    }
-  },
-  "g": {
-    "gemination": "ɡ",
-    "nCategory": "ng",
-    "ipa":"ɡ",
-    "vowels": {
-      "a": "ガ",
-      "i": "ギ",
-      "u": "グ",
-      "e": "ゲ",
-      "o": "ゴ"
-    }
-  },
-  "gy": {
-     "gemination": "ɡ",
-    "nCategory": "ng",
-    "ipa":"ɡʲ",
-    "vowels": {
-      "a": "ギャ",
-      "i": "",
-      "u": "ギュ",
-      "e": "",
-      "o": "ギョ"
-    }
-  },
-  "gw": {
-    "gemination": "ɡ",
-    "nCategory": "ng",
-    "ipa":"ɡʷ",
-    "vowels": {
-      "a": "グヮ",
-      "i": "",
-      "u": "",
-      "e": "",
-      "o": ""
-    }
-  },
-  "z": {
-    "gemination": "z",
-    "nCategory": "vowel",
-    "ipa":"z",
-    "vowels": {
-      "a": "ザ",
-      "i": "",
-      "u": "ズ",
-      "e": "ゼ",
-      "o": "ゾ"
-    }
-  },
-  "j": {
-    "gemination": "d",
-    "nCategory": "n",
-    "ipa":"d͡ʑ",
-    "vowels": {
-      "a": "ジャ",
-      "i": "ジ",
-      "u": "ジュ",
-      "e": "ジェ",
-      "o": "ジョ"
-    }
-  },
-  "d": {
-    "gemination": "d",
-    "nCategory": "n",
-    "ipa":"d",
-    "vowels": {
-      "a": "ダ",
-      "i": "ディ",
-      "u": "ドゥ",
-      "e": "デ",
-      "o": "ド"
-    }
-  },
-  "dy": {
-    "gemination": "d",
-    "nCategory": "n",
-    "ipa":"dʲ",
-    "vowels": {
-      "a": "",
-      "i": "",
-      "u": "デュ",
-      "e": "",
-      "o": ""
-    }
-  },
-  "b": {
-    "gemination": "b",
-    "nCategory": "m",
-    "ipa":"b",
-    "vowels": {
-      "a": "バ",
-      "i": "ビ",
-      "u": "ブ",
-      "e": "ベ",
-      "o": "ボ"
-    }
-  },
-  "by": {
-    "gemination": "b",
-    "nCategory": "m",
-    "ipa":"bʲ",
-    "vowels": {
-      "a": "ビャ",
-      "i": "",
-      "u": "ビュ",
-      "e": "",
-      "o": "ビョ"
-    }
-  },
-  "p": {
-    "gemination": "p",
-    "nCategory": "m",
-    "ipa":"p",
-    "vowels": {
-      "a": "パ",
-      "i": "ピ",
-      "u": "プ",
-      "e": "ペ",
-      "o": "ポ"
-    }
-  },
-  "py": {
-    "gemination": "p",
-    "nCategory": "m",
-    "ipa":"pʲ",
-    "vowels": {
-      "a": "ピャ",
-      "i": "",
-      "u": "ピュ",
-      "e": "",
-      "o": "ピョ"
-    }
-  },
-  "v": {
-    "gemination": "v",
-    "nCategory": "vowel",
-    "ipa":"v",
-    "vowels": {
-      "a": "ヴァ",
-      "i": "ヴィ",
-      "u": "ヴ",
-      "e": "ヴェ",
-      "o": "ヴォ"
-    }
-  },
-  "vy": {
-    "gemination": "v",
-    "nCategory": "vowel",
-    "ipa":"vʲ",
-    "vowels": {
-      "a": "",
-      "i": "",
-      "u": "ヴュ",
-      "e": "",
-      "o": ""
+  "consonants": {
+    "": {
+      "gemination": false,
+      "nCategory": "n",
+      "ipa": "",
+      "vowels": {
+        "a": "ア",
+        "i": "イ",
+        "u": "ウ",
+        "e": "エ",
+        "o": "オ"
+      }
+    },
+    "k": {
+      "gemination": "k",
+      "nCategory": "ng",
+      "ipa": "k",
+      "vowels": {
+        "a": "カ",
+        "i": "キ",
+        "u": "ク",
+        "e": "ケ",
+        "o": "コ"
+      }
+    },
+    "ky": {
+      "gemination": "k",
+      "nCategory": "ng",
+      "ipa": "kʲ",
+      "vowels": {
+        "a": "キャ",
+        "i": "",
+        "u": "キュ",
+        "e": "",
+        "o": "キョ"
+      }
+    },
+    "kw": {
+      "gemination": "k",
+      "nCategory": "ng",
+      "ipa": "kʷ",
+      "vowels": {
+        "a": "クヮ",
+        "i": "クィ",
+        "u": "",
+        "e": "クェ",
+        "o": "クォ"
+      }
+    },
+    "s": {
+      "gemination": "s",
+      "nCategory": "vowel",
+      "ipa": "s",
+      "vowels": {
+        "a": "サ",
+        "i": "",
+        "u": "ス",
+        "e": "セ",
+        "o": "ソ"
+      }
+    },
+    "sh": {
+      "gemination": "ɕ",
+      "nCategory": "vowel",
+      "ipa": "ɕ",
+      "vowels": {
+        "a": "シャ",
+        "i": "シ",
+        "u": "シュ",
+        "e": "シェ",
+        "o": "ショ"
+      }
+    },
+    "t": {
+      "gemination": "t",
+      "nCategory": "n",
+      "ipa": "t",
+      "vowels": {
+        "a": "タ",
+        "i": "ティ",
+        "u": "トゥ",
+        "e": "テ",
+        "o": "ト"
+      }
+    },
+    "ch": {
+      "gemination": "t",
+      "nCategory": "n",
+      "ipa": "t͡ɕ",
+      "vowels": {
+        "a": "チャ",
+        "i": "チ",
+        "u": "チュ",
+        "e": "チェ",
+        "o": "チョ"
+      }
+    },
+    "ts": {
+      "gemination": "t",
+      "nCategory": "n",
+      "ipa": "t͡s",
+      "vowels": {
+        "a": "ツァ",
+        "i": "ツィ",
+        "u": "ツ",
+        "e": "ツェ",
+        "o": "ツォ"
+      }
+    },
+    "ty": {
+      "gemination": "t",
+      "nCategory": "n",
+      "ipa": "tʲ",
+      "vowels": {
+        "a": "",
+        "i": "",
+        "u": "テュ",
+        "e": "",
+        "o": ""
+      }
+    },
+    "n": {
+      "gemination": "false",
+      "nCategory": "n",
+      "ipa": "n",
+      "vowels": {
+        "a": "ナ",
+        "i": "",
+        "u": "ヌ",
+        "e": "ネ",
+        "o": "ノ"
+      }
+    },
+    "ny": {
+      "gemination": "false",
+      "nCategory": "n",
+      "ipa": "ɲ",
+      "vowels": {
+        "a": "ニャ",
+        "i": {
+          "ipa": "nʲi",
+          "display": "ニ"
+        },
+        "u": "ニュ",
+        "e": "",
+        "o": "ニョ"
+      }
+    },
+    "h": {
+      "gemination": "h",
+      "nCategory": "vowel",
+      "ipa": "h",
+      "vowels": {
+        "a": "ハ",
+        "i": "",
+        "u": "",
+        "e": "ヘ",
+        "o": "ホ"
+      }
+    },
+    "hy": {
+      "gemination": "ç",
+      "nCategory": "vowel",
+      "ipa": "ç",
+      "vowels": {
+        "a": "ヒャ",
+        "i": "ヒ",
+        "u": "ヒュ",
+        "e": "",
+        "o": "ヒョ"
+      }
+    },
+    "f": {
+      "gemination": "ɸ",
+      "nCategory": "vowel",
+      "ipa": "ɸ",
+      "vowels": {
+        "a": "ファ",
+        "i": "フィ",
+        "u": "フ",
+        "e": "フェ",
+        "o": "フォ"
+      }
+    },
+    "fy": {
+      "gemination": "ɸ",
+      "nCategory": "vowel",
+      "ipa": "ɸʲ",
+      "vowels": {
+        "a": "",
+        "i": "",
+        "u": "フュ",
+        "e": "",
+        "o": ""
+      }
+    },
+    "m": {
+      "gemination": "m",
+      "nCategory": "m",
+      "ipa": "m",
+      "vowels": {
+        "a": "マ",
+        "i": "ミ",
+        "u": "ム",
+        "e": "メ",
+        "o": "モ"
+      }
+    },
+    "my": {
+      "gemination": "m",
+      "nCategory": "m",
+      "ipa": "mʲ",
+      "vowels": {
+        "a": "ミャ",
+        "i": "",
+        "u": "ミュ",
+        "e": "",
+        "o": "ミョ"
+      }
+    },
+    "y": {
+      "gemination": false,
+      "nCategory": "vowel",
+      "ipa": "j",
+      "vowels": {
+        "a": "ヤ",
+        "i": "",
+        "u": "ユ",
+        "e": "イェ",
+        "o": "ヨ"
+      }
+    },
+    "r": {
+      "gemination": "ɽ",
+      "nCategory": "vowel",
+      "ipa": "ɽ",
+      "vowels": {
+        "a": "ラ",
+        "i": "リ",
+        "u": "ル",
+        "e": "レ",
+        "o": "ロ"
+      }
+    },
+    "ry": {
+      "gemination": "ɽ",
+      "nCategory": "vowel",
+      "ipa": "ɽʲ",
+      "vowels": {
+        "a": "リャ",
+        "i": "",
+        "u": "リュ",
+        "e": "",
+        "o": "リョ"
+      }
+    },
+    "w": {
+      "gemination": false,
+      "nCategory": "vowel",
+      "ipa": "w",
+      "vowels": {
+        "a": "ワ",
+        "i": "ウィ",
+        "u": "",
+        "e": "ウェ",
+        "o": "ウォ"
+      }
+    },
+    "g": {
+      "gemination": "ɡ",
+      "nCategory": "ng",
+      "ipa": "ɡ",
+      "vowels": {
+        "a": "ガ",
+        "i": "ギ",
+        "u": "グ",
+        "e": "ゲ",
+        "o": "ゴ"
+      }
+    },
+    "gy": {
+      "gemination": "ɡ",
+      "nCategory": "ng",
+      "ipa": "ɡʲ",
+      "vowels": {
+        "a": "ギャ",
+        "i": "",
+        "u": "ギュ",
+        "e": "",
+        "o": "ギョ"
+      }
+    },
+    "gw": {
+      "gemination": "ɡ",
+      "nCategory": "ng",
+      "ipa": "ɡʷ",
+      "vowels": {
+        "a": "グヮ",
+        "i": "",
+        "u": "",
+        "e": "",
+        "o": ""
+      }
+    },
+    "z": {
+      "gemination": "z",
+      "nCategory": "vowel",
+      "ipa": "z",
+      "vowels": {
+        "a": "ザ",
+        "i": "",
+        "u": "ズ",
+        "e": "ゼ",
+        "o": "ゾ"
+      }
+    },
+    "j": {
+      "gemination": "d",
+      "nCategory": "n",
+      "ipa": "d͡ʑ",
+      "vowels": {
+        "a": "ジャ",
+        "i": "ジ",
+        "u": "ジュ",
+        "e": "ジェ",
+        "o": "ジョ"
+      }
+    },
+    "d": {
+      "gemination": "d",
+      "nCategory": "n",
+      "ipa": "d",
+      "vowels": {
+        "a": "ダ",
+        "i": "ディ",
+        "u": "ドゥ",
+        "e": "デ",
+        "o": "ド"
+      }
+    },
+    "dy": {
+      "gemination": "d",
+      "nCategory": "n",
+      "ipa": "dʲ",
+      "vowels": {
+        "a": "",
+        "i": "",
+        "u": "デュ",
+        "e": "",
+        "o": ""
+      }
+    },
+    "b": {
+      "gemination": "b",
+      "nCategory": "m",
+      "ipa": "b",
+      "vowels": {
+        "a": "バ",
+        "i": "ビ",
+        "u": "ブ",
+        "e": "ベ",
+        "o": "ボ"
+      }
+    },
+    "by": {
+      "gemination": "b",
+      "nCategory": "m",
+      "ipa": "bʲ",
+      "vowels": {
+        "a": "ビャ",
+        "i": "",
+        "u": "ビュ",
+        "e": "",
+        "o": "ビョ"
+      }
+    },
+    "p": {
+      "gemination": "p",
+      "nCategory": "m",
+      "ipa": "p",
+      "vowels": {
+        "a": "パ",
+        "i": "ピ",
+        "u": "プ",
+        "e": "ペ",
+        "o": "ポ"
+      }
+    },
+    "py": {
+      "gemination": "p",
+      "nCategory": "m",
+      "ipa": "pʲ",
+      "vowels": {
+        "a": "ピャ",
+        "i": "",
+        "u": "ピュ",
+        "e": "",
+        "o": "ピョ"
+      }
+    },
+    "v": {
+      "gemination": "v",
+      "nCategory": "vowel",
+      "ipa": "v",
+      "vowels": {
+        "a": "ヴァ",
+        "i": "ヴィ",
+        "u": "ヴ",
+        "e": "ヴェ",
+        "o": "ヴォ"
+      }
+    },
+    "vy": {
+      "gemination": "v",
+      "nCategory": "vowel",
+      "ipa": "vʲ",
+      "vowels": {
+        "a": "",
+        "i": "",
+        "u": "ヴュ",
+        "e": "",
+        "o": ""
+      }
     }
   }
 }

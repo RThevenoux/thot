@@ -1,5 +1,5 @@
-const NASAL_MARK = '\u0303'; // 'COMBINING TILDE'
-const LONG_MARK = '\u02D0'; // 'MODIFIER LETTER TRIANGULAR COLON'
+const NASAL_MARK = '\u0303'; // COMBINING TILDE
+const LONG_MARK  = '\u02D0'; // MODIFIER LETTER TRIANGULAR COLON
 
 class IPA {
 
@@ -29,19 +29,19 @@ class IPA {
   static _normalize(input) {
     let normalization = {
       '\u0067': '\u0261', // LATIN SMALL LETTER G > LATIN SMALL LETTER SCRIPT G
-      "\u02A6": "t͡s", // ʦ
-      "ʣ": "d͡z", // ʣ
-      "ʧ": "t͡ʃ", // ʧ
-      "ʤ": "d͡ʒ", // ʤ
-      "ʨ": "t͡ɕ", // ʨ
-      "ʥ": "d͡ʑ", // ʥ
-      "ɚ": "ə\u02DE", // ɚ
-      "ɝ": "ɜ\u02DE", // ɝ
+      "\u02A6": "t͡s", // LATIN SMALL LETTER TS DIGRAPH
+      "\u02A3": "d͡z", // LATIN SMALL LETTER DZ DIGRAPH
+      "\u02A7": "t͡ʃ", // LATIN SMALL LETTER TESH DIGRAPH
+      "\u02A4": "d͡ʒ", // LATIN SMALL LETTER DEZH DIGRAPH
+      "\u02A8": "t͡ɕ", // LATIN SMALL LETTER TC DIGRAPH WITH CURL
+      "\u02A5": "d͡ʑ", // LATIN SMALL LETTER DZ DIGRAPH WITH CURL
+      "\u025A": "\u0259\u02DE", // LATIN SMALL LETTER SCHWA WITH HOOK
+      "\u025D": "\u025C\u02DE", // LATIN SMALL LETTER REVERSED OPEN E WITH HOOK
       "\u035C": "\u0361", // COMBINING DOUBLE BREVE BELOW > COMBINING DOUBLE INVERTED BREVE
       "\u030D": "\u0329", // COMBINING VERTICAL LINE ABOVE > COMBINING VERTICAL LINE BELOW
       "\u0311": "\u032F", // COMBINING INVERTED BREVE > COMBINING INVERTED BREVE BELOW
       "\u030A": "\u0325", // COMBINING RING ABOVE > COMBINING RING BELOW
-      ":": LONG_MARK,     // COLON > MODIFIER LETTER TRIANGULAR COLON
+      "\u003A": "\u02D0", // COLON > MODIFIER LETTER TRIANGULAR COLON
       "\u02D7": "\u0320", // MODIFIER LETTER MINUS SIGN > COMBINING MINUS SIGN BELOW
       "\u02D6": "\u031F", // MODIFIER LETTER PLUS SIGN > COMBINING PLUS SIGN BELOW
       "\u02D4": "\u031D", // MODIFIER LETTER UP TACK > COMBINING UP TACK BELOW
@@ -111,6 +111,9 @@ class IPA {
       '\u2016', // DOUBLE VERTICAL LINE : Major (intonation) break
       // Tone
       // -- TODO --
+
+      // == EXTENSION ==
+      '\u034D' , // COMBINING LEFT RIGHT ARROW BELOW : labial spreading
     ];
 
     let phonemes = [];

@@ -21,12 +21,17 @@ class AppModel {
       console.log("|  Comparator : " + items.featureComparator.name);
       console.log("|    Alphabet : " + items.alphabet.name);
 
-      if (this.geneticRun) {
-        this.geneticRun.stop();
-      }
+      this.stop();
       this.geneticRun = new GeneticRun(ipaTarget, items.alphabet, items.featureSet, items.featureComparator, parameters);
       this.geneticRun.start(listener);
     });
+  }
+
+  stop() {
+    if (this.geneticRun) {
+      console.log("Stop genetic run");
+      this.geneticRun.stop();
+    }
   }
 
   getAlphabets() {

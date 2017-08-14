@@ -21,8 +21,8 @@ class AppController {
       });
     }
 
-    let evolveStartNode = document.getElementById('start-evolve');
-    evolveStartNode.onclick = () => this._start();
+    document.getElementById('start-evolve').onclick = () => this._start();
+    document.getElementById('stop-evolve').onclick = () => this._stop();
 
     this._init();
   }
@@ -32,7 +32,7 @@ class AppController {
     this.model.getDistances()
       .map(distance => new Option(distance.text, distance.value))
       .forEach(option => this.distanceNode.options.add(option));
-    
+
     //
     this.model.getAlphabets()
       .map(alphabet => new Option(alphabet.text, alphabet.value))

@@ -22,36 +22,39 @@ class KatakanaAlphabet {
 
   /**
    * @param {Genome} genome 
-   * @param {Number} mutationRate 
+   * @param {Number} mutationRate
+   * @returns {Genome} 
    */
   mutateGenome(genome, mutationRate) {
     let result = [];
+
+    let addition = (gene) => {
+      result.push(gene);
+      result.push(this._getRandomGene());
+    };
+
+    let mutation = (gene) => {
+      let mutated = this._mutateGene(gene);
+      result.push(mutated);
+    };
+
+    let deletion = (gene) => {
+      if (genome.length == 1) {
+        // Do not delete, mutate
+        mutate(gene);
+      } else {
+        // do not add gene
+      }
+    };
 
     for (let i = 0; i < genome.length; i++) {
       let gene = genome[i];
       if (Math.random() <= mutationRate) {
         // # Mutation
-        let mutationType = Math.random();
-        if (mutationType < 0.15) {
-          // Duplication p=0.15
-          result.push(gene);
-          result.push(gene);
-        } else if (mutationType >= 0.15 && mutationType < 0.3) {
-          // Deletion p=0.15
-          if (genome.length == 1) {
-            // Do not delete, mutate
-            let mutated = this._mutateGene(gene);
-            result.push(mutated);
-          } else {
-            // do not add gene
-          }
-        } else {
-          let mutated = this._mutateGene(gene);
-          // mutation p=0.2
-          result.push(mutated);
-        }
+        let modification = Random.inWeightedArray([addition, deletion, mutation], [1, 1, 5]);
+        modification(gene);
       } else {
-        // # No alteration
+        // # No mutation
         result.push(gene);
       }
     }
@@ -59,15 +62,9 @@ class KatakanaAlphabet {
   }
 
   _mutateGene(gene) {
-    let mutationType = Math.random();
-    let mutated = {
-      consonant: gene.consonant,
-      vowel: gene.vowel,
-      choonpu: gene.choonpu,
-      sokuon: gene.sokuon,
-      n: gene.n
-    };
+    let mutated = this._copyGene(gene);
 
+    let mutationType = Math.random();
     if (mutationType < 0.35) {
       mutated.vowel = this.helper.changeVowelKey(gene);
     } else if (mutationType >= 0.35 && mutationType < 0.7) {
@@ -84,13 +81,25 @@ class KatakanaAlphabet {
     return mutated;
   }
 
+  _copyGene(gene) {
+    return {
+      consonant: gene.consonant,
+      vowel: gene.vowel,
+      choonpu: gene.choonpu,
+      sokuon: gene.sokuon,
+      n: gene.n
+    };
+  }
+
   /**
    * @param {IpaPhoneme[]} ipaPhonemes
    * @returns {Genome} 
    */
   generateRandomGenome(ipaTarget) {
     let phonemeNumber = IPA.parsePhonemes(ipaTarget).length;
-    let length = phonemeNumber * (1 + (Math.random() - .5));
+    let min = 1;
+    let phonemePerGlyph = 1.9;
+    let length = Math.max(phonemeNumber * (1 + (Math.random() - .5) / phonemePerGlyph, min));
 
     let genome = [];
     for (let i = 0; i < length; i++) {
@@ -137,10 +146,7 @@ class KatakanaAlphabet {
       }
     }
 
-    return {
-      ipa: ipa,
-      display: display
-    };
+    return new Phenotype(display, ipa);
   };
 
   _nToIPA(gene, nextGene) {

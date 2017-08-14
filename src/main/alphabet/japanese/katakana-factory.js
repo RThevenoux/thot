@@ -9,7 +9,7 @@ class KatakanaFactory {
     this.singleton = null;
   }
 
-  getInstance(callback) {
+  get(callback) {
     if (this.singleton) {
       callback(null, this.singleton);
     } else {

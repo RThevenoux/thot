@@ -64,6 +64,8 @@
                 <h2>Your name</h2>
                 <div class="name-input">
                     <input type="text" id="textBox" />
+                    <select id="select-alphabet"></select>
+                    <select id="select-distance"></select>
                     <button id="start-evolve">Evolve Me</button>
                 </div>
             </div>
@@ -145,14 +147,16 @@
     <script type="text/javascript" src="./parameter-controller.js"></script>
     <script type="text/javascript" src="./parameter-model.js"></script>
 
+    <script type="text/javascript" src="./alphabet/alphabet-provider.js"></script>
     <script type="text/javascript" src="./alphabet/japanese/katakana-alphabet.js"></script>
     <script type="text/javascript" src="./alphabet/japanese/katakana-factory.js"></script>
     <script type="text/javascript" src="./alphabet/japanese/katakana-helper.js"></script>
 
-    <script type="text/javascript" src="./distance/levenshtein.js"></script>
-    <script type="text/javascript" src="./distance/scorer.js"></script>
     <script type="text/javascript" src="./distance/abstract-feature-comparator.js"></script>
     <script type="text/javascript" src="./distance/abstract-feature-set.js"></script>
+    <script type="text/javascript" src="./distance/distance-provider.js"></script>
+    <script type="text/javascript" src="./distance/levenshtein.js"></script>
+    <script type="text/javascript" src="./distance/scorer.js"></script>
     <script type="text/javascript" src="./distance/poc/poc-feature-comparator.js"></script>
     <script type="text/javascript" src="./distance/poc/poc-feature-factory.js"></script>
     <script type="text/javascript" src="./distance/poc/poc-feature-set.js"></script>

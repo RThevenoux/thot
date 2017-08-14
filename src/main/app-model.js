@@ -1,26 +1,27 @@
 class AppModel {
   constructor() {
-    this.featureFactory = new PctFeatureFactory();
-    //this.featureFactory = new PocFeatureFactory();
-    this.alphabetFactory = new KatakanaFactory();
+    this.distanceProvider = new DistanceProvider();
+    this.alphabetProvider = new AlphabetProvider();
     this.geneticRun = null;
   }
 
   /**
    * 
-   * @param {String} ipaTarget 
+   * @param {String} ipaTarget
+   * @param {String} alphabet 
+   * @param {String} distance 
    * @param {ParameterModel} parameters 
    * @param {*} listener 
    */
-  start(ipaTarget, parameters, listener) {
-    console.log("Load strategies... (target:"+ipaTarget+')');
+  start(ipaTarget, alphabet, distance, parameters, listener) {
+    console.log("Load strategies... (target: " + ipaTarget + ", alphabet: " + alphabet + ", distance: " + distance + ')');
 
-    this.loadStrategies((err, items) => {
+    this.loadStrategies(alphabet, distance, (err, items) => {
       console.log("| Feature Set : " + items.featureSet.name);
       console.log("|  Comparator : " + items.featureComparator.name);
-      console.log("|     Alpabet : " + items.alphabet.name);
+      console.log("|    Alphabet : " + items.alphabet.name);
 
-      if(this.geneticRun){
+      if (this.geneticRun) {
         this.geneticRun.stop();
       }
       this.geneticRun = new GeneticRun(ipaTarget, items.alphabet, items.featureSet, items.featureComparator, parameters);
@@ -28,30 +29,33 @@ class AppModel {
     });
   }
 
-  loadStrategies(callback) {
-    this.featureFactory.getFeatureSet((err, featureSet) => {
+  getAlphabets() {
+    return this.alphabetProvider.alphabets
+      .map(alphabet => { return { "text": alphabet.display, "value": alphabet.name } });
+  }
+
+  getDistances() {
+    return this.distanceProvider.distances
+      .map(distance => { return { "text": distance.display, "value": distance.name } });
+  }
+
+  loadStrategies(alphabet, distance, callback) {
+    this.distanceProvider.get(distance, (err, distance) => {
       if (err) {
         callback(err);
         return;
       }
-     
-      this.featureFactory.getFeatureComparator((err, featureComparator) => {
+
+      this.alphabetProvider.get(alphabet, (err, alphabet) => {
         if (err) {
           callback(err);
           return;
         }
-        
-        this.alphabetFactory.getInstance((err, alphabet) => {
-          if (err) {
-            callback(err);
-            return;
-          }
-          
-          callback(null, {
-            featureSet: featureSet,
-            featureComparator: featureComparator,
-            alphabet: alphabet
-          });
+
+        callback(null, {
+          featureSet: distance.featureSet,
+          featureComparator: distance.featureComparator,
+          alphabet: alphabet
         });
       });
     });

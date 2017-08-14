@@ -1,5 +1,5 @@
 class AbstractFeatureComparator {
-    constructor() {}
+    constructor() { }
 
     /**
      * 
@@ -8,6 +8,10 @@ class AbstractFeatureComparator {
      * @returns {Number} 
      */
     distance(a, b) {
+        if (!a || !b) {
+            return 1;
+        }
+
         let scoreSum = 0;
         let weightSum = 0;
 

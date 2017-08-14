@@ -9,6 +9,10 @@ class AppController {
     this.parameters = parameters;
     this.model = new AppModel();
 
+    this.inputNode = document.getElementById('textBox');
+    this.distanceNode = document.getElementById('select-distance');
+    this.alphabetNode = document.getElementById('select-alphabet');
+
     this.topPerformers = [];
     for (let i = 0; i < shownPopulationSize; i++) {
       this.topPerformers.push({
@@ -18,50 +22,68 @@ class AppController {
     }
 
     let evolveStartNode = document.getElementById('start-evolve');
-    let inputNode = document.getElementById('textBox');
-    evolveStartNode.onclick = () => this.start(inputNode.value);
+    evolveStartNode.onclick = () => this._start();
+
+    this._init();
+  }
+
+  _init() {
+    //
+    this.model.getDistances()
+      .map(distance => new Option(distance.text, distance.value))
+      .forEach(option => this.distanceNode.options.add(option));
+    
+    //
+    this.model.getAlphabets()
+      .map(alphabet => new Option(alphabet.text, alphabet.value))
+      .forEach(option => this.alphabetNode.options.add(option));
   }
 
   /**
    * 
-   * @param {String} ipaTarget 
+   * @param {String} ipaTarget
+   * @param {String} alphabet
+   * @param {String} distance
    */
-  start(ipaTarget) {
-    this.model.start(ipaTarget, this.parameters, this);
+  _start() {
+    let ipaTarget = this.inputNode.value;
+    let alphabet = this.alphabetNode.value;
+    let distance = this.distanceNode.value;
+    this.model.start(ipaTarget, alphabet, distance, this.parameters, this);
   }
 
-  stop(){
+  _stop() {
     this.model.stop();
   }
 
-  started(ipaTarget){
+  started(ipaTarget) {
     console.log("Start evolution. Target: " + ipaTarget);
-    this.updateFirstPerformerColor('darkorange');
+    this._updateFirstPerformerColor('darkorange');
   }
 
-  stopped(){
+  stopped() {
     console.log("Evolution stopped");
   }
 
   newGeneration(population) {
     let best = population.getBest();
     console.log('generations #' + population.generation + " best:" + best.score + " | " + best.display);
-    this.displayData(population);
+    this._displayData(population);
   }
 
   finished(population) {
-    this.displayData(population);
-    this.updateFirstPerformerColor('darkgreen');
+    this._displayData(population);
+    this._updateFirstPerformerColor('darkgreen');
 
     let winner = population.getBest();
     console.log("WINNER : " + winner.display + " score:" + winner.score);
   }
 
-  updateFirstPerformerColor(color) {
+  _updateFirstPerformerColor(color) {
     this.topPerformers[0].label.style.color = color;
   }
 
-  displayData(population) {
+  _displayData(population) {
     for (let i = 0; i < this.topPerformers.length; i++) {
       let individual = population.individuals[i];
       let view = this.topPerformers[i];

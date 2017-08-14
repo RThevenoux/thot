@@ -1,6 +1,6 @@
 class ParameterModel {
     constructor() {
-        this.mutationRate = 0.10;
+        this.mutationRate = 0.5;
         this.parentPerChild = 4;
         this.sBias = 0.8;
         this.popSize = 30;

@@ -32,15 +32,21 @@ class KatakanaAlphabet {
       if (Math.random() <= mutationRate) {
         // # Mutation
         let mutationType = Math.random();
-        if (mutationType < 0.2) {
-          // Duplication p=0.2
+        if (mutationType < 0.15) {
+          // Duplication p=0.15
           result.push(gene);
           result.push(gene);
-        } else if (mutationType >= 0.2 && mutationType < 0.4) {
-          // Deletion p=0.2
-          // do not add gene
+        } else if (mutationType >= 0.15 && mutationType < 0.3) {
+          // Deletion p=0.15
+          if (genome.length == 1) {
+            // Do not delete, mutate
+            let mutated = this._mutateGene(gene);
+            result.push(mutated);
+          } else {
+            // do not add gene
+          }
         } else {
-          let mutated = this._mutateGene(gene)
+          let mutated = this._mutateGene(gene);
           // mutation p=0.2
           result.push(mutated);
         }
@@ -65,7 +71,8 @@ class KatakanaAlphabet {
     if (mutationType < 0.35) {
       mutated.vowel = this.helper.changeVowelKey(gene);
     } else if (mutationType >= 0.35 && mutationType < 0.7) {
-      mutated.consonant = this.helper.changeConsonantKey(gene);
+      let consonant = this.helper.changeConsonantKey(gene);
+      mutated.consonant = consonant;
     } else if (mutationType >= 0.7 && mutationType < 0.8) {
       mutated.sokuon = !mutated.sokuon;
     } else if (mutationType >= 0.8 && mutationType < 0.9) {
@@ -84,7 +91,7 @@ class KatakanaAlphabet {
   generateRandomGenome(ipaTarget) {
     let phonemeNumber = IPA.parsePhonemes(ipaTarget).length;
     let length = phonemeNumber * (1 + (Math.random() - .5));
-    
+
     let genome = [];
     for (let i = 0; i < length; i++) {
       genome.push(this._getRandomGene());

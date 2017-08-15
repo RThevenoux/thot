@@ -13,16 +13,10 @@ class AppController {
     this.distanceNode = document.getElementById('select-distance');
     this.alphabetNode = document.getElementById('select-alphabet');
 
-    this.topPerformers = [];
-    for (let i = 0; i < shownPopulationSize; i++) {
-      this.topPerformers.push({
-        label: document.getElementById('top-performer' + i),
-        score: document.getElementById('score' + i)
-      });
-    }
-
     document.getElementById('start-evolve').onclick = () => this._start();
     document.getElementById('stop-evolve').onclick = () => this._stop();
+
+    this.performers = new PerformersController(document.getElementById('performers'));
 
     this._init();
   }
@@ -58,7 +52,7 @@ class AppController {
 
   started(ipaTarget) {
     console.log("Start evolution. Target: " + ipaTarget);
-    this._updateFirstPerformerColor('darkorange');
+    this.performers.highligthFirst(false);
   }
 
   stopped() {
@@ -66,30 +60,16 @@ class AppController {
   }
 
   newGeneration(population) {
+    this.performers.update(population);
     let best = population.getBest();
     console.log('generations #' + population.generation + " best:" + best.score + " | " + best.display);
-    this._displayData(population);
   }
 
   finished(population) {
-    this._displayData(population);
-    this._updateFirstPerformerColor('darkgreen');
+    this.performers.update(population);
+    this.performers.highligthFirst(true);
 
     let winner = population.getBest();
     console.log("WINNER : " + winner.display + " score:" + winner.score);
-  }
-
-  _updateFirstPerformerColor(color) {
-    this.topPerformers[0].label.style.color = color;
-  }
-
-  _displayData(population) {
-    for (let i = 0; i < this.topPerformers.length; i++) {
-      let individual = population.individuals[i];
-      let view = this.topPerformers[i];
-
-      view.label.textContent = individual.display + " - /" + individual.ipa + "/";
-      view.score.textContent = individual.score;
-    }
   }
 }

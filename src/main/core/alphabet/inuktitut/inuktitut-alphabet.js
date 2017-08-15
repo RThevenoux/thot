@@ -46,7 +46,7 @@ class InuktitutAlphabet {
     let deletion = (gene) => {
       if (genome.length == 1) {
         // Do not delete, mutate
-        mutate(gene);
+        mutation(gene);
       } else {
         // do not add gene
       }

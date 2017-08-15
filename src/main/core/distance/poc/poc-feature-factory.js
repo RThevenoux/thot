@@ -9,7 +9,7 @@ class PocFeatureFactory {
       callback(null, this.featureSet);
     } else {
       var that = this;
-      JSONLoader.load("distance/poc/poc-feature-set.json",
+      JSONLoader.load("core/distance/poc/poc-feature-set.json",
         (err, data) => {
           if (err) {
             callback(err);
@@ -26,7 +26,7 @@ class PocFeatureFactory {
       callback(null, this.featureComparator);
     } else {
       var that = this;
-      JSONLoader.load("distance/poc/poc-feature-comparator.json",
+      JSONLoader.load("core/distance/poc/poc-feature-comparator.json",
         (err, data) => {
           if (err) {
             callback(err);

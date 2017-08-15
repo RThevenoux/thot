@@ -14,7 +14,7 @@ class KatakanaFactory {
       callback(null, this.singleton);
     } else {
       var that = this;
-      JSONLoader.load("alphabet/japanese/katakana-data.json",
+      JSONLoader.load("core/alphabet/japanese/katakana-data.json",
         (err, input) => {
           if (err) {
             callback(err);

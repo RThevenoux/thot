@@ -8,7 +8,7 @@ class InuktitutFactory {
       callback(null, this.singleton);
     } else {
       var that = this;
-      JSONLoader.load("alphabet/inuktitut/inuktitut-data.json",
+      JSONLoader.load("core/alphabet/inuktitut/inuktitut-data.json",
         (err, input) => {
           if (err) {
             callback(err);

@@ -3,59 +3,61 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Name Evolver</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Caveat+Brush|Droid+Sans" rel="stylesheet">
+    <title>Thot - Transcriptor</title>
+    <link rel="stylesheet" type="text/css" href="gui/styles.css">
+    <link rel="stylesheet" type="text/css" href="gui/performers/performers.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Caveat+Brush|Droid+Sans">
 </head>
 
 <body>
-    <div>
-        <p>Voyelle</p>
-        <button onclick="addIPA('i')">i</button>
-        <button onclick="addIPA('y')">y</button>
-        <button onclick="addIPA('u')">u</button>
-        <button onclick="addIPA('e')">e</button>
-        <button onclick="addIPA('ø')">ø</button>
-        <button onclick="addIPA('o')">o</button>
-        <button onclick="addIPA('ə')">ə</button>
-        <button onclick="addIPA('ɛ')">ɛ</button>
-        <button onclick="addIPA('ɛ̃')">ɛ̃</button>
-        <button onclick="addIPA('œ')">œ</button>
-        <button onclick="addIPA('œ̃')">œ̃</button>
-        <button onclick="addIPA('ɔ')">ɔ</button>
-        <button onclick="addIPA('ɔ̃')">ɔ̃</button>
-        <button onclick="addIPA('a')">a</button>
-        <button onclick="addIPA('ɑ')">ɑ</button>
-        <button onclick="addIPA('ɑ̃')">ɑ̃</button>
+    <div class="keyboard">
+        <div>
+            <p>Voyelle</p>
+            <button onclick="addIPA('i')">i</button>
+            <button onclick="addIPA('y')">y</button>
+            <button onclick="addIPA('u')">u</button>
+            <button onclick="addIPA('e')">e</button>
+            <button onclick="addIPA('ø')">ø</button>
+            <button onclick="addIPA('o')">o</button>
+            <button onclick="addIPA('ə')">ə</button>
+            <button onclick="addIPA('ɛ')">ɛ</button>
+            <button onclick="addIPA('ɛ̃')">ɛ̃</button>
+            <button onclick="addIPA('œ')">œ</button>
+            <button onclick="addIPA('œ̃')">œ̃</button>
+            <button onclick="addIPA('ɔ')">ɔ</button>
+            <button onclick="addIPA('ɔ̃')">ɔ̃</button>
+            <button onclick="addIPA('a')">a</button>
+            <button onclick="addIPA('ɑ')">ɑ</button>
+            <button onclick="addIPA('ɑ̃')">ɑ̃</button>
+        </div>
+        <div>
+            <p>Semi</p>
+            <button onclick="addIPA('ɥ')">ɥ</button>
+            <button onclick="addIPA('w')">w</button>
+            <button onclick="addIPA('j')">j</button>
+        </div>
+        <div>
+            <p>Consone</p>
+            <button onclick="addIPA('p')">p</button>
+            <button onclick="addIPA('b')">b</button>
+            <button onclick="addIPA('t')">t</button>
+            <button onclick="addIPA('d')">d</button>
+            <button onclick="addIPA('k')">k</button>
+            <button onclick="addIPA('g')">g</button>
+            <button onclick="addIPA('m')">m</button>
+            <button onclick="addIPA('n')">n</button>
+            <button onclick="addIPA('ɲ')">ɲ</button>
+            <button onclick="addIPA('ŋ')">ŋ</button>
+            <button onclick="addIPA('f')">f</button>
+            <button onclick="addIPA('v')">v</button>
+            <button onclick="addIPA('s')">s</button>
+            <button onclick="addIPA('z')">z</button>
+            <button onclick="addIPA('ʃ')">ʃ</button>
+            <button onclick="addIPA('ʒ')">ʒ</button>
+            <button onclick="addIPA('ʁ')">ʁ</button>
+            <button onclick="addIPA('l')">l</button>
+        </div>
     </div>
-    <div>
-        <p>Semi</p>
-        <button onclick="addIPA('ɥ')">ɥ</button>
-        <button onclick="addIPA('w')">w</button>
-        <button onclick="addIPA('j')">j</button>
-    </div>
-    <div>
-        <p>Consone</p>
-        <button onclick="addIPA('p')">p</button>
-        <button onclick="addIPA('b')">b</button>
-        <button onclick="addIPA('t')">t</button>
-        <button onclick="addIPA('d')">d</button>
-        <button onclick="addIPA('k')">k</button>
-        <button onclick="addIPA('g')">g</button>
-        <button onclick="addIPA('m')">m</button>
-        <button onclick="addIPA('n')">n</button>
-        <button onclick="addIPA('ɲ')">ɲ</button>
-        <button onclick="addIPA('ŋ')">ŋ</button>
-        <button onclick="addIPA('f')">f</button>
-        <button onclick="addIPA('v')">v</button>
-        <button onclick="addIPA('s')">s</button>
-        <button onclick="addIPA('z')">z</button>
-        <button onclick="addIPA('ʃ')">ʃ</button>
-        <button onclick="addIPA('ʒ')">ʒ</button>
-        <button onclick="addIPA('ʁ')">ʁ</button>
-        <button onclick="addIPA('l')">l</button>
-    </div>
-
 
     <div class="container">
 
@@ -92,88 +94,44 @@
             </div>
         </div>
 
-        <div class="top-performers">
-
-            <div class="performer-row">
-                <div class="top-performer title">Top Individuals</div>
-                <span class="score title">Scores</span>
-            </div>
-
-            <div class="performer-row">
-                <div id="top-performer0" class="top-performer"></div>
-                <span id="score0" class="score"></span>
-            </div>
-            <div class="performer-row">
-                <div id="top-performer1" class="top-performer"></div>
-                <span id="score1" class="score"></span>
-            </div>
-            <div class="performer-row">
-                <div id="top-performer2" class="top-performer"></div>
-                <span id="score2" class="score"></span>
-            </div>
-            <div class="performer-row">
-                <div id="top-performer3" class="top-performer"></div>
-                <span id="score3" class="score"></span>
-            </div>
-            <div class="performer-row">
-                <div id="top-performer4" class="top-performer"></div>
-                <span id="score4" class="score"></span>
-            </div>
-            <div class="performer-row">
-                <div id="top-performer5" class="top-performer"></div>
-                <span id="score5" class="score"></span>
-            </div>
-            <div class="performer-row">
-                <div id="top-performer6" class="top-performer"></div>
-                <span id="score6" class="score"></span>
-            </div>
-            <div class="performer-row">
-                <div id="top-performer7" class="top-performer"></div>
-                <span id="score7" class="score"></span>
-            </div>
-            <div class="performer-row">
-                <div id="top-performer8" class="top-performer"></div>
-                <span id="score8" class="score"></span>
-            </div>
-            <div class="performer-row">
-                <div id="top-performer9" class="top-performer"></div>
-                <span id="score9" class="score"></span>
-            </div>
+        <div class="top-performers" id="performers">
         </div>
     </div>
 
     <script type="text/javascript" src="./index.js"></script>
-    <script type="text/javascript" src="./app-controller.js"></script>
-    <script type="text/javascript" src="./app-model.js"></script>
-    <script type="text/javascript" src="./parameter-controller.js"></script>
-    <script type="text/javascript" src="./parameter-model.js"></script>
 
-    <script type="text/javascript" src="./alphabet/alphabet-provider.js"></script>
-    <script type="text/javascript" src="./alphabet/phenotype.js"></script>
-    <script type="text/javascript" src="./alphabet/inuktitut/inuktitut-alphabet.js"></script>
-    <script type="text/javascript" src="./alphabet/inuktitut/inuktitut-factory.js"></script>
-    <script type="text/javascript" src="./alphabet/japanese/katakana-alphabet.js"></script>
-    <script type="text/javascript" src="./alphabet/japanese/katakana-factory.js"></script>
-    <script type="text/javascript" src="./alphabet/japanese/katakana-helper.js"></script>
+    <script type="text/javascript" src="./gui/app-controller.js"></script>
+    <script type="text/javascript" src="./gui/app-model.js"></script>
+    <script type="text/javascript" src="./gui/parameter-controller.js"></script>
+    <script type="text/javascript" src="./gui/parameter-model.js"></script>
+    <script type="text/javascript" src="./gui/performers/performers-controller.js"></script>
 
-    <script type="text/javascript" src="./distance/abstract-feature-comparator.js"></script>
-    <script type="text/javascript" src="./distance/abstract-feature-set.js"></script>
-    <script type="text/javascript" src="./distance/distance-provider.js"></script>
-    <script type="text/javascript" src="./distance/levenshtein.js"></script>
-    <script type="text/javascript" src="./distance/scorer.js"></script>
-    <script type="text/javascript" src="./distance/poc/poc-feature-comparator.js"></script>
-    <script type="text/javascript" src="./distance/poc/poc-feature-factory.js"></script>
-    <script type="text/javascript" src="./distance/poc/poc-feature-set.js"></script>
-    <script type="text/javascript" src="./distance/pct/pct-feature-comparator.js"></script>
-    <script type="text/javascript" src="./distance/pct/pct-feature-factory.js"></script>
-    <script type="text/javascript" src="./distance/pct/pct-feature-set.js"></script>
+    <script type="text/javascript" src="./core/alphabet/alphabet-provider.js"></script>
+    <script type="text/javascript" src="./core/alphabet/phenotype.js"></script>
+    <script type="text/javascript" src="./core/alphabet/inuktitut/inuktitut-alphabet.js"></script>
+    <script type="text/javascript" src="./core/alphabet/inuktitut/inuktitut-factory.js"></script>
+    <script type="text/javascript" src="./core/alphabet/japanese/katakana-alphabet.js"></script>
+    <script type="text/javascript" src="./core/alphabet/japanese/katakana-factory.js"></script>
+    <script type="text/javascript" src="./core/alphabet/japanese/katakana-helper.js"></script>
 
-    <script type="text/javascript" src="./genetic/genetic-run.js"></script>
-    <script type="text/javascript" src="./genetic/generator.js"></script>
-    <script type="text/javascript" src="./genetic/population.js"></script>
+    <script type="text/javascript" src="./core/distance/abstract-feature-comparator.js"></script>
+    <script type="text/javascript" src="./core/distance/abstract-feature-set.js"></script>
+    <script type="text/javascript" src="./core/distance/distance-provider.js"></script>
+    <script type="text/javascript" src="./core/distance/levenshtein.js"></script>
+    <script type="text/javascript" src="./core/distance/scorer.js"></script>
+    <script type="text/javascript" src="./core/distance/poc/poc-feature-comparator.js"></script>
+    <script type="text/javascript" src="./core/distance/poc/poc-feature-factory.js"></script>
+    <script type="text/javascript" src="./core/distance/poc/poc-feature-set.js"></script>
+    <script type="text/javascript" src="./core/distance/pct/pct-feature-comparator.js"></script>
+    <script type="text/javascript" src="./core/distance/pct/pct-feature-factory.js"></script>
+    <script type="text/javascript" src="./core/distance/pct/pct-feature-set.js"></script>
 
-    <script type="text/javascript" src="./ipa/ipa.js"></script>
-    <script type="text/javascript" src="./ipa/ipa-phoneme.js"></script>
+    <script type="text/javascript" src="./core/genetic/genetic-run.js"></script>
+    <script type="text/javascript" src="./core/genetic/generator.js"></script>
+    <script type="text/javascript" src="./core/genetic/population.js"></script>
+
+    <script type="text/javascript" src="./core/ipa/ipa.js"></script>
+    <script type="text/javascript" src="./core/ipa/ipa-phoneme.js"></script>
 
     <script type="text/javascript" src="./util/json-loader.js"></script>
     <script type="text/javascript" src="./util/random.js"></script>

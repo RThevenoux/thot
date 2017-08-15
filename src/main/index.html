@@ -10,57 +10,9 @@
 </head>
 
 <body>
-    <div class="keyboard">
-        <div>
-            <p>Voyelle</p>
-            <button onclick="addIPA('i')">i</button>
-            <button onclick="addIPA('y')">y</button>
-            <button onclick="addIPA('u')">u</button>
-            <button onclick="addIPA('e')">e</button>
-            <button onclick="addIPA('ø')">ø</button>
-            <button onclick="addIPA('o')">o</button>
-            <button onclick="addIPA('ə')">ə</button>
-            <button onclick="addIPA('ɛ')">ɛ</button>
-            <button onclick="addIPA('ɛ̃')">ɛ̃</button>
-            <button onclick="addIPA('œ')">œ</button>
-            <button onclick="addIPA('œ̃')">œ̃</button>
-            <button onclick="addIPA('ɔ')">ɔ</button>
-            <button onclick="addIPA('ɔ̃')">ɔ̃</button>
-            <button onclick="addIPA('a')">a</button>
-            <button onclick="addIPA('ɑ')">ɑ</button>
-            <button onclick="addIPA('ɑ̃')">ɑ̃</button>
-        </div>
-        <div>
-            <p>Semi</p>
-            <button onclick="addIPA('ɥ')">ɥ</button>
-            <button onclick="addIPA('w')">w</button>
-            <button onclick="addIPA('j')">j</button>
-        </div>
-        <div>
-            <p>Consone</p>
-            <button onclick="addIPA('p')">p</button>
-            <button onclick="addIPA('b')">b</button>
-            <button onclick="addIPA('t')">t</button>
-            <button onclick="addIPA('d')">d</button>
-            <button onclick="addIPA('k')">k</button>
-            <button onclick="addIPA('g')">g</button>
-            <button onclick="addIPA('m')">m</button>
-            <button onclick="addIPA('n')">n</button>
-            <button onclick="addIPA('ɲ')">ɲ</button>
-            <button onclick="addIPA('ŋ')">ŋ</button>
-            <button onclick="addIPA('f')">f</button>
-            <button onclick="addIPA('v')">v</button>
-            <button onclick="addIPA('s')">s</button>
-            <button onclick="addIPA('z')">z</button>
-            <button onclick="addIPA('ʃ')">ʃ</button>
-            <button onclick="addIPA('ʒ')">ʒ</button>
-            <button onclick="addIPA('ʁ')">ʁ</button>
-            <button onclick="addIPA('l')">l</button>
-        </div>
-    </div>
-
     <div class="container">
 
+        <div id="keyboard"></div>
         <div class="top-bar">
             <div class="input__container">
                 <h2>Your name</h2>
@@ -94,8 +46,7 @@
             </div>
         </div>
 
-        <div class="top-performers" id="performers">
-        </div>
+        <div class="top-performers" id="performers"></div>
     </div>
 
     <script type="text/javascript" src="./index.js"></script>
@@ -104,6 +55,7 @@
     <script type="text/javascript" src="./gui/app-model.js"></script>
     <script type="text/javascript" src="./gui/parameter-controller.js"></script>
     <script type="text/javascript" src="./gui/parameter-model.js"></script>
+    <script type="text/javascript" src="./gui/keyboard/keyboard-controller.js"></script>
     <script type="text/javascript" src="./gui/performers/performers-controller.js"></script>
 
     <script type="text/javascript" src="./core/alphabet/alphabet-provider.js"></script>

@@ -17,6 +17,7 @@ class AppController {
     document.getElementById('stop-evolve').onclick = () => this._stop();
 
     this.performers = new PerformersController(document.getElementById('performers'));
+    this.keyboard = new KeyboardController(document.getElementById('keyboard'));
 
     this._init();
   }

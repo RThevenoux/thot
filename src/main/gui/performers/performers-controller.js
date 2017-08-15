@@ -9,19 +9,21 @@ class PerformersController {
     this.size = 10;
 
     let templateHTML =
-      `<div class="display">Top Individuals</div>
-<span class="score">Scores</span>`;
+      `<div class="display"></div>
+<span class="score"></span>`;
 
-    let div = document.createElement("div");
-    div.innerHTML = templateHTML;
-    div.className = "performer-row title";
-    element.appendChild(div);
+    let titleRow = document.createElement("div");
+    titleRow.innerHTML = templateHTML;
+    titleRow.className = "performer-row title";
+    this._setRowValues(titleRow,["Top Individuals","Scores"]);
+    element.appendChild(titleRow);
 
     this.rows = [];
     for (let i = 0; i < this.size; i++) {
       let row = document.createElement("div");
       row.innerHTML = templateHTML;
       row.className = "performer-row";
+      this._setRowValues(row,"","");
       element.appendChild(row);
       this.rows.push(row);
     }
@@ -45,11 +47,19 @@ class PerformersController {
       let individual = population.individuals[i];
       let row = this.rows[i];
 
+
       let display = row.querySelector('.display');
       let score = row.querySelector('.score');
 
-      display.textContent = individual.display + " - /" + individual.ipa + "/";
-      score.textContent = individual.score;
+      this._setRowValues(row, [individual.display + " - /" + individual.ipa + "/", individual.score])
     }
+  }
+
+  _setRowValues(row, values) {
+    let display = row.querySelector('.display');
+    let score = row.querySelector('.score');
+
+    display.textContent = values[0];
+    score.textContent = values[1];
   }
 }

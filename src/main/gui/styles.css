@@ -11,18 +11,18 @@ body {
   text-align: center;
 }
 
+.top-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
 input {
   height: 2.2rem;
   width: 20rem;
   font-size: 2rem;
   font-family: var(--main-font);;
   font-weight: 500;
-}
-
-.top-bar {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
 }
 
 .input__container {

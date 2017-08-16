@@ -1,8 +1,3 @@
-function addIPA(value) {
-    let inputNode = document.getElementById('textBox');
-    inputNode.value += value;
-}
-
 class KeyboardController {
 
     /**
@@ -67,10 +62,16 @@ class KeyboardController {
                 let key = keys[i];
                 let button = document.createElement("button");
                 button.textContent = key;
-                button.onclick = () => addIPA(key);
+                button.onclick = () => this.onClick(key);
                 div.appendChild(button);
             }
             element.appendChild(div);
         });
+    }
+
+    /**
+     * @param {String} ipa 
+     */
+    onClick(ipa){
     }
 }

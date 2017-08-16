@@ -13,11 +13,12 @@ class AppController {
     this.distanceNode = document.getElementById('select-distance');
     this.alphabetNode = document.getElementById('select-alphabet');
 
-    document.getElementById('start-evolve').onclick = () => this._start();
-    document.getElementById('stop-evolve').onclick = () => this._stop();
-
     this.performers = new PerformersController(document.getElementById('performers'));
     this.keyboard = new KeyboardController(document.getElementById('keyboard'));
+
+    this.keyboard.onClick = (ipa) => this.inputNode.value += ipa;
+    document.getElementById('start-evolve').onclick = () => this._start();
+    document.getElementById('stop-evolve').onclick = () => this._stop();
 
     this._init();
   }

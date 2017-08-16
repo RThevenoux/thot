@@ -5,18 +5,17 @@ class PerformersController {
    * @param {HTMLElement} Element 
    */
   constructor(element) {
-    this.element = element;
     this.size = 10;
 
     let templateHTML =
       `<div class="display"></div>
       <div class="ipa"></div>
-<span class="score"></span>`;
+      <div class="score"></div>`;
 
     let titleRow = document.createElement("div");
     titleRow.innerHTML = templateHTML;
     titleRow.className = "performer-row title";
-    this._setRowValues(titleRow,["Top Individuals","IPA","Scores"]);
+    this._setRowValues(titleRow, ["Top Individuals", "IPA", "Score"]);
     element.appendChild(titleRow);
 
     this.rows = [];
@@ -24,7 +23,7 @@ class PerformersController {
       let row = document.createElement("div");
       row.innerHTML = templateHTML;
       row.className = "performer-row";
-      this._setRowValues(row,"","","");
+      this._setRowValues(row, "", "", "");
       element.appendChild(row);
       this.rows.push(row);
     }
@@ -51,11 +50,14 @@ class PerformersController {
       let individual = population.individuals[i];
       let row = this.rows[i];
 
-      this._setRowValues(row, [individual.display, "/" + individual.ipa + "/", individual.score])
+      let score = Math.floor(individual.score * 100) + " %";
+
+      this._setRowValues(row, [individual.display, "/" + individual.ipa + "/", score]);
     }
   }
 
   _setRowValues(row, values) {
+
     let display = row.querySelector('.display');
     let ipa = row.querySelector('.ipa');
     let score = row.querySelector('.score');

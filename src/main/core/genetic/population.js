@@ -27,8 +27,8 @@ class Population {
      * @param {Individual[]} individuals 
      */
     newGeneration(individuals){
-        this.individuals = individuals.sort((a, b) => a.score - b.score);
-        this.weights = this.individuals.map(indivual => 1 / (indivual.score ^ this.selectionBiais));
+        this.individuals = individuals.sort((a, b) => a.distance - b.distance);
+        this.weights = this.individuals.map(indivual => 1 / (indivual.distance ^ this.selectionBiais));
         this.generation++;
     }
 

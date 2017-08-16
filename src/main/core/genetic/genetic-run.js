@@ -17,23 +17,23 @@ class GeneticRun {
     this.population = new Population(parameters.sBiais);
   }
 
-  start(listener){
+  start(listener) {
     this.listener = listener;
     this.stopped = false;
     this.listener.started(this.ipaTarget);
 
-    this._initializePopulation(this.ipaTarget);
+    this._initializePopulation();
     this._evolution();
   }
 
-  stop(){
-    this.stopped=true;
+  stop() {
+    this.stopped = true;
   }
 
   _evolution() {
-    if(this.stopped){
+    if (this.stopped) {
       this.listener.stopped();
-    }else if (this._isConvergence()) {
+    } else if (this._isConvergence()) {
       this.listener.finished(this.population, this.generation);
     } else {
       this._newGeneration();
@@ -45,10 +45,10 @@ class GeneticRun {
   /**
    * @param {String} ipaTarget 
    */
-  _initializePopulation(ipaTarget) {
+  _initializePopulation() {
     let newGeneration = [];
     for (let i = 0; i < this.parameters.popSize; i++) {
-      let genome = this.alphabet.generateRandomGenome(ipaTarget);
+      let genome = this.alphabet.generateRandomGenome(this.ipaTarget);
       let individual = this._createIndivudual(genome);
       newGeneration.push(individual);
     }
@@ -62,17 +62,21 @@ class GeneticRun {
    */
   _createIndivudual(genome) {
     let phenotype = this.alphabet.generatePhenotype(genome);
-    let score = this.scorer.computeScore(phenotype.ipa);
+    let distance = this.scorer.computeDistance(phenotype.ipa);
+
+    let score = Math.max(0, 1 - distance / this.scorer.getTargetPhonemeLength());
+
     return {
       genome: genome,
       display: phenotype.display,
       ipa: phenotype.ipa,
+      distance: distance,
       score: score
     }
   }
 
   _isConvergence() {
-    return this.population.getBest().score == 0 || this.population.generation > this.parameters.maxGeneration;
+    return this.population.getBest().distance == 0 || this.population.generation > this.parameters.maxGeneration;
   }
 
   _newGeneration() {

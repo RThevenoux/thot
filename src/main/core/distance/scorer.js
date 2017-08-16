@@ -8,7 +8,7 @@ class Scorer {
    */
   constructor(targetIpaString, featureSet, featureComparator) {
     this.featureSet = featureSet;
-    let phonemes = IPA.parsePhonemes(targetIpaString);   
+    let phonemes = IPA.parsePhonemes(targetIpaString);
     this.targetFeatures = this.featureSet.parseArray(phonemes);
     this.comparator = new Levenshtein(featureComparator);
   }

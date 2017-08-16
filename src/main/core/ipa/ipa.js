@@ -140,7 +140,9 @@ class IPA {
 
         if (char === NASAL_MARK) {
           lastPhoneme.nasal = true;
-        } else {
+        } else if(char === '\u02D0'){
+          lastPhoneme.long = true;
+        }else{
           // ignore
         }
       }

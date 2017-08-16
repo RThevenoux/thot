@@ -1,38 +1,55 @@
 class AppController {
+
   /**
    * 
-   * @param {ParameterModel} parameters 
+   * @param {HTMLElement} element 
    */
-  constructor(parameters) {
-    let shownPopulationSize = 10;
+  constructor(element) {
 
-    this.parameters = parameters;
     this.model = new AppModel();
+    element.innerHTML = `<div id="keyboard"></div>
+        <div class="top-bar">
+            <div class="input__container">
+                <h2>Your name</h2>
+                <div class="name-input">
+                    <input type="text" id="textBox" />
+                    <select id="select-alphabet"></select>
+                    <select id="select-distance"></select>
+                    <button id="start-evolve">Evolve Me</button>
+                    <button id="stop-evolve">Stop</button>
+                </div>
+            </div>
+            <div class="parameters" id="parameters"></div>
+        </div>
+        <div class="top-performers" id="performers"></div>`;
 
-    this.inputNode = document.getElementById('textBox');
-    this.distanceNode = document.getElementById('select-distance');
-    this.alphabetNode = document.getElementById('select-alphabet');
+    this.inputNode = element.querySelector('#textBox');
+    this.distanceNode = element.querySelector('#select-distance');
+    this.alphabetNode = element.querySelector('#select-alphabet');
 
-    this.performers = new PerformersController(document.getElementById('performers'));
-    this.keyboard = new KeyboardController(document.getElementById('keyboard'));
+    this.parameter = new ParametersController(element.querySelector('#parameters'));
+    this.performers = new PerformersController(element.querySelector('#performers'));
+    this.keyboard = new KeyboardController(element.querySelector('#keyboard'));
 
-    this.keyboard.onClick = (ipa) => this.inputNode.value += ipa;
-    document.getElementById('start-evolve').onclick = () => this._start();
-    document.getElementById('stop-evolve').onclick = () => this._stop();
+    element.querySelector('#start-evolve').onclick = () => this._start();
+    element.querySelector('#stop-evolve').onclick = () => this._stop();
+    this.keyboard.onClick = (symbol) => this._addIPASymbol(symbol);
 
     this._init();
   }
 
   _init() {
-    //
     this.model.getDistances()
       .map(distance => new Option(distance.text, distance.value))
       .forEach(option => this.distanceNode.options.add(option));
 
-    //
     this.model.getAlphabets()
       .map(alphabet => new Option(alphabet.text, alphabet.value))
       .forEach(option => this.alphabetNode.options.add(option));
+  }
+
+  _addIPASymbol(symbol){
+    this.inputNode.value += symbol;
   }
 
   /**
@@ -45,7 +62,8 @@ class AppController {
     let ipaTarget = this.inputNode.value;
     let alphabet = this.alphabetNode.value;
     let distance = this.distanceNode.value;
-    this.model.start(ipaTarget, alphabet, distance, this.parameters, this);
+    let parameterModel = this.parameter.model;
+    this.model.start(ipaTarget, alphabet, distance, parameterModel, this);
   }
 
   _stop() {

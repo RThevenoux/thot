@@ -1,20 +1,24 @@
 class JSONLoader {
-  static load(url, callback) {
-    let req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-      if (req.readyState === 4) {
-        if (req.status === 200 || req.status == 0) {
-          let data = JSON.parse(req.responseText);
-          callback(null, data);
+  static load(url) {
+    return new Promise((resolve, reject) => {
+      let xhr = new XMLHttpRequest();
+      xhr.open("GET", url, true);
+      xhr.overrideMimeType("application/json");
+
+      xhr.onload = () => {
+        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 0) {
+          let data = JSON.parse(xhr.responseText);
+          resolve(data);
         } else {
-          callback("Invalid status "+ req.status+" when loading '" + url+"'");
+          let error = "Invalid status " + xhr.status + " (" + xhr.statusText + ") when loading '" + url + "'";
+          reject(error);
         }
+      };
+      xhr.onerror = () => {
+        let error = "Error (" + xhr.statusText + ") when loading '" + url + "'. Maybe invalid URL";
+        reject(xhr.statusText);
       }
-    };
-    req.onerror = () => callback("Error when loading '" + url+"'. Maybe invalid URL");
-    
-    req.open("GET", url, true);
-    req.overrideMimeType("application/json");
-    req.send(null);
+      xhr.send(null);
+    });
   }
 }

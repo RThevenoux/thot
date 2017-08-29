@@ -15,12 +15,26 @@ class AlphabetProvider {
     ];
   }
 
-  get(name, callback) {
-    let alphabet = this.alphabets.find(alphabet => alphabet.name == name);
-    if (alphabet) {
-      alphabet.factory.get(callback);
-    } else {
-      console.error("Alphabet not found: " + name);
-    }
+  get(name) {
+    return new Promise((resolve, reject) => {
+      let alphabet = this.alphabets.find(alphabet => alphabet.name == name);
+      if (!alphabet) {
+        reject("Alphabet not found: " + name);
+        return;
+      }
+
+      if (alphabet.singleton) {
+        resolve(alphabet.singleton);
+      } else {
+        alphabet.factory.get()
+          .then(
+          x => {
+            alphabet.singleton = x;
+            resolve(alphabet.singleton);
+          }
+          )
+          .catch(reject);
+      }
+    });
   }
 }

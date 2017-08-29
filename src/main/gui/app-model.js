@@ -8,23 +8,28 @@ class AppModel {
   /**
    * 
    * @param {String} ipaTarget
-   * @param {String} alphabet 
-   * @param {String} distance 
+   * @param {String} alphabetName 
+   * @param {String} distanceName 
    * @param {ParameterModel} parameters 
    * @param {*} listener 
    */
-  start(ipaTarget, alphabet, distance, parameters, listener) {
-    console.log("Load strategies... (target: " + ipaTarget + ", alphabet: " + alphabet + ", distance: " + distance + ')');
+  start(ipaTarget, alphabetName, distanceName, parameters, listener) {
+    this.stop();
 
-    this.loadStrategies(alphabet, distance, (err, items) => {
-      console.log("| Feature Set : " + items.featureSet.name);
-      console.log("|  Comparator : " + items.featureComparator.name);
-      console.log("|    Alphabet : " + items.alphabet.name);
+    console.log("Load strategies... (target: " + ipaTarget + ", alphabet: " + alphabetName + ", distance: " + distanceName + ')');
 
-      this.stop();
-      this.geneticRun = new GeneticRun(ipaTarget, items.alphabet, items.featureSet, items.featureComparator, parameters);
-      this.geneticRun.start(listener);
-    });
+    Promise.all([
+      this.distanceProvider.get(distanceName),
+      this.alphabetProvider.get(alphabetName)])
+      .then(([distance, alphabet]) => {
+        console.log("| Feature Set : " + distance.featureSet.name);
+        console.log("|  Comparator : " + distance.featureComparator.name);
+        console.log("|    Alphabet : " + alphabet.name);
+
+        this.geneticRun = new GeneticRun(ipaTarget, alphabet, distance.featureSet, distance.featureComparator, parameters);
+        this.geneticRun.start(listener);
+      })
+      .catch(err => console.error(err));
   }
 
   stop() {
@@ -42,27 +47,5 @@ class AppModel {
   getDistances() {
     return this.distanceProvider.distances
       .map(distance => { return { "text": distance.display, "value": distance.name } });
-  }
-
-  loadStrategies(alphabet, distance, callback) {
-    this.distanceProvider.get(distance, (err, distance) => {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      this.alphabetProvider.get(alphabet, (err, alphabet) => {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        callback(null, {
-          featureSet: distance.featureSet,
-          featureComparator: distance.featureComparator,
-          alphabet: alphabet
-        });
-      });
-    });
   }
 }

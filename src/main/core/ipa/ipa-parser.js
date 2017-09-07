@@ -1,8 +1,14 @@
 class IpaParser {
 
   constructor(data) {
-    this.normalization = data.normalization;
+    this.normalization = {};
+    for(let key in data.normalization){
+      this.normalization[key] = data.normalization[key].target;
+    }
+    
     this.diacritics = data.diacritics;
+    this.vowels = data.vowels;
+    this.vowelsKey = Object.keys(this.vowels);
   }
 
   /**
@@ -49,7 +55,10 @@ class IpaParser {
         }
         combining = true;
       }
-      else if (this.diacritics.indexOf(char) > -1) {
+      // Diacritics
+      else if (this.diacritics[char]) {
+        let diacritic = this.diacritics[char];
+        
         if (!lastPhoneme) {
           throw new Exception("Unexpected diacritics without base : " + char);
         }
@@ -57,15 +66,27 @@ class IpaParser {
           throw new Exception("Unexpected diacritics after combining : " + char);
         }
 
-        if (char === NASAL_MARK) {
+        if (diacritic.ipa === "Nasalized") {
           lastPhoneme.nasal = true;
-        } else if (char === '\u02D0') {
+        } else if (diacritic.ipa === "Long") {
           lastPhoneme.long = true;
         } else {
           // ignore
         }
       }
-      // Default - base character
+      // Vowel
+      else if (this.vowelsKey.indexOf(char) > -1) {
+        if (combining) {
+          lastPhoneme.combineBase(char);
+          combining = false;
+        } else {
+          if (lastPhoneme) {
+            phonemes.push(lastPhoneme);
+          }
+          lastPhoneme = IpaPhoneme.vowel(char);
+        }
+      }
+      // Default - expect consonant !
       else {
         if (combining) {
           lastPhoneme.combineBase(char);
@@ -74,7 +95,7 @@ class IpaParser {
           if (lastPhoneme) {
             phonemes.push(lastPhoneme);
           }
-          lastPhoneme = new IpaPhoneme(char);
+          lastPhoneme = IpaPhoneme.consonant(char);
         }
       }
     }

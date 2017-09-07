@@ -1,144 +1,109 @@
 {
-    "vowel": {
-        "i": {
-            "height": "close",
-            "backness": "front",
-            "rounded": false
-        },
-        "y": {
-            "height": "close",
-            "backness": "front",
-            "rounded": true
-        },
-        "ɨ": {
-            "height": "close",
-            "backness": "central",
-            "rounded": false
-        },
-        "ʉ": {
-            "height": "close",
-            "backness": "central",
-            "rounded": true
-        },
-        "ɯ": {
-            "height": "close",
-            "backness": "back",
-            "rounded": false
-        },
-        "u": {
-            "height": "close",
-            "backness": "back",
-            "rounded": true
-        },
-        "ɪ": {
-            "height": "near-close",
-            "backness": "near-front",
-            "rounded": false
-        },
-        "ʏ": {
-            "height": "near-close",
-            "backness": "near-front",
-            "rounded": true
-        },
-        "ʊ": {
-            "height": "near-close",
-            "backness": "near-back",
-            "rounded": true
-        },
-        "e": {
-            "height": "close-mid",
-            "backness": "front",
-            "rounded": false
-        },
-        "ø": {
-            "height": "close-mid",
-            "backness": "front",
-            "rounded": true
-        },
-        "ɘ": {
-            "height": "close-mid",
-            "backness": "central",
-            "rounded": false
-        },
-        "ɵ": {
-            "height": "close-mid",
-            "backness": "central",
-            "rounded": true
-        },
-        "ɤ": {
-            "height": "close-mid",
-            "backness": "back",
-            "rounded": false
-        },
-        "o": {
-            "height": "close-mid",
-            "backness": "back",
-            "rounded": true
-        },
-        "ə": {
-            "height": "mid",
-            "backness": "central",
-            "rounded": false
-        },
-        "ɛ": {
-            "height": "open-mid",
-            "backness": "front",
-            "rounded": false
-        },
-        "œ": {
-            "height": "open-mid",
-            "backness": "front",
-            "rounded": true
-        },
-        "ɜ": {
-            "height": "open-mid",
-            "backness": "central",
-            "rounded": false
-        },
-        "ɞ": {
-            "height": "open-mid",
-            "backness": "central",
-            "rounded": true
-        },
-        "ʌ": {
-            "height": "open-mid",
-            "backness": "back",
-            "rounded": false
-        },
-        "ɔ": {
-            "height": "open-mid",
-            "backness": "back",
-            "rounded": true
-        },
-        "æ": {
-            "height": "near-open",
-            "backness": "front",
-            "rounded": false
-        },
-        "ɐ": {
-            "height": "near-open",
-            "backness": "central",
-            "rounded": false
-        },
-        "a": {
-            "height": "open",
-            "backness": "front",
-            "rounded": false
-        },
-        "ɶ": {
-            "height": "open",
-            "backness": "front",
-            "rounded": true
-        },
-        "ɑ": {
-            "height": "open",
-            "backness": "back",
-            "rounded": false
-        },
-        "ɒ": {
-            "height": "open",
-            "backness": "back",
-            "rounded": true
-        }
+    "vowels": {
+      "i": {"height": "close", "backness": "front", "rounded": false},
+      "y": {"height": "close", "backness": "front", "rounded": true},
+      "ɨ": {"height": "close", "backness": "central", "rounded": false},
+      "ʉ": {"height": "close", "backness": "central", "rounded": true},
+      "ɯ": {"height": "close", "backness": "back", "rounded": false},
+      "u": {"height": "close", "backness": "back", "rounded": true},
+      "ɪ": {"height": "near-close", "backness": "near-front", "rounded": false},
+      "ʏ": {"height": "near-close", "backness": "near-front", "rounded": true},
+      "ʊ": {"height": "near-close", "backness": "near-back", "rounded": true},
+      "e": {"height": "close-mid", "backness": "front", "rounded": false},
+      "ø": {"height": "close-mid", "backness": "front", "rounded": true},
+      "ɘ": {"height": "close-mid", "backness": "central", "rounded": false},
+      "ɵ": {"height": "close-mid", "backness": "central", "rounded": true},
+      "ɤ": {"height": "close-mid", "backness": "back", "rounded": false},
+      "o": {"height": "close-mid", "backness": "back", "rounded": true},
+      "ə": {"height": "mid", "backness": "central", "rounded": false},
+      "ɛ": {"height": "open-mid", "backness": "front", "rounded": false},
+      "œ": {"height": "open-mid", "backness": "front", "rounded": true},
+      "ɜ": {"height": "open-mid", "backness": "central", "rounded": false},
+      "ɞ": {"height": "open-mid", "backness": "central", "rounded": true},
+      "ʌ": {"height": "open-mid", "backness": "back", "rounded": false},
+      "ɔ": {"height": "open-mid", "backness": "back", "rounded": true},
+      "æ": {"height": "near-open", "backness": "front", "rounded": false},
+      "ɐ": {"height": "near-open", "backness": "central", "rounded": false},
+      "a": {"height": "open", "backness": "front", "rounded": false},
+      "ɶ": {"height": "open", "backness": "front", "rounded": true},
+      "ɑ": {"height": "open", "backness": "back", "rounded": false},
+      "ɒ": {"height": "open", "backness": "back", "rounded": true}
+    },
+    "diacritics":{
+      "\u0329": { "unicode": "COMBINING VERTICAL LINE BELOW", "ipa": "Syllabic consonnant" },
+      "\u032F": { "unicode": "COMBINING INVERTED BREVE BELOW", "ipa": "Non-syllabic vowel" },
+     
+      "\u02B0": { "unicode": "MODIFIER LETTER SMALL H", "ipa": "Aspirated consonant" },
+      "\u207F": { "unicode": "SUPERSCRIPT LATIN SMALL LETTER N", "ipa": "Nasal release consonant" },
+      "\u1DBF": { "unicode": "MODIFIER LETTER SMALL THETA", "ipa": "Voiceless dental fricative release consonant" },
+      "\u1D4A": { "unicode": "MODIFIER LETTER SMALL SCHWA", "ipa": "Mid central vowel release consonant" },
+      "\u031A": { "unicode": "COMBINING LEFT ANGLE ABOVE", "ipa": "Unreleased stop consonant" },
+      "\u02E1": { "unicode": "MODIFIER LETTER SMALL L", "ipa": "Lateral release consonant" },
+      "\u02E3": { "unicode": "MODIFIER LETTER SMALL X", "ipa": "Voiceless velar fricative release consonant" },
+     
+      "\u0325": { "unicode": "COMBINING RING BELOW", "ipa": "Voiceless" },
+      "\u032C": { "unicode": "COMBINING CARON BELOW", "ipa": "Voiced" },
+      "\u0324": { "unicode": "COMBINING DIAERESIS BELOW", "ipa": "Murmured" },
+      "\u0330": { "unicode": "COMBINING TILDE BELOW", "ipa": "Creaky voice" },
+      "\u032A": { "unicode": "COMBINING BRIDGE BELOW", "ipa": "Dental consonant" },
+      
+      "\u033A": { "unicode": "COMBINING INVERTED BRIDGE BELOW", "ipa": "Apical consonant" },
+      "\u033C": { "unicode": "COMBINING SEAGULL BELOW", "ipa": "Linguolabial consonant" },
+      "\u033B": { "unicode": "COMBINING SQUARE BELOW", "ipa": "Laminal consonant" },
+      "\u031F": { "unicode": "COMBINING PLUS SIGN BELOW", "ipa": "Advanced" },
+      "\u0320": { "unicode": "COMBINING MINUS SIGN BELOW", "ipa": "Retracted" },
+      "\u0308": { "unicode": "COMBINING DIAERESIS", "ipa": "Centralized vowel / semi-vowel" },
+      "\u033D": { "unicode": "COMBINING X ABOVE", "ipa": "Mid-centralized vowel" },
+      "\u031D": { "unicode": "COMBINING UP TACK BELOW", "ipa": "Raised" },
+      "\u031E": { "unicode": "COMBINING DOWN TACK BELOW", "ipa": "Lowered" },
+      
+      "\u0339": { "unicode": "COMBINING RIGHT HALF RING BELOW", "ipa": "More rounded" },
+      "\u031C": { "unicode": "COMBINING LEFT HALF RING BELOW", "ipa": "Less rounded" },
+      "\u02B7": { "unicode": "MODIFIER LETTER SMALL W", "ipa": "Labialized" },
+      "\u02B2": { "unicode": "MODIFIER LETTER SMALL J", "ipa": "Palatalized" },
+      "\u1DA3": { "unicode": "MODIFIER LETTER SMALL TURNED H", "ipa": "Labio-palatalized" },
+      "\u1DB9": { "unicode": "MODIFIER LETTER SMALL V WITH HOOK", "ipa": "Labialized without protrusion of the lips or velarization" },
+      "\u02E0": { "unicode": "MODIFIER LETTER SMALL GAMMA", "ipa": "Velarized" },
+      "\u02E4": { "unicode": "MODIFIER LETTER SMALL REVERSED GLOTTAL STOP", "ipa": "Pharyngealized" },
+      "\u0334": { "unicode": "COMBINING TILDE OVERLAY", "ipa": "/!\\ Not recommended /!\\ Velarized, uvularized or pharyngealized" },
+      "\u0318": { "unicode": "COMBINING LEFT TACK BELOW", "ipa": "Advanced tongue root" },
+      "\u0319": { "unicode": "COMBINING RIGHT TACK BELOW", "ipa": "Retracted tongue root" },
+      "\u02DE": { "unicode": "MODIFIER LETTER RHOTIC HOOK", "ipa": "Rhotacized" },
+      "\u0303": { "unicode": "COMBINING TILDE", "ipa": "Nasalized" },
+      
+      "\u02C8": { "unicode": "MODIFIER LETTER VERTICAL LINE", "ipa": "Primary stress" },
+      "\u02CC": { "unicode": "MODIFIER LETTER LOW VERTICAL LINE", "ipa": "Secondary stress" },
+      "\u02D0": { "unicode": "MODIFIER LETTER TRIANGULAR COLON", "ipa": "Long" },
+      "\u02D1": { "unicode": "MODIFIER LETTER HALF TRIANGULAR COLON", "ipa": "Half-long" },
+      "\u0306": { "unicode": "COMBINING BREVE", "ipa": "Extra-short" },
+      "\u002E": { "unicode": "FULL STOP", "ipa": "Syllable break" },
+      "\u203F": { "unicode": "UNDERTIE", "ipa": "Linking" },
+      
+      "\u007C": { "unicode": "VERTICAL LINE", "ipa": "Minor (foot) break" },
+      "\u2016": { "unicode": "DOUBLE VERTICAL LINE", "ipa": "Major (intonation) break" },
+      
+      
+      "\u034D": { "unicode": "COMBINING LEFT RIGHT ARROW BELOW", "ipa": "labial spreading" }
+    },
+    "normalization":{
+      "\u0067": { "target": "\u0261", "unicode": "LATIN SMALL LETTER G", "target-unicode": "LATIN SMALL LETTER SCRIPT G" },
+      "\u02A6": { "target": "t͡s", "unicode": "LATIN SMALL LETTER TS DIGRAPH" },
+      "\u02A3": { "target": "d͡z", "unicode": "LATIN SMALL LETTER DZ DIGRAPH" },
+      "\u02A7": { "target": "t͡ʃ", "unicode": "LATIN SMALL LETTER TESH DIGRAPH" },
+      "\u02A4": { "target": "d͡ʒ", "unicode": "LATIN SMALL LETTER DEZH DIGRAPH" },
+      "\u02A8": { "target": "t͡ɕ", "unicode": "LATIN SMALL LETTER TC DIGRAPH WITH CURL" },
+      "\u02A5": { "target": "d͡ʑ", "unicode": "LATIN SMALL LETTER DZ DIGRAPH WITH CURL" },
+      "\u025A": { "target": "\u0259\u02DE", "unicode": "LATIN SMALL LETTER SCHWA WITH HOOK" },
+      "\u025D": { "target": "\u025C\u02DE", "unicode": "LATIN SMALL LETTER REVERSED OPEN E WITH HOOK" },
+      
+      "\u035C": { "target": "\u0361", "unicode": "COMBINING DOUBLE BREVE BELOW", "target-unicode": "COMBINING DOUBLE INVERTED BREVE" },
+      "\u030D": { "target": "\u0329", "unicode": "COMBINING VERTICAL LINE ABOVE", "target-unicode": "COMBINING VERTICAL LINE BELOW" },
+      "\u0311": { "target": "\u032F", "unicode": "COMBINING INVERTED BREVE", "target-unicode": "COMBINING INVERTED BREVE BELOW" },
+      "\u030A": { "target": "\u0325", "unicode": "COMBINING RING ABOVE", "target-unicode": "COMBINING RING BELOW" },
+      "\u003A": { "target": "\u02D0", "unicode": "COLON", "target-unicode": "MODIFIER LETTER TRIANGULAR COLON" },
+      "\u02D7": { "target": "\u0320", "unicode": "MODIFIER LETTER MINUS SIGN", "target-unicode": "COMBINING MINUS SIGN BELOW" },
+      "\u02D6": { "target": "\u031F", "unicode": "MODIFIER LETTER PLUS SIGN", "target-unicode": "COMBINING PLUS SIGN BELOW" },
+      "\u02D4": { "target": "\u031D", "unicode": "MODIFIER LETTER UP TACK", "target-unicode": "COMBINING UP TACK BELOW" },
+      "\u02D5": { "target": "\u031E", "unicode": "MODIFIER LETTER DOWN TACK", "target-unicode": "COMBINING DOWN TACK BELOW" }
     }
 }

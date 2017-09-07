@@ -92,14 +92,13 @@ class KatakanaAlphabet {
   }
 
   /**
-   * @param {IpaPhoneme[]} ipaPhonemes
+   * @param {IpaPhoneme[]} phonemes
    * @returns {Genome} 
    */
-  generateRandomGenome(ipaTarget) {
-    let phonemeNumber = IPA.parsePhonemes(ipaTarget).length;
+  generateRandomGenome(phonemes) {
     let min = 1;
     let phonemePerGlyph = 1.9;
-    let length = Math.max(phonemeNumber * (1 + (Math.random() - .5) / phonemePerGlyph, min));
+    let length = Math.max(phonemes.length * (1 + (Math.random() - .5) / phonemePerGlyph, min));
 
     let genome = [];
     for (let i = 0; i < length; i++) {

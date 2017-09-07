@@ -2,6 +2,7 @@ class AppModel {
   constructor() {
     this.distanceProvider = new DistanceProvider();
     this.alphabetProvider = new AlphabetProvider();
+    this.ipa = new Ipa();
     this.geneticRun = null;
   }
 
@@ -20,14 +21,15 @@ class AppModel {
 
     Promise.all([
       this.distanceProvider.get(distanceName),
-      this.alphabetProvider.get(alphabetName)])
-      .then(([distance, alphabet]) => {
+      this.alphabetProvider.get(alphabetName),
+      this.ipa.getParser()])
+      .then(([distance, alphabet, ipaParser]) => {
         console.log("| Feature Set : " + distance.featureSet.name);
         console.log("|  Comparator : " + distance.featureComparator.name);
         console.log("|    Alphabet : " + alphabet.name);
 
-        this.geneticRun = new GeneticRun(ipaTarget, alphabet, distance.featureSet, distance.featureComparator, parameters);
-        this.geneticRun.start(listener);
+        this.geneticRun = new GeneticRun(alphabet, distance.featureSet, distance.featureComparator, ipaParser, parameters);
+        this.geneticRun.start(ipaTarget, listener);
       })
       .catch(err => console.error(err));
   }

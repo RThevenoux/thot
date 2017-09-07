@@ -21,7 +21,6 @@ class InuktitutAlphabet {
   */
 
   constructor(data) {
-    console.log(JSON.stringify(data));
     this.data = data;
   }
 
@@ -31,16 +30,16 @@ class InuktitutAlphabet {
   * @returns {Genome} 
   */
   mutateGenome(genome, mutationRate) {
-    let result = [];
+    let mutatedGenome = [];
 
     let addition = (gene) => {
-      result.push(gene);
-      result.push(this._getRandomGene());
+      mutatedGenome.push(gene);
+      mutatedGenome.push(this._getRandomGene());
     };
 
     let mutation = (gene) => {
-      let mutated = this._mutateGene(gene);
-      result.push(mutated);
+      let mutatedGene = this._mutateGene(gene);
+      mutatedGenome.push(mutatedGene);
     };
 
     let deletion = (gene) => {
@@ -60,10 +59,11 @@ class InuktitutAlphabet {
         modification(gene);
       } else {
         // # No mutation
-        result.push(gene);
+        mutatedGenome.push(gene);
       }
     }
-    return result;
+
+    return mutatedGenome;
   }
 
   _mutateGene(gene) {
@@ -81,14 +81,13 @@ class InuktitutAlphabet {
   }
 
   /**
-   * @param {IpaPhoneme[]} ipaPhonemes
+   * @param {IpaPhoneme[]} phonemes
    * @returns {Genome} 
    */
-  generateRandomGenome(ipaTarget) {
-    let phonemeNumber = IPA.parsePhonemes(ipaTarget).length;
+  generateRandomGenome(phonemes) {
     let min = 1;
     let phonemePerGlyph = 1.9;
-    let length = Math.max(phonemeNumber * (1 + (Math.random() - .5) / phonemePerGlyph, min));
+    let length = Math.max(phonemes.length * (1 + (Math.random() - .5) / phonemePerGlyph, min));
 
     let genome = [];
     for (let i = 0; i < length; i++) {
@@ -118,10 +117,12 @@ class InuktitutAlphabet {
 
     for (let i = 0; i < genome.length; i++) {
       let gene = genome[i];
-      let combinationKey = gene.consonant + gene.vowel;
-      let combination = this.data.combinations[combinationKey];
-      display += combination.display;
-      ipa += combination.ipa;
+      if (gene.consonant || gene.vowel) { // 'H' is ignored
+        let combinationKey = gene.consonant + gene.vowel;
+        let combination = this.data.combinations[combinationKey];
+        display += combination.display;
+        ipa += combination.ipa;
+      }
     }
 
     return new Phenotype(display, ipa);

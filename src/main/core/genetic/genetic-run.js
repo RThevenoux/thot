@@ -8,22 +8,26 @@ class GeneticRun {
    * @param {AbstractFeatureComparator} featureComparator 
    * @param {ParameterModel} parameters 
    */
-  constructor(ipaTarget, alphabet, featureSet, featureComparator, parameters) {
+  constructor(alphabet, featureSet, featureComparator, ipaParser, parameters) {
     this.parameters = parameters;
     this.alphabet = alphabet;
-    this.ipaTarget = ipaTarget;
-    this.scorer = new Scorer(ipaTarget, featureSet, featureComparator);
+    this.ipaParser = ipaParser;
+
+    this.scorer = new Scorer(featureSet, featureComparator);
     this.generator = new Generator(this.alphabet, this.parameters);
     this.population = new Population(parameters.sBiais);
   }
 
-  start(listener) {
+  start(ipaTarget, listener) {
     this.listener = listener;
     this.stopped = false;
-    this.listener.started(this.ipaTarget);
-
+    this.targetPhonemes = this.ipaParser.parsePhonemes(ipaTarget);
+    this.scorer.setTargetPhonemes(this.targetPhonemes);
     this._initializePopulation();
+
     this._evolution();
+
+    this.listener.started(ipaTarget);
   }
 
   stop() {
@@ -42,13 +46,10 @@ class GeneticRun {
     }
   }
 
-  /**
-   * @param {String} ipaTarget 
-   */
   _initializePopulation() {
     let newGeneration = [];
     for (let i = 0; i < this.parameters.popSize; i++) {
-      let genome = this.alphabet.generateRandomGenome(this.ipaTarget);
+      let genome = this.alphabet.generateRandomGenome(this.targetPhonemes);
       let individual = this._createIndivudual(genome);
       newGeneration.push(individual);
     }
@@ -62,9 +63,10 @@ class GeneticRun {
    */
   _createIndivudual(genome) {
     let phenotype = this.alphabet.generatePhenotype(genome);
-    let distance = this.scorer.computeDistance(phenotype.ipa);
+    let phonemes = this.ipaParser.parsePhonemes(phenotype.ipa);
+    let distance = this.scorer.computeDistance(phonemes);
 
-    let score = Math.max(0, 1 - distance / this.scorer.getTargetPhonemeLength());
+    let score = Math.max(0, 1 - distance / this.targetPhonemes.length);
 
     return {
       genome: genome,

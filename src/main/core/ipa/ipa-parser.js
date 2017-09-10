@@ -2,13 +2,31 @@ class IpaParser {
 
   constructor(data) {
     this.normalization = {};
-    for(let key in data.normalization){
+    for (let key in data.normalization) {
       this.normalization[key] = data.normalization[key].target;
     }
-    
-    this.diacritics = data.diacritics;
-    this.vowels = data.vowels;
-    this.vowelsKey = Object.keys(this.vowels);
+
+    this.mapping = {};
+    this.mapping["\u0361"] = { "type": "combining" };
+    this.mapping["\u035C"] = { "type": "combining" };
+    for (let key in data.diacritics) {
+      let diacritic = data.diacritics[key];
+      diacritic.type = "diacritic";
+      diacritic.base = key;
+      this.mapping[key] = diacritic;
+    }
+    for (let key in data.vowels) {
+      let vowel = data.vowels[key];
+      vowel.type = "vowel";
+      vowel.base = key;
+      this.mapping[key] = vowel;
+    }
+    for (let key in data.consonants) {
+      let consonant = data.consonants[key];
+      consonant.type = "consonant";
+      consonant.base = key;
+      this.mapping[key] = consonant;
+    }
   }
 
   /**
@@ -24,7 +42,7 @@ class IpaParser {
 
     let simplification = {
       '\u02B7': 'w',// Labiovelarisation : MODIFIER LETTER SMALL W > Letter 'w'
-      '\u02B2': 'j' // Palatalisation : MODIFIER LETTER SMALL J > LEtter 'j'
+      '\u02B2': 'j' // Palatalisation : MODIFIER LETTER SMALL J > Letter 'j'
     };
 
     let simplified = this._replaceAll(normalized, simplification);
@@ -47,60 +65,70 @@ class IpaParser {
     let combining = false;
 
     for (let i = 0; i < normalized.length; i++) {
-      let char = normalized[i];
+      let symbol = this._getSymbol(normalized[i]);
+      if (!symbol) {
+        console.log("Invalid character: " + normalized[i]);
+        continue;
+      }
 
-      if (char === "\u0361") {// COMBINING DOUBLE BREVE
-        if (!lastPhoneme) {
-          throw new Exception("Unexpected 'COMBINING DOUBLE BREVE' without base");
-        }
-        combining = true;
-      }
-      // Diacritics
-      else if (this.diacritics[char]) {
-        let diacritic = this.diacritics[char];
-        
-        if (!lastPhoneme) {
-          throw new Exception("Unexpected diacritics without base : " + char);
-        }
-        if (combining) {
-          throw new Exception("Unexpected diacritics after combining : " + char);
-        }
-
-        if (diacritic.ipa === "Nasalized") {
-          lastPhoneme.nasal = true;
-        } else if (diacritic.ipa === "Long") {
-          lastPhoneme.long = true;
-        } else {
-          // ignore
-        }
-      }
-      // Vowel
-      else if (this.vowelsKey.indexOf(char) > -1) {
-        if (combining) {
-          lastPhoneme.combineBase(char);
-          combining = false;
-        } else {
-          if (lastPhoneme) {
-            phonemes.push(lastPhoneme);
+      switch (symbol.type) {
+        case "combining": {// COMBINING DOUBLE BREVE
+          if (!lastPhoneme) {
+            throw new Exception("Unexpected 'COMBINING DOUBLE BREVE' without base");
           }
-          lastPhoneme = IpaPhoneme.vowel(char);
+          combining = true;
         }
-      }
-      // Default - expect consonant !
-      else {
-        if (combining) {
-          lastPhoneme.combineBase(char);
-          combining = false;
-        } else {
-          if (lastPhoneme) {
-            phonemes.push(lastPhoneme);
+          break;
+        case "diacritic": {
+          if (!lastPhoneme) {
+            throw new Exception("Unexpected diacritics without base : " + char);
           }
-          lastPhoneme = IpaPhoneme.consonant(char);
+          if (combining) {
+            throw new Exception("Unexpected diacritics after combining : " + char);
+          }
+          if (symbol.ipa === "Nasalized") {
+            lastPhoneme.nasal = true;
+          } else if (symbol.ipa === "Long") {
+            lastPhoneme.long = true;
+          } else {
+            // ignore
+          }
         }
+          break;
+        case "vowel": {
+          if (combining) {
+            lastPhoneme.combineBase(symbol.base);
+            combining = false;
+          } else {
+            if (lastPhoneme) {
+              phonemes.push(lastPhoneme);
+            }
+            lastPhoneme = IpaPhoneme.vowel(symbol.base);
+          }
+        }
+          break;
+        case "consonant": {
+          if (combining) {
+            lastPhoneme.combineBase(symbol.base);
+            combining = false;
+          } else {
+            if (lastPhoneme) {
+              phonemes.push(lastPhoneme);
+            }
+            lastPhoneme = IpaPhoneme.consonant(symbol.base);
+          }
+        }
+        default:
+          break;
       }
     }
     phonemes.push(lastPhoneme);
     return phonemes;
+  }
+
+  _getSymbol(char) {
+    let symbol = this.mapping[char];
+    return symbol;
   }
 
   _replaceAll(input, actions) {

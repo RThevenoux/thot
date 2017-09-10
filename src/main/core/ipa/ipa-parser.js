@@ -1,32 +1,8 @@
 class IpaParser {
 
-  constructor(data) {
-    this.normalization = {};
-    for (let key in data.normalization) {
-      this.normalization[key] = data.normalization[key].target;
-    }
-
-    this.mapping = {};
-    this.mapping["\u0361"] = { "type": "combining" };
-    this.mapping["\u035C"] = { "type": "combining" };
-    for (let key in data.diacritics) {
-      let diacritic = data.diacritics[key];
-      diacritic.type = "diacritic";
-      diacritic.base = key;
-      this.mapping[key] = diacritic;
-    }
-    for (let key in data.vowels) {
-      let vowel = data.vowels[key];
-      vowel.type = "vowel";
-      vowel.base = key;
-      this.mapping[key] = vowel;
-    }
-    for (let key in data.consonants) {
-      let consonant = data.consonants[key];
-      consonant.type = "consonant";
-      consonant.base = key;
-      this.mapping[key] = consonant;
-    }
+  constructor(mapping, normalization) {
+    this.mapping = mapping;
+    this.normalization = normalization;
   }
 
   /**

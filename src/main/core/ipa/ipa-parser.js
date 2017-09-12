@@ -17,7 +17,6 @@ class IpaParser {
     let normalized = this._normalize(ipaString);
 
     let simplification = {
-      '\u02B7': 'w',// Labiovelarisation : MODIFIER LETTER SMALL W > Letter 'w'
       '\u02B2': 'j' // Palatalisation : MODIFIER LETTER SMALL J > Letter 'j'
     };
 

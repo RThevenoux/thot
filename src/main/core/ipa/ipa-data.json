@@ -135,12 +135,12 @@
     },
     "diacritics": {
       "syllabicity":{
-        "\u0329": {"visual":"◌̩",  "ipa": "Syllabic",        "target":"consonant", "unicode": "COMBINING VERTICAL LINE BELOW"},
-        "\u032F": {"visual":"◌̯",  "ipa": "Non-syllabic",    "target":"vowel",     "unicode": "COMBINING INVERTED BREVE BELOW"}
+        "\u0329": { "visual":"◌̩",  "ipa": "Syllabic",        "target":"consonant", "unicode": "COMBINING VERTICAL LINE BELOW"},
+        "\u032F": { "visual":"◌̯",  "ipa": "Non-syllabic",    "target":"vowel",     "unicode": "COMBINING INVERTED BREVE BELOW"}
       },
       "release":{
-        "\u02B0": { "visual":"◌ʰ", "ipa": "Aspirated",       "target":"consonant", "unicode": "MODIFIER LETTER SMALL H"},
-        "\u207F": { "visual":"◌ⁿ", "ipa": "Nasal",           "target":"consonant", "unicode": "SUPERSCRIPT LATIN SMALL LETTER N"},
+        "\u02B0": { "visual":"◌ʰ", "ipa": "Aspirated",         "target":"consonant", "unicode": "MODIFIER LETTER SMALL H"},
+        "\u207F": { "visual":"◌ⁿ", "ipa": "Nasal",             "target":"consonant", "unicode": "SUPERSCRIPT LATIN SMALL LETTER N"},
         "\u1DBF": { "visual":"◌ᶿ", "ipa": "Voiceless dental fricative", "target":"consonant", "unicode": "MODIFIER LETTER SMALL THETA"},
         "\u1D4A": { "visual":"◌ᵊ", "ipa": "Mid central vowel", "target":"consonant", "unicode": "MODIFIER LETTER SMALL SCHWA"},
         "\u031A": { "visual":"◌̚",  "ipa": "Unreleased",        "target":"stop",      "unicode": "COMBINING LEFT ANGLE ABOVE"},
@@ -182,17 +182,17 @@
         "\u034D": { "ipa": "labial spreading",      "standard":false, "unicode": "COMBINING LEFT RIGHT ARROW BELOW"}
       },
       "length":{
-        "\u02D0": { "ipa": "Long",        "unicode": "MODIFIER LETTER TRIANGULAR COLON"},
-        "\u02D1": { "ipa": "Half-long",   "unicode": "MODIFIER LETTER HALF TRIANGULAR COLON" },
-        "\u0306": { "ipa": "Extra-short", "unicode": "COMBINING BREVE" }
+        "\u02D0": { "ipa": "Long",                     "unicode": "MODIFIER LETTER TRIANGULAR COLON"},
+        "\u02D1": { "ipa": "Half-long",                "unicode": "MODIFIER LETTER HALF TRIANGULAR COLON" },
+        "\u0306": { "ipa": "Extra-short",              "unicode": "COMBINING BREVE" }
       },
       "prosody":{
-      "\u002E": { "unicode": "FULL STOP",                         "ipa": "Syllable break" },
-      "\u203F": { "unicode": "UNDERTIE",                          "ipa": "Linking" },
-      "\u02C8": { "unicode": "MODIFIER LETTER VERTICAL LINE",     "ipa": "Primary stress" },
-      "\u02CC": { "unicode": "MODIFIER LETTER LOW VERTICAL LINE", "ipa": "Secondary stress" },
-      "\u007C": { "unicode": "VERTICAL LINE",                     "ipa": "Minor (foot) break" },
-      "\u2016": { "unicode": "DOUBLE VERTICAL LINE",              "ipa": "Major (intonation) break" }
+        "\u002E": { "ipa": "Syllable break",           "unicode": "FULL STOP"},
+        "\u203F": { "ipa": "Linking",                  "unicode": "UNDERTIE"},
+        "\u02C8": { "ipa": "Primary stress",           "unicode": "MODIFIER LETTER VERTICAL LINE"},
+        "\u02CC": { "ipa": "Secondary stress",         "unicode": "MODIFIER LETTER LOW VERTICAL LINE" },
+        "\u007C": { "ipa": "Minor (foot) break",       "unicode": "VERTICAL LINE"},
+        "\u2016": { "ipa": "Major (intonation) break", "unicode": "DOUBLE VERTICAL LINE"}
       }
     },
 

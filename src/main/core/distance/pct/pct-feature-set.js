@@ -12,20 +12,28 @@ class PctFeatureSet extends AbstractFeatureSet {
    */
   parse(phoneme) {
     let feature = this._find(phoneme.base);
-    if (feature) {
-
-      if (phoneme.nasal) {
-        feature.nasal = '+';
-      }
-
-      if (phoneme.long) {
-        feature.long = '+';
-      }
-      
-      return feature;
-    } else {
+    if (!feature) {
       return null;
     }
+
+    phoneme.coarticaltions.forEach(coarticaltion => {
+      switch (coarticaltion) {
+        case "Nasalized":
+          feature.nasal = '+';
+          break;
+        case "Labialized":
+          console.log("Labialized on "+phoneme.base);
+          feature.labial = "+";
+          feature.round = "+";
+          break;
+      }
+    });
+
+    if (phoneme.lengths.indexOf("Long") > -1) {
+      feature.long = '+';
+    }
+
+    return feature;
   }
 
   _find(base) {

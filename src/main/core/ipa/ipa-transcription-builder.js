@@ -11,7 +11,7 @@ class IpaTranscriptionBuilder {
    */
   add(symbol) {
     switch (symbol.type) {
-      case "combining": this._combining();       break;
+      case "combining": this._combining(symbol); break;
       case "diacritic": this._diacritic(symbol); break;
       case "vowel"    : this._vowel(symbol);     break;
       case "consonant": this._consonant(symbol); break;
@@ -30,8 +30,8 @@ class IpaTranscriptionBuilder {
       this.lastPhoneme = IpaPhoneme.consonant(symbol.base);
     }
   }
-  
-  _combining() {
+
+  _combining(symbol) {
     if (!this.lastPhoneme) {
       throw new Exception("Unexpected 'COMBINING DOUBLE BREVE' without base");
     }
@@ -45,12 +45,11 @@ class IpaTranscriptionBuilder {
     if (this.combining) {
       throw new Exception("Unexpected diacritics after combining : " + char);
     }
-    if (symbol.ipa === "Nasalized") {
-      this.lastPhoneme.nasal = true;
-    } else if (symbol.ipa === "Long") {
-      this.lastPhoneme.long = true;
-    } else {
-      // ignore
+
+    if (symbol.diacritic.type === "co-articulation") {
+      this.lastPhoneme.coarticaltions.push(symbol.diacritic.label);
+    } else if( symbol.diacritic.type === "length"){
+      this.lastPhoneme.lengths.push(symbol.diacritic.label);
     }
   }
 
@@ -62,7 +61,7 @@ class IpaTranscriptionBuilder {
       if (this.lastPhoneme) {
         this.phonemes.push(this.lastPhoneme);
       }
-      this.lastPhoneme = IpaPhoneme.consonant(symbol.base);
+      this.lastPhoneme = IpaPhoneme.vowel(symbol.base);
     }
   }
 

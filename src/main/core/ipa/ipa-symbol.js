@@ -12,17 +12,22 @@ class IpaSymbol {
         return symbol;
     }
 
-    static consonant(unicode, manner, place, voiced) {
+    static consonant(unicode, manner, place, voiced, lateral) {
         let symbol = new IpaSymbol("consonant", unicode);
         symbol.manner = manner;
         symbol.place = place;
         symbol.voiced = voiced;
+        symbol.lateral = lateral;
         return symbol;
     }
 
-    static diacritic(unicode, ipaLabel) {
+    static diacritic(unicode, label, type) {
         let symbol = new IpaSymbol("diacritic", unicode);
-        symbol.ipa = ipaLabel;
+        symbol.ipa = label;
+        symbol.diacritic = {
+            "type": type,
+            "label": label
+        }
         return symbol;
     }
 

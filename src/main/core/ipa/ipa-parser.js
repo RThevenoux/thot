@@ -34,74 +34,23 @@ class IpaParser {
   }
 
   _parse(normalized) {
-
-    let phonemes = [];
-
-    let lastPhoneme = null;
-    let combining = false;
-
+    let builder = new IpaTranscriptionBuilder();
     for (let i = 0; i < normalized.length; i++) {
       let symbol = this._getSymbol(normalized[i]);
       if (!symbol) {
         console.log("Invalid character: " + normalized[i]);
-        continue;
-      }
-
-      switch (symbol.type) {
-        case "combining": {// COMBINING DOUBLE BREVE
-          if (!lastPhoneme) {
-            throw new Exception("Unexpected 'COMBINING DOUBLE BREVE' without base");
-          }
-          combining = true;
-        }
-          break;
-        case "diacritic": {
-          if (!lastPhoneme) {
-            throw new Exception("Unexpected diacritics without base : " + char);
-          }
-          if (combining) {
-            throw new Exception("Unexpected diacritics after combining : " + char);
-          }
-          if (symbol.ipa === "Nasalized") {
-            lastPhoneme.nasal = true;
-          } else if (symbol.ipa === "Long") {
-            lastPhoneme.long = true;
-          } else {
-            // ignore
-          }
-        }
-          break;
-        case "vowel": {
-          if (combining) {
-            lastPhoneme.combineBase(symbol.base);
-            combining = false;
-          } else {
-            if (lastPhoneme) {
-              phonemes.push(lastPhoneme);
-            }
-            lastPhoneme = IpaPhoneme.vowel(symbol.base);
-          }
-        }
-          break;
-        case "consonant": {
-          if (combining) {
-            lastPhoneme.combineBase(symbol.base);
-            combining = false;
-          } else {
-            if (lastPhoneme) {
-              phonemes.push(lastPhoneme);
-            }
-            lastPhoneme = IpaPhoneme.consonant(symbol.base);
-          }
-        }
-        default:
-          break;
+      } else {
+        builder.add(symbol);
       }
     }
-    phonemes.push(lastPhoneme);
+    let phonemes = builder.end();
     return phonemes;
   }
 
+  /**
+   * @param {String} char
+   * @returns {IpaSymbol} 
+   */
   _getSymbol(char) {
     let symbol = this.mapping[char];
     return symbol;

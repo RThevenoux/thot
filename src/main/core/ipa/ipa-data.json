@@ -1,8 +1,5 @@
 {
-    "combining":{
-      "\u0361":{},
-      "\u035C":{}
-    },
+    "combining":["\u0361","\u035C"],
     "vowels": {
       "i": {"height": "close",      "backness": "front",      "rounded": false},
       "y": {"height": "close",      "backness": "front",      "rounded": true},

@@ -8,26 +8,20 @@ class IpaParserFactory {
         }
 
         let mapping = {};
-        for (let key in data.combining) {
-          mapping[key] = { "type": "combining" };
-        }
+
+        data.combining.forEach(key => mapping[key] = IpaSymbol.combining(key));
+
         for (let key in data.diacritics) {
           let diacritic = data.diacritics[key];
-          diacritic.type = "diacritic";
-          diacritic.base = key;
-          mapping[key] = diacritic;
+          mapping[key] = IpaSymbol.diacritic(key, diacritic.ipa);
         }
         for (let key in data.vowels) {
           let vowel = data.vowels[key];
-          vowel.type = "vowel";
-          vowel.base = key;
-          mapping[key] = vowel;
+          mapping[key] = IpaSymbol.vowel(key, vowel.height, vowel.backness, vowel.rounded);
         }
         for (let key in data.consonants) {
           let consonant = data.consonants[key];
-          consonant.type = "consonant";
-          consonant.base = key;
-          mapping[key] = consonant;
+          mapping[key] = IpaSymbol.consonant(key, consonant.manner, consonant.place, consonant.voiced);
         }
 
         return new IpaParser(mapping, normalization);

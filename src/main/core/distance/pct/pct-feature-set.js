@@ -22,14 +22,13 @@ class PctFeatureSet extends AbstractFeatureSet {
           feature.nasal = '+';
           break;
         case "Labialized":
-          console.log("Labialized on "+phoneme.base);
           feature.labial = "+";
           feature.round = "+";
           break;
       }
     });
 
-    if (phoneme.lengths.indexOf("Long") > -1) {
+    if (phoneme.quantity.isLong()) {
       feature.long = '+';
     }
 

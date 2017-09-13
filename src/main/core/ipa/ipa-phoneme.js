@@ -15,7 +15,7 @@ class IpaPhoneme {
   constructor(base) {
     this.base = base;
     this.coarticaltions = [];
-    this.lengths = [];
+    this.quantity = new IpaQuantity();
   }
 
   /**

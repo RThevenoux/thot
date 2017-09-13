@@ -209,15 +209,16 @@
       "\u025A": { "target": "\u0259\u02DE", "unicode": "LATIN SMALL LETTER SCHWA WITH HOOK" },
       "\u025D": { "target": "\u025C\u02DE", "unicode": "LATIN SMALL LETTER REVERSED OPEN E WITH HOOK" },
       
-      "\u0067": { "target": "\u0261", "unicode": "LATIN SMALL LETTER G",          "target-unicode": "LATIN SMALL LETTER SCRIPT G" },
       "\u035C": { "target": "\u0361", "unicode": "COMBINING DOUBLE BREVE BELOW",  "target-unicode": "COMBINING DOUBLE INVERTED BREVE" },
       "\u030D": { "target": "\u0329", "unicode": "COMBINING VERTICAL LINE ABOVE", "target-unicode": "COMBINING VERTICAL LINE BELOW" },
       "\u0311": { "target": "\u032F", "unicode": "COMBINING INVERTED BREVE",      "target-unicode": "COMBINING INVERTED BREVE BELOW" },
       "\u030A": { "target": "\u0325", "unicode": "COMBINING RING ABOVE",          "target-unicode": "COMBINING RING BELOW" },
-      "\u003A": { "target": "\u02D0", "unicode": "COLON",                         "target-unicode": "MODIFIER LETTER TRIANGULAR COLON" },
       "\u02D7": { "target": "\u0320", "unicode": "MODIFIER LETTER MINUS SIGN",    "target-unicode": "COMBINING MINUS SIGN BELOW" },
       "\u02D6": { "target": "\u031F", "unicode": "MODIFIER LETTER PLUS SIGN",     "target-unicode": "COMBINING PLUS SIGN BELOW" },
       "\u02D4": { "target": "\u031D", "unicode": "MODIFIER LETTER UP TACK",       "target-unicode": "COMBINING UP TACK BELOW" },
-      "\u02D5": { "target": "\u031E", "unicode": "MODIFIER LETTER DOWN TACK",     "target-unicode": "COMBINING DOWN TACK BELOW" }
+      "\u02D5": { "target": "\u031E", "unicode": "MODIFIER LETTER DOWN TACK",     "target-unicode": "COMBINING DOWN TACK BELOW"},
+      
+      "\u0067": { "target": "\u0261", "unicode": "LATIN SMALL LETTER G",          "target-unicode": "LATIN SMALL LETTER SCRIPT G" },
+      "\u003A": { "target": "\u02D0", "unicode": "COLON",                         "target-unicode": "MODIFIER LETTER TRIANGULAR COLON" }
     }
 }

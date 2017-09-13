@@ -49,7 +49,7 @@ class IpaTranscriptionBuilder {
     if (symbol.diacritic.type === "co-articulation") {
       this.lastPhoneme.coarticaltions.push(symbol.diacritic.label);
     } else if( symbol.diacritic.type === "length"){
-      this.lastPhoneme.lengths.push(symbol.diacritic.label);
+      this.lastPhoneme.quantity.update(symbol);
     }
   }
 

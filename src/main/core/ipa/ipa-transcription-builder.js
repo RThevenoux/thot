@@ -37,7 +37,7 @@ class IpaTranscriptionBuilder {
 
   _consonant(symbol) {
     this._endPhoneme();
-    this.pendingPhoneme = IpaPhoneme.consonant(symbol.base);
+    this.pendingPhoneme = new ConsonantPhoneme(symbol);
   }
 
   _combining(symbol) {
@@ -61,7 +61,7 @@ class IpaTranscriptionBuilder {
 
   _vowel(symbol) {
     this._endPhoneme();
-    this.pendingPhoneme = IpaPhoneme.vowel(symbol.base);
+    this.pendingPhoneme = new VowelPhoneme(symbol);
   }
 
   _endPhoneme() {

@@ -1,72 +1,79 @@
 class IpaTranscriptionBuilder {
   constructor() {
     this.phonemes = [];
-    this.lastPhoneme = null;
+    this.pendingPhoneme = null;
     this.combining = false;
   }
 
   /**
-   * 
    * @param {IpaSymbol} symbol 
    */
   add(symbol) {
-    switch (symbol.type) {
-      case "combining": this._combining(symbol); break;
-      case "diacritic": this._diacritic(symbol); break;
-      case "vowel"    : this._vowel(symbol);     break;
-      case "consonant": this._consonant(symbol); break;
-      default: break;
+    if (this.combining) {
+      switch (symbol.type) {
+        case "vowel":
+        case "consonant":
+          this.pendingPhoneme.combineBase(symbol.base);
+          this.combining = false;
+          break;
+        default:
+          throw this._unexpectedSymbol(symbol);
+      }
+    } else {
+      switch (symbol.type) {
+        case "combining": this._combining(symbol); break;
+        case "diacritic": this._diacritic(symbol); break;
+        case "vowel": this._vowel(symbol); break;
+        case "consonant": this._consonant(symbol); break;
+        default: break;
+      }
     }
+  }
+
+  end() {
+    this._endPhoneme();
+    return this.phonemes;
   }
 
   _consonant(symbol) {
-    if (this.combining) {
-      this.lastPhoneme.combineBase(symbol.base);
-      this.combining = false;
-    } else {
-      if (this.lastPhoneme) {
-        this.phonemes.push(this.lastPhoneme);
-      }
-      this.lastPhoneme = IpaPhoneme.consonant(symbol.base);
-    }
+    this._endPhoneme();
+    this.pendingPhoneme = IpaPhoneme.consonant(symbol.base);
   }
 
   _combining(symbol) {
-    if (!this.lastPhoneme) {
-      throw new Exception("Unexpected 'COMBINING DOUBLE BREVE' without base");
+    if (!this.pendingPhoneme) {
+      throw this._unexpectedSymbol(symbol);
     }
     this.combining = true;
   }
 
   _diacritic(symbol) {
-    if (!this.lastPhoneme) {
-      throw new Exception("Unexpected diacritics without base : " + char);
-    }
-    if (this.combining) {
-      throw new Exception("Unexpected diacritics after combining : " + char);
+    if (!this.pendingPhoneme) {
+      throw this._unexpectedSymbol(symbol);
     }
 
     if (symbol.diacritic.type === "co-articulation") {
-      this.lastPhoneme.coarticaltions.push(symbol.diacritic.label);
-    } else if( symbol.diacritic.type === "length"){
-      this.lastPhoneme.quantity.update(symbol);
+      this.pendingPhoneme.coarticaltions.push(symbol.diacritic.label);
+    } else if (symbol.diacritic.type === "length") {
+      this.pendingPhoneme.quantity.update(symbol);
     }
   }
 
   _vowel(symbol) {
-    if (this.combining) {
-      this.lastPhoneme.combineBase(symbol.base);
-      this.combining = false;
-    } else {
-      if (this.lastPhoneme) {
-        this.phonemes.push(this.lastPhoneme);
-      }
-      this.lastPhoneme = IpaPhoneme.vowel(symbol.base);
+    this._endPhoneme();
+    this.pendingPhoneme = IpaPhoneme.vowel(symbol.base);
+  }
+
+  _endPhoneme() {
+    if (this.pendingPhoneme) {
+      this.phonemes.push(this.pendingPhoneme);
+      this.pendingPhoneme = null;
     }
   }
 
-  end() {
-    this.phonemes.push(this.lastPhoneme);
-    return this.phonemes;
+  _unexpectedSymbol(symbol) {
+    return new Exception("Unexpected symbol. Combining= " + this.combining
+      + "isPendingPhonemen= " + (this.pendingPhoneme ? true : false)
+      + ", symboleType= " + symbol.type + ", symbol: " + symbol.base);
   }
 }

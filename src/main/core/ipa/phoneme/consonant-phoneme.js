@@ -1,4 +1,5 @@
 class ConsonantPhoneme extends AbstractPhoneme {
+
   /**
    * @param {IpaSymbol} symbol 
    */
@@ -11,5 +12,9 @@ class ConsonantPhoneme extends AbstractPhoneme {
   */
   combineBase(char) {
     this.base += char;
+  }
+
+  updateArticulation(symbol) {
+    //
   }
 }

@@ -52,10 +52,16 @@ class IpaTranscriptionBuilder {
       throw this._unexpectedSymbol(symbol);
     }
 
-    if (symbol.diacritic.type === "co-articulation") {
-      this.pendingPhoneme.coarticaltions.push(symbol.diacritic.label);
-    } else if (symbol.diacritic.type === "length") {
-      this.pendingPhoneme.quantity.update(symbol);
+    switch (symbol.diacritic.type) {
+      case "co-articulation":
+        this.pendingPhoneme.updateCoarticulation(symbol);
+        break;
+      case "length":
+        this.pendingPhoneme.quantity.update(symbol);
+        break;
+      case "articulation":
+        this.pendingPhoneme.updateArticulation(symbol);
+        break;
     }
   }
 

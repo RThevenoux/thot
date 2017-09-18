@@ -1,35 +1,35 @@
 {
     "combining":["\u0361","\u035C"],
     "vowels": {
-      "close":{
-        "front":["i","y"],
-        "central":["ɨ","ʉ"],
-        "back":["ɯ","u"]
+      "CLOSE":{
+        "FRONT":["i","y"],
+        "CENTRAL":["ɨ","ʉ"],
+        "BACK":["ɯ","u"]
       },
-      "near-close":{
-        "near-front":["ɪ","ʏ"],
-        "near-back": [null,"ʊ"]
+      "NEAR_CLOSE":{
+        "NEAR_FRONT":["ɪ","ʏ"],
+        "NEAR_BACK": [null,"ʊ"]
       },
-      "close-mid":{
-        "front":["e","ø"],
-        "central":["ɘ","ɵ"],
-        "back":["ɤ","o"]
+      "CLOSE_MID":{
+        "FRONT":["e","ø"],
+        "CENTRAL":["ɘ","ɵ"],
+        "BACK":["ɤ","o"]
       },
-      "mid":{
-        "central":["ə",null]
+      "MID":{
+        "CENTRAL":["ə",null]
       },  
-      "open-mid":{
-        "front":["ɛ","œ"],
-        "central":["ɜ","ɞ"],
-        "back":["ʌ","ɔ"]
+      "OPEN_MID":{
+        "FRONT":["ɛ","œ"],
+        "CENTRAL":["ɜ","ɞ"],
+        "BACK":["ʌ","ɔ"]
       },
-      "near-open":{
-        "front":["æ",null],
-        "central":["ɐ",null]
+      "NEAR_OPEN":{
+        "FRONT":["æ",null],
+        "CENTRAL":["ɐ",null]
       },
-      "open":{
-        "front":["a","ɶ"],
-        "back":["ɑ","ɒ"]
+      "OPEN":{
+        "FRONT":["a","ɶ"],
+        "BACK":["ɑ","ɒ"]
       }      
     },
     "consonants": {

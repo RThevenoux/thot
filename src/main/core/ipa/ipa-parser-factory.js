@@ -22,10 +22,14 @@ class IpaParserFactory {
         }
 
         // Vowels
-        for (let height in data.vowels) {
-          let heightBundle = data.vowels[height];
-          for (let backness in heightBundle) {
-            let couple = heightBundle[backness];
+        for (let heightLabel in data.vowels) {
+          let heightBundle = data.vowels[heightLabel];
+          for (let backnessLabel in heightBundle) {
+            let couple = heightBundle[backnessLabel];
+
+            let height = VowelHeight[heightLabel];
+            let backness = VowelBackness[backnessLabel];
+
             let unroundedVowel = couple[0];
             if (unroundedVowel) {
               mapping[unroundedVowel] = IpaSymbol.vowel(unroundedVowel, height, backness, false);

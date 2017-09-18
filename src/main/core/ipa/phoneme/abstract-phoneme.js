@@ -5,4 +5,20 @@ class AbstractPhoneme {
     this.coarticaltions = [];
     this.quantity = new IpaQuantity();
   }
+
+  /**
+   * 
+   * @param {IpaSymbol} symbol 
+   */
+  updateArticulation(symbol) {
+    // Need to be Override
+  }
+
+  /**
+   * 
+   * @param {IpaSymbol} symbol 
+   */
+  updateCoarticulation(symbol) {
+    this.coarticaltions.push(symbol.diacritic.label);
+  }
 }

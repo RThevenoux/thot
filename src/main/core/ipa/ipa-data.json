@@ -135,33 +135,33 @@
     },
     "diacritics": {
       "syllabicity":{
-        "\u0329": { "visual":"◌̩",  "ipa": "Syllabic",        "target":"consonant", "unicode": "COMBINING VERTICAL LINE BELOW"},
-        "\u032F": { "visual":"◌̯",  "ipa": "Non-syllabic",    "target":"vowel",     "unicode": "COMBINING INVERTED BREVE BELOW"}
+        "\u0329": { "visual":"◌̩",  "ipa": "Syllabic",                   "target":"consonant", "unicode": "COMBINING VERTICAL LINE BELOW"},
+        "\u032F": { "visual":"◌̯",  "ipa": "Non-syllabic",               "target":"vowel",     "unicode": "COMBINING INVERTED BREVE BELOW"}
       },
       "release":{
-        "\u02B0": { "visual":"◌ʰ", "ipa": "Aspirated",         "target":"consonant", "unicode": "MODIFIER LETTER SMALL H"},
-        "\u207F": { "visual":"◌ⁿ", "ipa": "Nasal",             "target":"consonant", "unicode": "SUPERSCRIPT LATIN SMALL LETTER N"},
+        "\u02B0": { "visual":"◌ʰ", "ipa": "Aspirated",                  "target":"consonant", "unicode": "MODIFIER LETTER SMALL H"},
+        "\u207F": { "visual":"◌ⁿ", "ipa": "Nasal",                      "target":"consonant", "unicode": "SUPERSCRIPT LATIN SMALL LETTER N"},
         "\u1DBF": { "visual":"◌ᶿ", "ipa": "Voiceless dental fricative", "target":"consonant", "unicode": "MODIFIER LETTER SMALL THETA"},
-        "\u1D4A": { "visual":"◌ᵊ", "ipa": "Mid central vowel", "target":"consonant", "unicode": "MODIFIER LETTER SMALL SCHWA"},
-        "\u031A": { "visual":"◌̚",  "ipa": "Unreleased",        "target":"stop",      "unicode": "COMBINING LEFT ANGLE ABOVE"},
-        "\u02E1": { "visual":"◌ˡ", "ipa": "Lateral",           "target":"consonant", "unicode": "MODIFIER LETTER SMALL L"},
-        "\u02E3": { "visual":"◌ˣ", "ipa": "Voiceless velar fricative", "target":"consonant", "unicode": "MODIFIER LETTER SMALL X"}
+        "\u1D4A": { "visual":"◌ᵊ", "ipa": "Mid central vowel",          "target":"consonant", "unicode": "MODIFIER LETTER SMALL SCHWA"},
+        "\u031A": { "visual":"◌̚",  "ipa": "Unreleased",                 "target":"stop",      "unicode": "COMBINING LEFT ANGLE ABOVE"},
+        "\u02E1": { "visual":"◌ˡ", "ipa": "Lateral",                    "target":"consonant", "unicode": "MODIFIER LETTER SMALL L"},
+        "\u02E3": { "visual":"◌ˣ", "ipa": "Voiceless velar fricative",  "target":"consonant", "unicode": "MODIFIER LETTER SMALL X"}
       },
       "phonation":{
-        "\u0325": { "visaul":"◌̥", "ipa": "Voiceless",    "unicode": "COMBINING RING BELOW"},
-        "\u032C": { "visaul":"◌̬", "ipa": "Voiced",       "unicode": "COMBINING CARON BELOW"},
-        "\u0324": { "visaul":"◌̤", "ipa": "Murmured",     "unicode": "COMBINING DIAERESIS BELOW"},
-        "\u0330": { "visaul":"◌̰", "ipa": "Creaky voice", "unicode": "COMBINING TILDE BELOW"}
+        "\u0325": { "visual":"◌̥", "ipa": "Voiceless",    "unicode": "COMBINING RING BELOW"},
+        "\u032C": { "visual":"◌̬", "ipa": "Voiced",       "unicode": "COMBINING CARON BELOW"},
+        "\u0324": { "visual":"◌̤", "ipa": "Murmured",     "unicode": "COMBINING DIAERESIS BELOW"},
+        "\u0330": { "visual":"◌̰", "ipa": "Creaky voice", "unicode": "COMBINING TILDE BELOW"}
       },
       "articulation":{
-        "\u032A": { "ipa": "Dental",          "taget":"consonant", "unicode": "COMBINING BRIDGE BELOW" }, 
-        "\u033A": { "ipa": "Apical",          "taget":"consonant", "unicode": "COMBINING INVERTED BRIDGE BELOW" },
-        "\u033C": { "ipa": "Linguolabial",    "taget":"consonant", "unicode": "COMBINING SEAGULL BELOW" },
-        "\u033B": { "ipa": "Laminal",         "taget":"consonant", "unicode": "COMBINING SQUARE BELOW" },
+        "\u032A": { "ipa": "Dental",          "target":"consonant", "unicode": "COMBINING BRIDGE BELOW" }, 
+        "\u033A": { "ipa": "Apical",          "target":"consonant", "unicode": "COMBINING INVERTED BRIDGE BELOW" },
+        "\u033C": { "ipa": "Linguolabial",    "target":"consonant", "unicode": "COMBINING SEAGULL BELOW" },
+        "\u033B": { "ipa": "Laminal",         "target":"consonant", "unicode": "COMBINING SQUARE BELOW" },
         "\u031F": { "ipa": "Advanced",        "unicode": "COMBINING PLUS SIGN BELOW" },
         "\u0320": { "ipa": "Retracted",       "unicode": "COMBINING MINUS SIGN BELOW" },
-        "\u0308": { "ipa": "Centralized",     "taget":"vowel", "unicode": "COMBINING DIAERESIS" },
-        "\u033D": { "ipa": "Mid-centralized", "taget":"vowel", "unicode": "COMBINING X ABOVE" },
+        "\u0308": { "ipa": "Centralized",     "target":"vowel", "unicode": "COMBINING DIAERESIS" },
+        "\u033D": { "ipa": "Mid-centralized", "target":"vowel", "unicode": "COMBINING X ABOVE" },
         "\u031D": { "ipa": "Raised",          "unicode": "COMBINING UP TACK BELOW" },
         "\u031E": { "ipa": "Lowered",         "unicode": "COMBINING DOWN TACK BELOW" }
       },

@@ -1,0 +1,24 @@
+{
+  "name": "thot",
+  "version": "1.0.0",
+  "description": "A phonetic transcription tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RThevenoux/thot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RThevenoux/thot/issues"
+  },
+  "homepage": "https://github.com/RThevenoux/thot#readme",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "run-sequence": "^2.2.1"
+  }
+}

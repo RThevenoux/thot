@@ -19,6 +19,7 @@
   "devDependencies": {
     "del": "^3.0.0",
     "gulp": "^3.9.1",
+    "gulp-inject": "^4.3.2",
     "run-sequence": "^2.2.1"
   }
 }

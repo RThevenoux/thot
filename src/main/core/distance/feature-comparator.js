@@ -1,5 +1,8 @@
-class AbstractFeatureComparator {
-    constructor() { }
+class FeatureComparator {
+    constructor(descriptors, name) {
+        this.descriptors = descriptors;
+        this.name = name;
+    }
 
     /**
      * 

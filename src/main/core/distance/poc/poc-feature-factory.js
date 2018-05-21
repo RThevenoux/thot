@@ -2,13 +2,14 @@ class PocFeatureFactory {
   constructor() {
   }
 
-  getFeatureSet(callback) {
-    return JSONLoader.load("core/distance/poc/poc-feature-set.json")
-      .then(data => new PocFeatureSet(data));
+  getFeatureMapper(callback) {
+    return JSONLoader.load("core/distance/poc/poc-feature-mapping.json")
+      .then(data => new PocFeatureMapper(data));
   }
 
   getFeatureComparator(callback) {
+    var name = "Proof of Concept Comparator";
     return JSONLoader.load("core/distance/poc/poc-feature-comparator.json")
-      .then(data => new PocFeatureComparator(data));
+      .then(data => new FeatureComparator(data, name));
   }
 }

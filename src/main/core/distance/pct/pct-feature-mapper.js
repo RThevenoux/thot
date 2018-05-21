@@ -1,4 +1,4 @@
-class PctFeatureSet extends AbstractFeatureSet {
+class PctFeatureMapper extends AbstractFeatureMapper {
   constructor(data) {
     super();
     this.name = "Derive from PCT (Phonologic Corpus Tool)";

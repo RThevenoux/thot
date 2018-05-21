@@ -1,6 +1,18 @@
 # thot
 A transciption robot
 
+# How to run
+
+`
+npm install
+`
+
+```
+gulp build
+```
+
+Then open `dist/index.html`
+
 # Related work
 Based on http://nk1tz.com/explore-genetic-algorithm/
 

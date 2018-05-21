@@ -1,4 +1,4 @@
-class AbstractFeatureSet {
+class AbstractFeatureMapper {
     constructor() { }
 
     /**

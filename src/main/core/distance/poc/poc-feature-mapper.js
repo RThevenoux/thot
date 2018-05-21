@@ -1,4 +1,4 @@
-class PocFeatureSet extends AbstractFeatureSet {
+class PocFeatureMapper extends AbstractFeatureMapper {
   constructor(mapping) {
     super();
     this.name = "Proof of Concept Feature Set";

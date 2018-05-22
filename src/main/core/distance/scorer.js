@@ -2,11 +2,11 @@ class Scorer {
 
   /**
    * @param {AbstractFeatureMapper} featureMapper 
-   * @param {FeatureComparator} featureComparator 
+   * @param {FeatureSetComparator} featureSetComparator 
    */
-  constructor(featureMapper, featureComparator) {
+  constructor(featureMapper, featureSetComparator) {
     this.featureMapper = featureMapper;
-    this.featureComparator = featureComparator;
+    this.featureSetComparator = featureSetComparator;
 
     this.insertionCost = 2;
     this.deletionCost = 2;
@@ -29,9 +29,9 @@ class Scorer {
   }
 
   /**
-  * Compute the edit distance between the two given Features array
-  * @param {Features[]} a
-  * @param {Features[]} b
+  * Compute the edit distance between the two given FeatureSet array
+  * @param {FeatureSet[]} a
+  * @param {FeatureSet[]} b
   * @returns {Number}
   */
   _levenshtein(a, b) {
@@ -56,7 +56,7 @@ class Scorer {
         let featuresA = a[j - 1];
         let featuresB = b[i - 1];
 
-        let distance = this.featureComparator.distance(featuresA, featuresB);
+        let distance = this.featureSetComparator.distance(featuresA, featuresB);
 
         let substitution = matrix[i - 1][j - 1] + distance;
         let insertion = matrix[i][j - 1] + this.insertionCost;

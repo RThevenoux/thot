@@ -5,15 +5,15 @@ class GeneticRun {
    * @param {String} ipaTarget 
    * @param {*} alphabet 
    * @param {AbstractFeatureMapper} featureMapper 
-   * @param {FeatureComparator} featureComparator 
+   * @param {FeatureSetComparator} featureSetComparator 
    * @param {ParameterModel} parameters 
    */
-  constructor(alphabet, featureMapper, featureComparator, ipaParser, parameters) {
+  constructor(alphabet, featureMapper, featureSetComparator, ipaParser, parameters) {
     this.parameters = parameters;
     this.alphabet = alphabet;
     this.ipaParser = ipaParser;
 
-    this.scorer = new Scorer(featureMapper, featureComparator);
+    this.scorer = new Scorer(featureMapper, featureSetComparator);
     this.generator = new Generator(this.alphabet, this.parameters);
     this.population = new Population(parameters.sBiais);
   }

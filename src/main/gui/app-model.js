@@ -24,11 +24,11 @@ class AppModel {
       this.alphabetProvider.get(alphabetName),
       this.ipa.getParser()])
       .then(([distance, alphabet, ipaParser]) => {
-        console.log("| Feature Set : " + distance.featureMapper.name);
-        console.log("|  Comparator : " + distance.featureComparator.name);
-        console.log("|    Alphabet : " + alphabet.name);
+        console.log("|     Mapper : " + distance.featureMapper.name);
+        console.log("| Comparator : " + distance.featureSetComparator.name);
+        console.log("|   Alphabet : " + alphabet.name);
 
-        this.geneticRun = new GeneticRun(alphabet, distance.featureMapper, distance.featureComparator, ipaParser, parameters);
+        this.geneticRun = new GeneticRun(alphabet, distance.featureMapper, distance.featureSetComparator, ipaParser, parameters);
         this.geneticRun.start(ipaTarget, listener);
       })
       .catch(err => console.error(err));

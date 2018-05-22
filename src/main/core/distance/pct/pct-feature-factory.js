@@ -7,9 +7,9 @@ class PctFeatureFactory {
       .then(data => new PctFeatureMapper(data));
   }
 
-  getFeatureComparator(callback) {
+  getFeatureSetComparator(callback) {
     var name = "Equal weights on PCT feature";
-    return JSONLoader.load("core/distance/pct/pct-feature-comparator.json")
-      .then(data => new FeatureComparator(data, name));
+    return JSONLoader.load("core/distance/pct/pct-feature-weight.json")
+      .then(weights => new FeatureSetComparator(weights, name));
   }
 }

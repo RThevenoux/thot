@@ -8,16 +8,17 @@ class PocFeatureMapper extends AbstractFeatureMapper {
   /**
    * 
    * @param {IpaPhoneme} phoneme
-   * @returns {Features}
+   * @returns {FeatureSet}
    */
   parse(phoneme) {
-    let feature = this.mapping[phoneme.base];
-    if (feature) {
-      feature.nasal = (phoneme.nasal ? 1 : 0);
-      return feature;
-    } else {
+    let baseFeatures = this.mapping[phoneme.base];
+    if (!baseFeatures) {
       return null;
     }
+
+    let featureSet = new FeatureSet(baseFeatures);
+    featureSet.add('nasal', (phoneme.nasal ? 1 : 0));
+    return featureSet;
   }
 };
 

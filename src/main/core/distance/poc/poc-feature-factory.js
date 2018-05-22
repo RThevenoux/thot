@@ -7,9 +7,9 @@ class PocFeatureFactory {
       .then(data => new PocFeatureMapper(data));
   }
 
-  getFeatureComparator(callback) {
+  getFeatureSetComparator(callback) {
     var name = "Proof of Concept Comparator";
-    return JSONLoader.load("core/distance/poc/poc-feature-comparator.json")
-      .then(data => new FeatureComparator(data, name));
+    return JSONLoader.load("core/distance/poc/poc-feature-weight.json")
+      .then(weights => new FeatureSetComparator(weights, name));
   }
 }

@@ -3,7 +3,7 @@ class AbstractFeatureMapper {
 
     /**
      * @param {IpaPhoneme[]} phonemes
-     * @returns {Features[]} 
+     * @returns {FeatureSet[]} 
      */
     parseArray(phonemes) {
         return phonemes.map(x => this.parse(x));

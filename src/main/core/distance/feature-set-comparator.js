@@ -1,4 +1,4 @@
-class FeatureComparator {
+class FeatureSetComparator {
     constructor(descriptors, name) {
         this.descriptors = descriptors;
         this.name = name;
@@ -6,8 +6,8 @@ class FeatureComparator {
 
     /**
      * 
-     * @param {Features} a 
-     * @param {Features} b
+     * @param {FeatureSet} a 
+     * @param {FeatureSet} b
      * @returns {Number} 
      */
     distance(a, b) {
@@ -19,19 +19,20 @@ class FeatureComparator {
         let weightSum = 0;
 
         this.descriptors.forEach(featureDesc => {
-            let featureA = a[featureDesc.name];
-            let featureB = b[featureDesc.name];
-            scoreSum += this._oneFeatureDistance(featureA, featureB, featureDesc) * featureDesc.weight;
+            let name = featureDesc.name;
+            let featureDistance = this._oneFeatureDistance(a.get(name), b.get(name), featureDesc);
+
+            scoreSum += featureDistance * featureDesc.weight;
             weightSum += featureDesc.weight;
         });
 
         return scoreSum / weightSum;
     }
 
-    _oneFeatureDistance(featureA, featureB, featureDesc) {
+    _oneFeatureDistance(a, b, featureDesc) {
         switch (featureDesc.type) {
-            case "number": return this._numberDistance(featureA, featureB, featureDesc);
-            case "value": return this._valueDistance(featureA, featureB, featureDesc);
+            case "number": return this._numberDistance(a, b, featureDesc);
+            case "value": return this._valueDistance(a, b, featureDesc);
             default: return 0;
         }
     }

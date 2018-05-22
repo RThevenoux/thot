@@ -8,43 +8,32 @@ class PctFeatureMapper extends AbstractFeatureMapper {
   /**
    * 
    * @param {IpaPhoneme} phoneme
-   * @returns {Features}
+   * @returns {FeatureSet}
    */
   parse(phoneme) {
-    let feature = this._find(phoneme.base);
-    if (!feature) {
+    let baseFeatures = this.mapping[phoneme.base];
+    if (!baseFeatures) {
       return null;
     }
+
+    let features = new FeatureSet(baseFeatures);
 
     phoneme.coarticaltions.forEach(coarticaltion => {
       switch (coarticaltion) {
         case "Nasalized":
-          feature.nasal = '+';
+          features.add('nasal', '+');
           break;
         case "Labialized":
-          feature.labial = "+";
-          feature.round = "+";
+          features.add('labial', "+");
+          features.add('round', "+");
           break;
       }
     });
 
     if (phoneme.quantity.isLong()) {
-      feature.long = '+';
+      features.add('long', '+');
     }
 
-    return feature;
-  }
-
-  _find(base) {
-    let features = this.mapping[base];
-    if (features) {
-      let copy = {};
-      for (let f in features) {
-        copy[f] = features[f];
-      }
-      return copy;
-    } else {
-      return null;
-    }
+    return features;
   }
 };

@@ -27,12 +27,12 @@ class DistanceProvider {
       } else {
         Promise.all([
           distance.factory.getFeatureMapper(),
-          distance.factory.getFeatureComparator()
+          distance.factory.getFeatureSetComparator()
         ])
-          .then(([featureMapper, featureComparator]) => {
+          .then(([featureMapper, featureSetComparator]) => {
             distance.singleton = {
               featureMapper: featureMapper,
-              featureComparator: featureComparator
+              featureSetComparator: featureSetComparator
             };
             resolve(distance.singleton);
           })

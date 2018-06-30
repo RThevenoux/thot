@@ -26,6 +26,15 @@ class KatakanaHelper {
     this.N = '\u30F3'; // ン
   }
 
+  /**
+  * @param {String} consonantKey
+  * @param {String} vowelKey 
+  * @returns {KanaDescription}
+  */
+  getKana(consonantKey, vowelKey) {
+    return this.data[consonantKey].vowels[vowelKey];
+  }
+
   /** Returns a data structure reflecting the effect of /Q/ before the consonant
    * { 'available' : boolean // true if gemination is available for this consonant
    *   'ipa' : string // the ipa value of the gemination sound
@@ -80,55 +89,45 @@ class KatakanaHelper {
    * @returns {String}
    */
   _getNasalizedVowel(vowelKey) {
-    let key = {
-      'consonant': "",
-      'vowel': vowelKey
-    };
-    let singleVowelKana = this.getKana(key);
+    let singleVowelKana = this.getKana("", vowelKey);
     return singleVowelKana.ipa + NASAL_MARK;
   }
 
   /** returns try to find another valid vowelKey for this consonnant and return it.
    * If there is no other vowelKey, return the original vowelKey
-   * @param {KanaKey} key
-   * @returns {String}
+   * @param {String} consonantKey
+   * @param {String} vowelKey
+   * @returns {String} an alternative vowelKey
    */
-  changeVowelKey(key) {
-    let consonantDesc = this.data[key.consonant];
+  alternativeVowelKey(consonantKey, vowelKey) {
+    let consonantDesc = this.data[consonantKey];
     let otherVowels = Object.keys(consonantDesc.vowels);
-    otherVowels.splice(otherVowels.indexOf(key.vowel), 1);
+    otherVowels.splice(otherVowels.indexOf(vowelKey), 1);
     if (otherVowels.length > 0) {
       return Random.inArray(otherVowels);
     } else {
-      return key.vowel;
+      return vowelKey;
     }
   }
 
   /** Returns try to find another valid consonantKey for this vowel and return it.
    * If there is no other consonantKey, return the original consonantKey
-   * @param {KanaKey} key
-   * @returns {String}
+   * @param {String} consonantKey
+   * @param {String} vowelKey
+   * @returns {String} an alterntive consonantKey
    */
-  changeConsonantKey(key) {
-    let otherConsonants = new Set(this.vowelCombination[key.vowel]);
-    otherConsonants.delete(key.consonant);
+  alternativeConsonantKey(consonantKey, vowelKey) {
+    let otherConsonants = new Set(this.vowelCombination[vowelKey]);
+    otherConsonants.delete(consonantKey);
     if (otherConsonants.size > 0) {
       return Random.inArray([...otherConsonants]);
     } else {
-      return key.consonant;
+      return consonantKey;
     }
   }
 
   /**
-   * @param {KanaKey} key 
-   * @returns {KanaDescription}
-   */
-  getKana(key) {
-    return this.data[key.consonant].vowels[key.vowel];
-  }
-
-  /**
-   * @returns {KanaKey}
+   * @returns { {consonant: String, vowel: String } }
    */
   getRandomKeys() {
     let consonant = Random.inArray(Object.keys(this.data));

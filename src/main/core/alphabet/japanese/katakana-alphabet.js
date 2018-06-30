@@ -1,15 +1,7 @@
 class KatakanaAlphabet {
 
   /*
-    Genome : array of Gene
-    Gene :
-      {
-        consonant: "",
-        vowel: "",
-        choonpu: bool, // true if choonpu after
-        sokuon: bool, // true if sukuon before
-        n: bool, //true if /N/ kana after 
-      }
+  *  Genome : array of KatakanaGene
   */
 
   /**
@@ -22,9 +14,9 @@ class KatakanaAlphabet {
   }
 
   /**
-   * @param {Genome} genome 
+   * @param {KatakanaGene[]} genome 
    * @param {Number} mutationRate
-   * @returns {Genome} 
+   * @returns {KatakanaGene[]} 
    */
   mutateGenome(genome, mutationRate) {
     let result = [];
@@ -62,39 +54,33 @@ class KatakanaAlphabet {
     return result;
   }
 
+  /**
+   * 
+   * @param {KatakanaGene} gene 
+   * @returns {KatakanaGene} a new mutated gene 
+   */
   _mutateGene(gene) {
-    let mutated = this._copyGene(gene);
+    let mutated = gene.clone();
 
     let mutationType = Math.random();
     if (mutationType < 0.35) {
-      mutated.vowel = this.helper.changeVowelKey(gene);
+      mutated.vowelKey = this.helper.alternativeVowelKey(gene.consonantKey, gene.vowelKey);
     } else if (mutationType >= 0.35 && mutationType < 0.7) {
-      let consonant = this.helper.changeConsonantKey(gene);
-      mutated.consonant = consonant;
+      mutated.consonantKey = this.helper.alternativeConsonantKey(gene.consonantKey, gene.vowelKey);
     } else if (mutationType >= 0.7 && mutationType < 0.8) {
-      mutated.sokuon = !mutated.sokuon;
+      mutated.switchSukuon();
     } else if (mutationType >= 0.8 && mutationType < 0.9) {
-      mutated.choonpu = !mutated.choonpu;
+      mutated.switchChoonpu();
     } else if (mutationType >= 0.9) {
-      mutated.n = !mutated.n;
+      mutated.switchN();
     }
 
     return mutated;
   }
 
-  _copyGene(gene) {
-    return {
-      consonant: gene.consonant,
-      vowel: gene.vowel,
-      choonpu: gene.choonpu,
-      sokuon: gene.sokuon,
-      n: gene.n
-    };
-  }
-
   /**
    * @param {IpaPhoneme[]} phonemes
-   * @returns {Genome} 
+   * @returns {KatakanaGene[]} genome as an array of KatakanaGene
    */
   generateRandomGenome(phonemes) {
     let min = 1;
@@ -110,7 +96,7 @@ class KatakanaAlphabet {
   };
 
   /**
-   * @param {Genome} genome
+   * @param {KatakanaGene[]} genome
    * @returns {Phenotype} 
    */
   generatePhenotype(genome) {
@@ -121,14 +107,14 @@ class KatakanaAlphabet {
 
       // Sokuon (gemination)
       if (gene.sokuon && i != 0) {
-        let geminationData = this.helper.getGeminationData(gene.consonant);
+        let geminationData = this.helper.getGeminationData(gene.consonantKey);
         if (geminationData.available) {
           builder.add(this.helper.SOKUON, geminationData.ipa);
         }
       }
 
       // Main information
-      let kana = this.helper.getKana(gene);
+      let kana = this.helper.getKana(gene.consonantKey, gene.vowelKey);
       builder.add(kana.display, kana.ipa);
 
       // Choonpu (long vowel)
@@ -138,11 +124,11 @@ class KatakanaAlphabet {
 
       // Kana "n" (ン) : add a nasal consonant or the NASAL_MARK
       if (gene.n) {
-        let vowelKey = gene.vowel;
+        let vowelKey = gene.vowelKey;
 
         let nextConsonantKey = null;
         if (i !== genome.length - 1) {
-          nextConsonantKey = genome[i + 1].consonant;
+          nextConsonantKey = genome[i + 1].consonantKey;
         }
 
         let ipa = this.helper.nToIPA(vowelKey, nextConsonantKey);
@@ -153,6 +139,9 @@ class KatakanaAlphabet {
     return builder.build();
   };
 
+  /**
+   * @returns {KatakanaGene}
+   */
   _getRandomGene() {
     let n = Math.random() < 0.1;
     let sokuon = Math.random() < 0.1;
@@ -160,12 +149,6 @@ class KatakanaAlphabet {
 
     let keys = this.helper.getRandomKeys();
 
-    return {
-      consonant: keys.consonant,
-      vowel: keys.vowel,
-      choonpu: choonpu,
-      sokuon: sokuon,
-      n: n
-    };
+    return new KatakanaGene(keys.consonant, keys.vowel, choonpu, sokuon, n);
   }
 }

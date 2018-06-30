@@ -112,19 +112,17 @@ class InuktitutAlphabet {
    * @returns {Phenotype} 
    */
   generatePhenotype(genome) {
-    let display = "";
-    let ipa = "";
+    let builder = new PhenotypeBuilder();
 
     for (let i = 0; i < genome.length; i++) {
       let gene = genome[i];
       if (gene.consonant || gene.vowel) { // 'H' is ignored
         let combinationKey = gene.consonant + gene.vowel;
         let combination = this.data.combinations[combinationKey];
-        display += combination.display;
-        ipa += combination.ipa;
+        builder.add(combination.display, combination.ipa);
       }
     }
 
-    return new Phenotype(display, ipa);
+    return builder.build();
   }
 }

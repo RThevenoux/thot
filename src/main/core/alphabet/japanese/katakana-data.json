@@ -128,7 +128,7 @@
       }
     },
     "n": {
-      "gemination": "false",
+      "gemination": false,
       "nCategory": "n",
       "ipa": "n",
       "vowels": {
@@ -140,7 +140,7 @@
       }
     },
     "ny": {
-      "gemination": "false",
+      "gemination": false,
       "nCategory": "n",
       "ipa": "ɲ",
       "vowels": {

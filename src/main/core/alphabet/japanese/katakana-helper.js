@@ -20,34 +20,79 @@ class KatakanaHelper {
   constructor(data, vowelCombination) {
     this.data = data;
     this.vowelCombination = vowelCombination;
+
+    this.SOKUON = '\u30c3'; // ッ
+    this.CHOOPNU = '\u30FC'; // ー
+    this.N = '\u30F3'; // ン
   }
 
-  /** Returns the IPA representation of the sound produce by /Q/ before the consonant
+  /** Returns a data structure reflecting the effect of /Q/ before the consonant
+   * { 'available' : boolean // true if gemination is available for this consonant
+   *   'ipa' : string // the ipa value of the gemination sound
+   * }
    * @param {String} consonantKey
-   * @returns {String}  */
-  getGemination(consonantKey) {
-    return this.data[consonantKey].gemination;
+   * @returns {String}
+   */
+  getGeminationData(consonantKey) {
+    let value = this.data[consonantKey].gemination;
+
+    if (value) {
+      return {
+        'available': true,
+        'ipa': value
+      };
+    } else {
+      return {
+        'available': false,
+        'ipa': null
+      };
+    }
   }
 
-  /** Returns the category of how if /N/ react is present before the consonant 
-  * @param {String} consonantKey
-  * @returns {String}*/
-  getNCategory(consonantKey) {
-    return this.data[consonantKey].nCategory;
+  /**
+  * @param {String} vowelKey
+  * @param {String} nextConsonantKey Null if no following consonant
+  * @returns {String}
+  */
+  nToIPA(vowelKey, nextConsonantKey) {
+    if (!nextConsonantKey) {
+      return '\u0274'; // ɴ
+    }
+
+    let nextNCategory = this.data[nextConsonantKey].nCategory;
+    switch (nextNCategory) {
+      case "m":
+        return 'm'; // m
+      case "n":
+        return 'n'; // m
+      case "ng":
+        return '\u014B'; // ŋ
+      case "vowel":
+        return this._getNasalizedVowel(vowelKey);
+      default:
+        console.error("invalid 'nCategory':" + nextNCategory);
+        return "";
+    }
   }
 
   /** Returns the IPA representation of the nazalised vowel
    * @param {String} vowelKey
-   * @returns {String} */
-  getNasalizedVowel(vowelKey) {
-    let singleVowelKana = this.getKana({ 'consonant': "", "vowel": vowelKey });
+   * @returns {String}
+   */
+  _getNasalizedVowel(vowelKey) {
+    let key = {
+      'consonant': "",
+      'vowel': vowelKey
+    };
+    let singleVowelKana = this.getKana(key);
     return singleVowelKana.ipa + NASAL_MARK;
   }
 
   /** returns try to find another valid vowelKey for this consonnant and return it.
    * If there is no other vowelKey, return the original vowelKey
    * @param {KanaKey} key
-   * @returns {String}*/
+   * @returns {String}
+   */
   changeVowelKey(key) {
     let consonantDesc = this.data[key.consonant];
     let otherVowels = Object.keys(consonantDesc.vowels);
@@ -62,7 +107,8 @@ class KatakanaHelper {
   /** Returns try to find another valid consonantKey for this vowel and return it.
    * If there is no other consonantKey, return the original consonantKey
    * @param {KanaKey} key
-   * @returns {String}*/
+   * @returns {String}
+   */
   changeConsonantKey(key) {
     let otherConsonants = new Set(this.vowelCombination[key.vowel]);
     otherConsonants.delete(key.consonant);
@@ -75,7 +121,8 @@ class KatakanaHelper {
 
   /**
    * @param {KanaKey} key 
-   * @returns {KanaDescription} */
+   * @returns {KanaDescription}
+   */
   getKana(key) {
     return this.data[key.consonant].vowels[key.vowel];
   }

@@ -1,4 +1,5 @@
 class KatakanaAlphabet {
+
   /*
     Genome : array of Gene
     Gene :
@@ -113,57 +114,44 @@ class KatakanaAlphabet {
    * @returns {Phenotype} 
    */
   generatePhenotype(genome) {
-    let display = "";
-    let ipa = "";
+    let builder = new PhenotypeBuilder();
 
     for (let i = 0; i < genome.length; i++) {
       let gene = genome[i];
-      let consonantGemination = this.helper.getGemination(gene.consonant);
 
-      if (gene.sokuon && consonantGemination && i != 0) {
-        display += '\u30c3'; // ッ
-        ipa += consonantGemination;
-      }
-
-      let kana = this.helper.getKana(gene);
-      display += kana.display;
-      ipa += kana.ipa;
-
-      if (gene.choonpu) {
-        display += '\u30FC'; // ー
-        ipa += '\u02D0'; // 'ː', long vowel 
-      }
-
-      if (gene.n) {
-        display += '\u30F3'; // ン
-        if (i === genome.length - 1) {
-          ipa += '\u0274'; // ɴ
-        } else {
-          let nextGene = genome[i + 1];
-          ipa += this._nToIPA(gene, nextGene);
+      // Sokuon (gemination)
+      if (gene.sokuon && i != 0) {
+        let geminationData = this.helper.getGeminationData(gene.consonant);
+        if (geminationData.available) {
+          builder.add(this.helper.SOKUON, geminationData.ipa);
         }
       }
+
+      // Main information
+      let kana = this.helper.getKana(gene);
+      builder.add(kana.display, kana.ipa);
+
+      // Choonpu (long vowel)
+      if (gene.choonpu) {
+        builder.add(this.helper.CHOOPNU, LONG_MARK);
+      }
+
+      // Kana "n" (ン) : add a nasal consonant or the NASAL_MARK
+      if (gene.n) {
+        let vowelKey = gene.vowel;
+
+        let nextConsonantKey = null;
+        if (i !== genome.length - 1) {
+          nextConsonantKey = genome[i + 1].consonant;
+        }
+
+        let ipa = this.helper.nToIPA(vowelKey, nextConsonantKey);
+        builder.add(this.helper.N, ipa);
+      }
     }
 
-    return new Phenotype(display, ipa);
+    return builder.build();
   };
-
-  _nToIPA(gene, nextGene) {
-    let nextNCategory = this.helper.getNCategory(nextGene.consonant);
-    switch (nextNCategory) {
-      case "m":
-        return 'm'; // m
-      case "n":
-        return 'n'; // m
-      case "ng":
-        return '\u014B'; // ŋ
-      case "vowel":
-        return this.helper.getNasalizedVowel(gene.vowel);
-      default:
-        console.error("invalid 'nCategory':" + nextNCategory);
-        return "";
-    }
-  }
 
   _getRandomGene() {
     let n = Math.random() < 0.1;

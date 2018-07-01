@@ -7,7 +7,7 @@ class IpaParser {
 
   /**
   * @param {String} ipaString
-  * @returns {IpaPhoneme[]} 
+  * @returns {AbstractPhoneme[]} 
   */
   parsePhonemes(ipaString) {
     if (!ipaString || ipaString.length === 0) {
@@ -25,6 +25,11 @@ class IpaParser {
     return this._parse(simplified);
   }
 
+  /**
+   * 
+   * @param {String} input a 'IPA' string
+   * @returns {String} 
+   */
   _normalize(input) {
     let tmp = this._replaceAll(input, this.normalization);
     tmp = tmp.normalize("NFD");
@@ -32,6 +37,10 @@ class IpaParser {
     return tmp;
   }
 
+  /**
+   * @param {String} normalized a 'IPA' normalized String 
+   * @returns {AbstractPhoneme[]}
+   */
   _parse(normalized) {
     let builder = new IpaTranscriptionBuilder();
     for (let i = 0; i < normalized.length; i++) {

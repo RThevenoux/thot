@@ -21,9 +21,13 @@ class KatakanaHelper {
     this.data = data;
     this.vowelCombination = vowelCombination;
 
+    // Display const
     this.SOKUON = '\u30c3'; // ッ
     this.CHOOPNU = '\u30FC'; // ー
     this.N = '\u30F3'; // ン
+
+    // IPA const
+
   }
 
   /**
@@ -93,7 +97,7 @@ class KatakanaHelper {
     return singleVowelKana.ipa + NASAL_MARK;
   }
 
-  /** returns try to find another valid vowelKey for this consonnant and return it.
+  /** returns try to find another valid vowelKey for this consonnantKey and return it.
    * If there is no other vowelKey, return the original vowelKey
    * @param {String} consonantKey
    * @param {String} vowelKey
@@ -110,7 +114,7 @@ class KatakanaHelper {
     }
   }
 
-  /** Returns try to find another valid consonantKey for this vowel and return it.
+  /** Returns try to find another valid consonantKey for this vowelKey and return it.
    * If there is no other consonantKey, return the original consonantKey
    * @param {String} consonantKey
    * @param {String} vowelKey

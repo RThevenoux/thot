@@ -28,8 +28,8 @@ class AppModel {
         console.log("| Comparator : " + distance.featureSetComparator.name);
         console.log("|   Alphabet : " + alphabet.name);
 
-        this.geneticRun = new GeneticRun(alphabet, distance.featureMapper, distance.featureSetComparator, ipaParser, parameters);
-        this.geneticRun.start(ipaTarget, listener);
+        this.geneticRun = new GeneticRun(distance.featureMapper, distance.featureSetComparator, ipaParser, parameters);
+        this.geneticRun.start(ipaTarget, alphabet, listener);
       })
       .catch(err => console.error(err));
   }

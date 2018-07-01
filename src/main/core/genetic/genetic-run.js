@@ -1,29 +1,32 @@
 class GeneticRun {
 
   /**
-   * 
-   * @param {String} ipaTarget 
-   * @param {*} alphabet 
    * @param {AbstractFeatureMapper} featureMapper 
-   * @param {FeatureSetComparator} featureSetComparator 
+   * @param {FeatureSetComparator} featureSetComparator
+   * @param {IpaParser} ipaParser
    * @param {ParameterModel} parameters 
    */
-  constructor(alphabet, featureMapper, featureSetComparator, ipaParser, parameters) {
+  constructor(featureMapper, featureSetComparator, ipaParser, parameters) {
     this.parameters = parameters;
-    this.alphabet = alphabet;
     this.ipaParser = ipaParser;
 
     this.scorer = new Scorer(featureMapper, featureSetComparator);
-    this.generator = new Generator(this.alphabet, this.parameters);
+    this.generator = new Generator(this.parameters);
     this.population = new Population(parameters.sBiais);
   }
 
-  start(ipaTarget, listener) {
+  /**
+   * 
+   * @param {String} ipaTarget an valid IPA string
+   * @param {*} alphabet 
+   * @param {*} listener 
+   */
+  start(ipaTarget, alphabet, listener) {
     this.listener = listener;
     this.stopped = false;
     this.targetPhonemes = this.ipaParser.parsePhonemes(ipaTarget);
     this.scorer.setTargetPhonemes(this.targetPhonemes);
-    this._initializePopulation();
+    this._initializePopulation(alphabet);
 
     this._evolution();
 
@@ -46,11 +49,11 @@ class GeneticRun {
     }
   }
 
-  _initializePopulation() {
+  _initializePopulation(alphabet) {
     let newGeneration = [];
     for (let i = 0; i < this.parameters.popSize; i++) {
-      let genome = this.alphabet.generateRandomGenome(this.targetPhonemes);
-      let individual = this._createIndivudual(genome);
+      let genotype = alphabet.generateRandomGenotype(this.targetPhonemes);
+      let individual = this._createIndivudual(genotype);
       newGeneration.push(individual);
     }
     this.population.newGeneration(newGeneration);
@@ -58,18 +61,18 @@ class GeneticRun {
 
   /**
    * 
-   * @param {Genome} genome
+   * @param {Genotype} genotype
    * @returns {Individual} 
    */
-  _createIndivudual(genome) {
-    let phenotype = this.alphabet.generatePhenotype(genome);
+  _createIndivudual(genotype) {
+    let phenotype = genotype.generatePhenotype();
     let phonemes = this.ipaParser.parsePhonemes(phenotype.ipa);
     let distance = this.scorer.computeDistance(phonemes);
 
     let score = Math.max(0, 1 - distance / this.targetPhonemes.length);
 
     return {
-      genome: genome,
+      genome: genotype,
       display: phenotype.display,
       ipa: phenotype.ipa,
       distance: distance,

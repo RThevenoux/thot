@@ -5,8 +5,11 @@ class AppController {
    * @param {HTMLElement} element 
    */
   constructor(element) {
+    this.ALL_ALPHABET = "#ALL#";
 
-    this.model = new AppModel();
+    let alphabetProvider = new AlphabetProvider();
+    let geneticRunFactory = new GeneticRunFactory();
+
     element.innerHTML =
       `<div id="keyboard"></div>
        <div class="top-bar">
@@ -24,12 +27,10 @@ class AppController {
         </div>
         <div class="cardlayout" id="card-layout">
           <div class="message" id="welcome-message-card">
-            <p> Entrée une séquence API valide et cliquez sur 'start'</p>
+            <p> Entrée une séquence API valide et cliquez sur 'Evolve Me'</p>
           </div>
-          <div class="top-performers" id="single-alphabet-card"></div>
-          <div class="message" id="multi-alphabet-card">
-            <p> Not implemented yet ... ¯\\_(ツ)_/¯ </p>
-          </div>
+          <div class="single-alphabet" id="single-alphabet-card"></div>
+          <div class="multi-alphabet" id="multi-alphabet-card"></div>
         </div>`;
 
     this.inputNode = element.querySelector('#textBox');
@@ -38,26 +39,31 @@ class AppController {
     this.cardLayout = element.querySelector('#card-layout');
 
     this.parameter = new ParametersController(element.querySelector('#parameters'));
-    this.singleAlphabet = new SingleAlphabetController(element.querySelector('#single-alphabet-card'));
     this.keyboard = new KeyboardController(element.querySelector('#keyboard'));
+
+    let singleAlphabet = element.querySelector('#single-alphabet-card');
+    this.singleAlphabet = new SingleAlphabetController(singleAlphabet, alphabetProvider, geneticRunFactory);
+
+    let multiAlphabet = element.querySelector('#multi-alphabet-card');
+    this.multiAlphabet = new MultiAlphabetController(multiAlphabet, alphabetProvider, geneticRunFactory);
 
     element.querySelector('#start-evolve').onclick = () => this._start();
     element.querySelector('#stop-evolve').onclick = () => this._stop();
     this.keyboard.onClick = (symbol) => this._addIPASymbol(symbol);
 
-    this._init();
+    this._init(alphabetProvider, geneticRunFactory);
   }
 
-  _init() {
+  _init(alphabetProvider, geneticRunFactory) {
     // Add 'Distance' option
-    this.model.getDistances()
+    geneticRunFactory.getDistances()
       .map(distance => new Option(distance.text, distance.value))
       .forEach(option => this.distanceNode.options.add(option));
 
     // Add 'Alphabet' option
-    this.alphabetNode.options.add(new Option("-- ALL --", "#ALL#"));
-    this.model.getAlphabets()
-      .map(alphabet => new Option(alphabet.text, alphabet.value))
+    this.alphabetNode.options.add(new Option("-- ALL --", this.ALL_ALPHABET));
+    alphabetProvider.alphabets
+      .map(alphabet => new Option(alphabet.display, alphabet.name))
       .forEach(option => this.alphabetNode.options.add(option));
 
     // Init CardLayout
@@ -93,16 +99,18 @@ class AppController {
     let distance = this.distanceNode.value;
     let parameterModel = this.parameter.model;
 
-    if (alphabet === "#ALL#") {
+    if (alphabet === this.ALL_ALPHABET) {
       this._showCard("multi-alphabet-card");
+      this.multiAlphabet.start(ipaTarget, distance, parameterModel);
       console.log("'-- ALL --' is not yet implemented");
     } else {
       this._showCard("single-alphabet-card");
-      this.model.start(ipaTarget, alphabet, distance, parameterModel, this.singleAlphabet);
+      this.singleAlphabet.start(ipaTarget, alphabet, distance, parameterModel);
     }
   }
 
   _stop() {
-    this.model.stop();
+    this.singleAlphabet.stop();
+    this.multiAlphabet.stop();
   }
 }

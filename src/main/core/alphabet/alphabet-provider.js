@@ -43,13 +43,44 @@ class AlphabetProvider {
       } else {
         alphabet.factory.get()
           .then(
-          x => {
-            alphabet.singleton = x;
-            resolve(alphabet.singleton);
-          }
+            x => {
+              alphabet.singleton = x;
+              resolve(alphabet.singleton);
+            }
           )
           .catch(reject);
       }
+    });
+  }
+
+  getAll() {
+    let names = this.alphabets.map(desc => desc.name);
+
+    return new Promise((resolve, reject) => {
+      let count = 0;
+      let result = {
+        'alphabets': [],
+        'errors': []
+      };
+
+      let incrementCounter = () => {
+        count++;
+        if (count === names.length) {
+          resolve(result);
+        }
+      };
+
+      names.forEach(name => {
+        this.get(name)
+          .then(alphabet => {
+            result.alphabets.push(alphabet);
+            incrementCounter();
+          })
+          .catch(err => {
+            result.errors.push({ 'alphabetName': name, 'error': err });
+            incrementCounter();
+          });
+      });
     });
   }
 }

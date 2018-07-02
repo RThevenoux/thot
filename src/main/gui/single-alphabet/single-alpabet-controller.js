@@ -1,11 +1,12 @@
 class SingleAlphabetController {
 
   /**
-   * 
    * @param {HTMLElement} parent 
    */
-  constructor(parent) {
+  constructor(parent, alphabetProvider, geneticRunFactory) {
     this.size = 10;
+    this.alphabetProvider = alphabetProvider;
+    this.geneticRunFactory = geneticRunFactory;
 
     let rowTemplate =
       `<div class="display"></div>
@@ -67,6 +68,35 @@ class SingleAlphabetController {
     display.textContent = values[0];
     ipa.textContent = values[1];
     score.textContent = values[2];
+  }
+
+  /**
+   * 
+   * @param {String} ipaTarget
+   * @param {String} alphabetName 
+   * @param {String} distanceName 
+   * @param {ParameterModel} parameters
+   */
+  start(ipaTarget, alphabetName, distanceName, parameters) {
+    this.stop();
+
+    console.log("Load strategies... (target: " + ipaTarget + ", alphabet: " + alphabetName + ", distance: " + distanceName + ')');
+
+    Promise.all([
+      this.geneticRunFactory.get(distanceName, parameters),
+      this.alphabetProvider.get(alphabetName)])
+      .then(([geneticRun, alphabet]) => {
+        this.geneticRun = geneticRun;
+        this.geneticRun.start(ipaTarget, alphabet, this);
+      })
+      .catch(err => console.error(err));
+  }
+
+  stop() {
+    if (this.geneticRun) {
+      console.log("Stop Single Alphabet");
+      this.geneticRun.stop();
+    }
   }
 
   started(ipaTarget) {

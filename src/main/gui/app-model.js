@@ -24,10 +24,6 @@ class AppModel {
       this.alphabetProvider.get(alphabetName),
       this.ipa.getParser()])
       .then(([distance, alphabet, ipaParser]) => {
-        console.log("|     Mapper : " + distance.featureMapper.name);
-        console.log("| Comparator : " + distance.featureSetComparator.name);
-        console.log("|   Alphabet : " + alphabet.name);
-
         this.geneticRun = new GeneticRun(distance.featureMapper, distance.featureSetComparator, ipaParser, parameters);
         this.geneticRun.start(ipaTarget, alphabet, listener);
       })

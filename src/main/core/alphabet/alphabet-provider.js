@@ -11,6 +11,21 @@ class AlphabetProvider {
         "name": "inuktitut",
         "display": "Inuktitut",
         "factory": new InuktitutFactory()
+      },
+      {
+        "name": "cyrillic",
+        "display": "Cyrillic",
+        "factory": new CyrillicFactory()
+      },
+      {
+        "name": "elder-futhark",
+        "display": "Elder Futhark",
+        "factory": new ElderFutharkFactory()
+      },
+      {
+        "name": "arab",
+        "display": "Arab",
+        "factory": new ArabFactory()
       }
     ];
   }

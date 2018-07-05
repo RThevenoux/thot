@@ -102,7 +102,6 @@ class AppController {
     if (alphabet === this.ALL_ALPHABET) {
       this._showCard("multi-alphabet-card");
       this.multiAlphabet.start(ipaTarget, distance, parameterModel);
-      console.log("'-- ALL --' is not yet implemented");
     } else {
       this._showCard("single-alphabet-card");
       this.singleAlphabet.start(ipaTarget, alphabet, distance, parameterModel);

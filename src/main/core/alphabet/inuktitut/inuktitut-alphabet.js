@@ -21,6 +21,7 @@ class InuktitutAlphabet {
 
   constructor(data) {
     this.data = data;
+    this.name = "Inuktitut";
   }
 
   mutateGene(gene) {

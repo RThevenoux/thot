@@ -7,6 +7,7 @@ class SingleAlphabetController {
     this.size = 10;
     this.alphabetProvider = alphabetProvider;
     this.geneticRunFactory = geneticRunFactory;
+    this.formater = new Formater();
 
     let rowTemplate =
       `<div class="display"></div>
@@ -27,7 +28,7 @@ class SingleAlphabetController {
   _createRow(values, title, template) {
     let row = document.createElement("div");
     row.innerHTML = template;
-    row.className = "performer-row" + (title ? " title" : "");
+    row.className = "my-row" + (title ? " title" : "");
     this._setRowValues(row, values);
     return row;
   }
@@ -53,9 +54,10 @@ class SingleAlphabetController {
       let individual = population.individuals[i];
       let row = this.rows[i];
 
-      let score = Math.floor(individual.score * 100) + " %";
+      let score = this.formater.toPercent(individual.score);
+      let ipa = this.formater.toIPA(individual.ipa);
 
-      this._setRowValues(row, [individual.display, "/" + individual.ipa + "/", score]);
+      this._setRowValues(row, [individual.display, ipa, score]);
     }
   }
 

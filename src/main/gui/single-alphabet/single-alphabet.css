@@ -1,19 +1,4 @@
-.top-performers {
-  margin: 2rem 4rem;
-  display: flex;
-  flex-flow: column;
-  align-items: flex-start;
-}
-
-.performer-row {
-  width: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.performer-row.title * {
+.my-row.title * {
   color: black;
   font-size: 20px;
   font-family: var(--main-font);
@@ -41,7 +26,7 @@
   width: 20%;
 }
 
-.performer-row .highlighted {
+.my-row .highlighted {
   color: darkgreen
 }
 

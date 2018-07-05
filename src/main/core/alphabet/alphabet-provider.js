@@ -53,8 +53,15 @@ class AlphabetProvider {
     });
   }
 
-  getAll() {
-    let names = this.alphabets.map(desc => desc.name);
+  /**
+   * Return a list of alphabets
+   * @param {String[]} names if null or empty, return all declared alphabets
+   * @returns { {'alphabets': Promise<Alphabet>[], 'errors':  {'alphabetName': string, 'error': err } [] } }
+   */
+  getAll(names) {
+    if (!names || names.length == 0) {
+      names = this.alphabets.map(desc => desc.name);
+    }
 
     return new Promise((resolve, reject) => {
       let count = 0;

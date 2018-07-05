@@ -219,6 +219,8 @@
       "\u02D5": { "target": "\u031E", "unicode": "MODIFIER LETTER DOWN TACK",     "target-unicode": "COMBINING DOWN TACK BELOW"},
       
       "\u0067": { "target": "\u0261", "unicode": "LATIN SMALL LETTER G",          "target-unicode": "LATIN SMALL LETTER SCRIPT G" },
-      "\u003A": { "target": "\u02D0", "unicode": "COLON",                         "target-unicode": "MODIFIER LETTER TRIANGULAR COLON" }
+      "\u003A": { "target": "\u02D0", "unicode": "COLON",                         "target-unicode": "MODIFIER LETTER TRIANGULAR COLON" },
+
+      "\u02C1": { "target": "\u02E4", "unicode": "Modifier Letter Reversed Glottal Stop", "target-unicode": "Modifier Letter Small Reversed Glottal Stop" }
     }
 }

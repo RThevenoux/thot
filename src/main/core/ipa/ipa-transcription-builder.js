@@ -30,6 +30,9 @@ class IpaTranscriptionBuilder {
     }
   }
 
+  /**
+   * @returns {AbstractPhoneme[]} 
+   */
   end() {
     this._endPhoneme();
     return this.phonemes;

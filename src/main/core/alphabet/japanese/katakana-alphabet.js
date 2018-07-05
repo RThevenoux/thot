@@ -75,10 +75,10 @@ class KatakanaAlphabet {
 
       // Choonpu (long vowel)
       if (gene.choonpu) {
-        builder.add(this.helper.CHOOPNU, LONG_MARK);
+        builder.add(this.helper.CHOOPNU, IPA_LONG_MARK);
       }
 
-      // Kana "n" (ン) : add a nasal consonant or the NASAL_MARK
+      // Kana "n" (ン) : add a nasal consonant or the IPA_NASAL_MARK
       if (gene.n) {
         let vowelKey = gene.vowelKey;
 

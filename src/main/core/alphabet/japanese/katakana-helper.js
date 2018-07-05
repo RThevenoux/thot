@@ -94,7 +94,7 @@ class KatakanaHelper {
    */
   _getNasalizedVowel(vowelKey) {
     let singleVowelKana = this.getKana("", vowelKey);
-    return singleVowelKana.ipa + NASAL_MARK;
+    return singleVowelKana.ipa + IPA_NASAL_MARK;
   }
 
   /** returns try to find another valid vowelKey for this consonnantKey and return it.

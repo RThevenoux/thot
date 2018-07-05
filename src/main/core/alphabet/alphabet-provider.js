@@ -26,6 +26,11 @@ class AlphabetProvider {
         "name": "arab",
         "display": "Arab",
         "factory": new ArabFactory()
+      },
+      {
+        "name": "neo-tifinagh",
+        "display": "Neo Tifinagh",
+        "factory": new NeoTifinaghFactory()
       }
     ];
   }

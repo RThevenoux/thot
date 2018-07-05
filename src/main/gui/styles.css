@@ -2,7 +2,7 @@
 body {
   padding: 3rem;
   font-size: 10px;
-  --main-font: 'Droid Sans', sans-serif;
+  --main-font: Helvetica, sans-serif;
   font-family: var(--main-font);
 }
 
@@ -52,11 +52,4 @@ input {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }

@@ -20,7 +20,7 @@ class Genotype {
     * @param {Number} mutationRate
     * @returns {Genotype} A new mutated Genotype
     */
-    mutateGenome(mutationRate) {
+    mutateGenotype(mutationRate) {
         let result = [];
 
         let addition = (gene) => {

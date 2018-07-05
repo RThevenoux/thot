@@ -33,7 +33,7 @@ class Population {
     }
 
     /**
-     * @returns {Number}
+     * @returns {Individual}
      */
     getBest(){
         return this.individuals[0];
@@ -41,7 +41,8 @@ class Population {
 
     /**
      * 
-     * @param {Number} eliteNumber 
+     * @param {Number} eliteNumber
+     * @returns {Individual[]}
      */
     getElite(eliteNumber){
         return this.individuals.slice(0, eliteNumber);

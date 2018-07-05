@@ -29,7 +29,7 @@ The score of an individual is found by comparing char-by-char the ASCII code val
 Chance of mutating any given char during mating.
 
 #### Parents per Child
-How many individuals' contribute part of their genome during a single mating event.
+How many individuals' contribute part of their genotype during a single mating event.
 
 #### Population Size
 How many individuals are generated at every generational event.

@@ -71,13 +71,7 @@ class GeneticRun {
 
     let score = Math.max(0, 1 - distance / this.targetPhonemes.length);
 
-    return {
-      genome: genotype,
-      display: phenotype.display,
-      ipa: phenotype.ipa,
-      distance: distance,
-      score: score
-    }
+    return new Individual(genotype, phenotype.display, phenotype.ipa, distance, score);
   }
 
   _isConvergence() {
@@ -93,8 +87,8 @@ class GeneticRun {
 
     // Generate other individual
     for (let i = eliteNumber; i < popSize; i++) {
-      let genome = this.generator.generateGenome(this.population);
-      let indivual = this._createIndivudual(genome);
+      let genotype = this.generator.generateGenotype(this.population);
+      let indivual = this._createIndivudual(genotype);
       newGeneration.push(indivual);
     }
 

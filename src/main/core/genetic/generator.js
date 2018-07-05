@@ -11,10 +11,10 @@ class Generator {
      * @param {Population} population
      * @returns {Genotype}
      */
-    generateGenome(population) {
+    generateGenotype(population) {
         let parents = this._selectParentGenotypes(population);
         let child = this._mateGenotypes(parents);
-        let mutated = child.mutateGenome(this.parameters.mutationRate);
+        let mutated = child.mutateGenotype(this.parameters.mutationRate);
 
         return mutated;
     }
@@ -29,7 +29,7 @@ class Generator {
         let selectedGenotypes = [];
         for (let i = 0; i < number; i++) {
             let selected = population.select();
-            selectedGenotypes.push(selected.genome);
+            selectedGenotypes.push(selected.genotype);
         }
 
         return selectedGenotypes;

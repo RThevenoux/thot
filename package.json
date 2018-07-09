@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/RThevenoux/thot#readme",
   "devDependencies": {
+    "csv": "^3.1.0",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-inject": "^4.3.2",

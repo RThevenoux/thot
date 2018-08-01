@@ -18,7 +18,7 @@ class PctFeatureMapper extends AbstractFeatureMapper {
 
     let features = new FeatureSet(baseFeatures);
 
-    phoneme.coarticaltions.forEach(coarticaltion => {
+    phoneme.coarticulation.forEach(coarticaltion => {
       switch (coarticaltion) {
         case "Nasalized":
           features.add('nasal', '+');

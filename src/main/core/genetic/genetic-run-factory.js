@@ -1,3 +1,5 @@
+var Ipa = require("ipa-parser");
+
 class GeneticRunFactory {
   constructor() {
     this.ipa = new Ipa();
@@ -27,3 +29,6 @@ class GeneticRunFactory {
       .map(distance => { return { "text": distance.display, "value": distance.name } });
   }
 }
+
+// Export outside browserified bundle
+window.GeneticRunFactory = GeneticRunFactory;
